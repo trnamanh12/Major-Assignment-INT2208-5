@@ -7,7 +7,7 @@ Bài tập lớn môn Công nghệ phần mềm INT2208 5
 1. Bùi Đức Mạnh - 22022602
 2. Lê Việt Hùng - 22022666
 3. Đàm Thái Ninh - 22022522
-
+4. Trần Nam Anh - 22022569
 ## Hướng Dẫn Cài Đặt
 
 
