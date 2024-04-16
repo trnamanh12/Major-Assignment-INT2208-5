@@ -1,7 +1,8 @@
-# Phân tích bán hàng
+# IntelliPurchase
 Dự án này được kế thừa từ dự án https://github.com/NinhDT22022522/Mobile-e-commerce-review-sentiment-classification. Mọi tiến độ hay phân công công việc của dự án trước được lưu tại [đây]([url](https://rainy-infinity-73a.notion.site/Ph-n-c-ng-96e1de5cf7bb4b3a9bc4b643d763daf9?pvs=4)).
 
 Bài tập lớn môn Công nghệ phần mềm INT2208 5
+Trang web phân tích bán hàng IntelliPurchase
 
 ## Thành Viên
 
