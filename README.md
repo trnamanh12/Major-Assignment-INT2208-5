@@ -36,3 +36,9 @@ Trang web phân tích bán hàng IntelliPurchase
 - `git checkout -b <tên-branch>`: tạo branch mới và chuyển sang đó (tên branch không được trùng nhau)
 - `git branch -d <tên-branch>`: xoá branch được chỉ định khỏi máy (đương nhiên toàn bộ thay đổi có ở nhánh này cũng sẽ mất hết)
 - **Nếu không quen có thể sử dụng GUI của VSC**
+
+## Phản hồi và Đóng góp
+
+Chúng tôi cam kết phản hồi và đánh giá mọi yêu cầu từ cộng đồng người dùng. Bất kỳ issues, pull requests hoặc ý kiến đóng góp nào cũng được đánh giá và giải quyết một cách nhanh chóng.
+
+Nếu bạn gặp bất kỳ vấn đề hoặc có ý kiến đóng góp, vui lòng tạo một issue mới hoặc một pull request. Chúng tôi luôn đánh giá cao sự hợp tác của cộng đồng và sẵn lòng cải thiện dự án cùng với bạn.
