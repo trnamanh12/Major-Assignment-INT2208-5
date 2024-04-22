@@ -1,0 +1,5 @@
+# Assign reviewers for specific files or directories
+
+# Assign @manhbd22022602, @trnamanh12, @HungLV2512, @NinhDT22022522 as code owners for all files in the src/ directory
+/src/ @manhbd22022602 @trnamanh12 @HungLV2512 @NinhDT22022522 
+
