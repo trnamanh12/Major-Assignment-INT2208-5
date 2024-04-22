@@ -1,0 +1,32 @@
+## Cách Đóng Góp
+
+Hãy Fork repository và tạo một pull request.
+
+Chúng tôi rất hoan nghênh sự đóng góp của bạn.
+
+# Quy trình đóng góp
+## Khi được giao nhiệm vụ mới
+- Kéo develop về: `git pull origin develop`
+- Tạo một nhánh mới từ develop: `git checkout -b <tên-nhánh>`
+- Code x3,14
+
+## Khi đang làm nhiệm vụ cũ
+- Kéo develop về nhánh hiện tại mỗi ngày làm việc mới: `git pull origin develop`
+- Code x3,14
+- Commit và đẩy code lên GitHub mỗi khi kết thúc ngày làm việc:
+  - `git add .`
+  - `git commit -m "Message"`
+  - `git push origin <tên-nhánh-hiện-tại>`
+
+## Một số lệnh Git
+- `git clone <url>`: sao chép repository về máy
+- `git add .`: thêm tất cả các thay đổi để commit
+- `git commit -m "Commit Message"`: commit tất cả các thay đổi với thông điệp được chỉ định vào nhánh hiện tại
+- `git push origin <tên-nhánh>`: đẩy tất cả các commit (tức là các thay đổi về các tệp) trong nhánh hiện tại lên nhánh được chỉ định trên GitHub
+- `git pull origin <tên-nhánh>`: kéo tất cả các commit (tức là các thay đổi về các tệp) từ nhánh được chỉ định trên GitHub về nhánh hiện tại
+- `git checkout <tên-nhánh>`: chuyển sang nhánh được chỉ định
+- `git checkout -b <tên-nhánh>`: tạo một nhánh mới và chuyển sang đó (tên nhánh không được trùng lặp)
+- `git branch -d <tên-nhánh>`: xoá nhánh được chỉ định khỏi máy (tất cả các thay đổi ở nhánh này cũng sẽ mất)
+- **Nếu không quen thuộc có thể sử dụng giao diện người dùng đồ họa (GUI) của VSC**
+
+Tất cả các đóng góp, bao gồm cả đóng góp từ các thành viên trong dự án, đều cần được xem xét. Chúng tôi sử dụng GitHub pull request cho mục đích này. Hãy tham khảo [Trợ Giúp GitHub](https://help.github.com/articles/about-pull-requests/) để biết thêm thông tin về việc sử dụng pull request.
