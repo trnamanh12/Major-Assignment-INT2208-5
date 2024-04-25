@@ -1,0 +1,37 @@
+CREATE TABLE IF NOT EXISTS product(
+                            product_id TEXT PRIMARY KEY,
+                            product_name TEXT,
+                            category_id TEXT,
+                            TGDD_product_link TEXT,
+                            FPT_product_link TEXT,
+                            image TEXT,
+                            FOREIGN KEY(category_id) REFERENCES product_category(category_id)                            
+                            );
+
+CREATE TABLE IF NOT EXISTS user_account(
+    account_id TEXT PRIMARY KEY, 
+    email TEXT, 
+    phone_number TEXT, 
+    password TEXT, 
+    user_name TEXT, 
+    profile_image TEXT
+);
+CREATE TABLE IF NOT EXISTS product_category(
+    category_id TEXT PRIMARY KEY, 
+    category_name TEXT,
+    parent_category_id TEXT,
+    FOREIGN KEY(parent_category_id) REFERENCES product_category(category_id) 
+);
+CREATE TABLE IF NOT EXISTS history (
+    id TEXT PRIMARY KEY,
+    time DATETIME,
+    account_id TEXT,
+    product_id TEXT,
+    FOREIGN KEY(account_id) REFERENCES user_account(account_id), 
+    FOREIGN KEY(product_id) REFERENCES product(product_id)
+);
+
+CREATE TABLE IF NOT EXISTS saved_history(
+    id TEXT PRIMARY KEY,
+    FOREIGN KEY(id) REFERENCES history(id) 
+);
