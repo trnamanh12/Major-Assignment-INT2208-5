@@ -36,5 +36,7 @@ urlpatterns = [
     path('user/favorites/', views.user_favorites, name='user_favorites'),
     path('admin/', admin.site.urls),
     path('home', include('home.urls')),
+    path('blog/', include('blog.urls')),
+
 ]
 
