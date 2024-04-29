@@ -1,0 +1,19 @@
+name: Deploy IntelliPurchase
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Deploy application
+        env:
+          DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
+          API_KEY: ${{ secrets.API_KEY }}
+        # Deploy application steps using the exported secrets
