@@ -2,6 +2,11 @@
 {% block title %}Blog{% endblock %}
 {% block content %}
 {% for post in Posts %}
-   <h4>{{post.date|date:"d-m-Y"}}<a href="/blog/{{post.id}}">{{post.title}}</a></h4>
+   {% if forloop.counter|divisibleby:2 %}
+      <h4 style="background-color: rgb(231, 222, 222); color: black;">{{ post.date|date:"d-m-Y" }} <a href="{% url 'post' post.id %}">{{ post.title }}</a></h4>
+   {% else %}
+      <h4>{{ post.date|date:"d-m-Y" }} <a href="{% url 'post' post.id %}">{{ post.title }}</a></h4>
+   {% endif %}
+   <hr class="gray-line">
 {% endfor %}
 {% endblock %}

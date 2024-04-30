@@ -22,9 +22,9 @@
                 <center><img src="{% static 'images/tgdd.png' %}" class="responsive-img" style="max-height:150px"/></center>
                 <div class="bs-sliderbar" style="background-color: #ffffff;">
                     <ul class="nav flex-column">
-                        <li><a href="/home">Thông tin cá nhân</a></li>
-                        <li><a href="/blog">Bài viết</a></li>
-                        <li><a href="/home/contact">Liên hệ</a></li>
+                        <li><a href="{% url 'home' %}">Thông tin cá nhân</a></li>
+                        <li><a href="{% url 'blog' %}">Bài viết</a></li>
+                        <li><a href="{% url 'contact' %}">Liên hệ</a></li>
                     </ul>
                 </div>
             </div>
