@@ -1,12 +1,11 @@
 from django import forms
 import re
 from django.contrib.auth.models import User
-from django.core.exceptions import ObjectDoesNotExist
 
 class RegistrationForm(forms.Form):
-    username = forms.CharField(label='Tài khoản')
+    username = forms.CharField(label='Tài khoản', max_length=30)
     email = forms.EmailField(label='Email')
-    phone_number = forms.CharField(label='Số điện thoại', max_length=15)
+    phone_number = forms.CharField(label='Số điện thoại', max_length=10)
     password1 = forms.CharField(label='Mật khẩu', widget=forms.PasswordInput())
     password2 = forms.CharField(label='Nhập lại mật khẩu', widget=forms.PasswordInput())
 
@@ -20,7 +19,7 @@ class RegistrationForm(forms.Form):
 
     def clean_username(self):
         username = self.cleaned_data['username']
-        if not re.search(r'^\w+&', username):
+        if not re.search(r'^\w+$', username):
             raise forms.ValidationError("Tên tài khoản có kí tự đặc biệt")
         try:
             User.objects.get(username=username)
@@ -28,5 +27,11 @@ class RegistrationForm(forms.Form):
             return username
         raise forms.ValidationError("Tài khoản đã tồn tại")
 
+    def clean_phone_number(self):
+        phone_number = self.cleaned_data['phone_number']
+        if not re.match(r'^[0-9]{10}$', phone_number):
+            raise forms.ValidationError("Số điện thoại không hợp lệ")
+        return phone_number
+
     def save(self):
-        User.objects.create_user(username=self.cleaned_data['username'], email=self.cleaned_data['email'], password=self.cleaned_data['password1'])
+        User.objects.create_user(username=self.cleaned_data['username'], email=self.cleaned_data['email'], phone_number=self.cleaned_data['phone_number'], password=self.cleaned_data['password1'])
