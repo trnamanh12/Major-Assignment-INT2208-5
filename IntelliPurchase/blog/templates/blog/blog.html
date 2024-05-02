@@ -7,6 +7,7 @@
    {% else %}
       <h4>{{ post.date|date:"d-m-Y" }} <a href="{% url 'post' post.id %}">{{ post.title }}</a></h4>
    {% endif %}
+   <img src="{{post.image.url}}" width="500px" height="300px" />
    <hr class="gray-line">
 {% endfor %}
 {% endblock %}
