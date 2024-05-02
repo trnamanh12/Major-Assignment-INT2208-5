@@ -16,27 +16,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from . import views
+from home import views
 from django.conf.urls import handler404
 from django.conf.urls.static import static
 from django.conf import settings
 
 urlpatterns = [
     path('', views.home, name='home'),
-    path('authors/', views.authors, name='authors'),
-    path('account/', views.account, name='account'),
-    path('account/link_phone/', views.link_phone, name='link_phone'),
-    path('account/link_email/', views.link_email, name='link_email'),
-    path('product/add/', views.add_product, name='add_product'),
-    path('product/delete/', views.delete_product, name='delete_product'),
-    path('product/compare/', views.compare_products, name='compare_products'),
-    path('product/compare_specs/', views.compare_specs, name='compare_specs'),
-    path('product/compare_prices/', views.compare_prices, name='compare_prices'),
-    path('product/compare_ratings/', views.compare_ratings, name='compare_ratings'),
-    path('seller/', views.seller, name='seller'),
     path('register/', views.register, name='register'),
-    path('login/', views.login, name='login'),
-    path('user/favorites/', views.user_favorites, name='user_favorites'),
     path('admin/', admin.site.urls),
     path('home', include('home.urls')),
     path('blog/', include('blog.urls')),
