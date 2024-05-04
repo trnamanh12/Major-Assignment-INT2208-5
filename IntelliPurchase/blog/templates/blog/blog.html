@@ -2,12 +2,14 @@
 {% block title %}Blog{% endblock %}
 {% block content %}
 {% for post in Posts %}
-   {% if forloop.counter|divisibleby:2 %}
-      <h4 style="background-color: rgb(231, 222, 222); color: black;">{{ post.date|date:"d-m-Y" }} <a href="{% url 'post' post.id %}">{{ post.title }}</a></h4>
-   {% else %}
-      <h4>{{ post.date|date:"d-m-Y" }} <a href="{% url 'post' post.id %}">{{ post.title }}</a></h4>
+   <h4>{{post.date|date:"d-m-Y"}}<a href="{% url 'post' post.id %}">{{post.title}}</a></h4>
+   {% if post.image %}
+      <img src="{{post.image.url}}" width="500px" height="300px" />
    {% endif %}
-   <img src="{{post.image.url}}" width="500px" height="300px" />
    <hr class="gray-line">
 {% endfor %}
+<br/>
+{% if page_obj.has_next %}
+   <a href="{{request.path}}?page={{page_obj.next_page_number}}">Tiếp theo</a>
+{% endif %}
 {% endblock %}
