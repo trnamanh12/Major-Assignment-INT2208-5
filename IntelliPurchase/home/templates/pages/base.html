@@ -5,48 +5,110 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     {% load static %}
-    <link rel="stylesheet" href = " {% static 'css/bootstrap.min.css' %}" type="text/css">
-    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/logo_bg.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/var.css' %}" type="text/css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400&display=swap">
+    
     <style>
         html, body {
-            height: 100%;
-            background-color: #f6f6f6;
+            height: 95%;
+            margin: 0; /* Đảm bảo không có margin */
+            padding: 0; /* Đảm bảo không có padding */
+        }
+
+        header {
+            margin: 0; /* Đảm bảo không có margin */
+            padding: 0; /* Đảm bảo không có padding */
+        }
+        
+        .logo_background_1 {
+            height: 75px;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            position: relative;
+            background-color: #e7f451;
+            max-width: 100%;
+        }
+        .logo_background_2 {
+            height: 66px;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            background-color: #f8fead;
+        }
+        .logo_name {
+            margin: 0;
+            width: 415px;
+            position: relative;
+            font-size: inherit;
+            font-weight: 100;
+            font-family: inherit;
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
+            text-shadow: 1px 0 0#000, 0 1px 0#000, -1px 0 0#000, 0-1px 0#000;
+            max-width: 100%;
+            z-index: 2;
+        }
+        .intelligent-purchase {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            justify-content: flex-start;
+            box-sizing: border-box;
+            max-width: 100%;
+        }
+        .intelligent-purchase {
+            flex: 1;
+            background-color: var(--color-khaki);
+            padding: 6px 20px 12px;
+            z-index: 1;
+            text-align: left;
+            font-size: 40px;
+            color: var(--color-black);
+            font-family: var(--font-roboto);
+        }
+        .logo {
+            /* position: sticky; */
+            /* top: 0; */
+            /* left: 0; */
+            /* background-color: var(--color-yellow); */
+            /* width: 100%; */
+            /* padding: 0 0 9px; */
+            /* z-index: 99; */
+            position: relative; /* Sử dụng vị trí tương đối */
         }
     </style>
+    
+    <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
-    <br/>
-    <div class="container-fluid" style="min-height: 95%;">
-        <div class="row">
-            <div class="col-sm-2">
-                <center><img src="{% static 'images/tgdd.png' %}" class="responsive-img" style="max-height:150px"/></center>
-                <div class="bs-sliderbar" style="background-color: #ffffff;">
-                    <ul class="nav flex-column">
-                        <li><a href="{% url 'home' %}">Thông tin cá nhân</a></li>
-                        <li><a href="{% url 'blog' %}">Bài viết</a></li>
-                        <li><a href="{% url 'contact' %}">Liên hệ</a></li>
-                    </ul>
+    <div class="logo">
+        <header class="intelligent-purchase">
+            <div class="logo_background_1">
+                <div class="logo_background_2">
+                    <h1 class="logo_name">INTELLIPURCHASE</h1>
                 </div>
             </div>
+        </header>
+    </div>
+    
+    <div class="container-fluid" style="min-height: 95%;">
+        <div class="row">
             <div class="col-sm-9">
                 {% block content %}
-            
                 {% endblock %}
             </div>
-            <div class="col-sm-1">
-                {% if user.username %}
-                    <p>Xin chào {{user.username}}</p>
-                    <p><a href="{% url 'logout' %}">Đăng xuất</a></p>
-                {% else %}
-                    <p><a href="{% url 'register' %}">Đăng ký</a>|<a href="{% url 'login' %}">Đăng nhập</a></p>
-                {% endif %}
-            </div>
+            <div class="col-sm-1"></div>
         </div>
     </div>
+    
+    <footer>
+        <div class="container-fluid">
+            <a href="#">Facebook</a> | <a href="#">Twitter</a> | <a href="#">Google</a>
+        </div>
+    </footer>
 </body>
-<footer>
-    <div class="container-fluid">
-        <a href="#">Facebook</a> | <a href="#">Twitter</a> | <a href="#">Google</a>
-    </div>
-</footer>
 </html>
