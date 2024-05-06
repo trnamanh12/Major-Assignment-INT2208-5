@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Product, Post
+from .models import Post
 from django.views.generic import ListView, DetailView
 
 # Create your views here.
