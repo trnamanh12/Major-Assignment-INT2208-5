@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Product, Post
+from .models import Product, Post, ProductSpec
 # Register your models here.
 
 class ProductAdmin(admin.ModelAdmin):
@@ -8,6 +8,14 @@ class ProductAdmin(admin.ModelAdmin):
     search_fields = ['product_name']
 
 admin.site.register(Product, ProductAdmin)
+
+class ProductSpecsAdmin(admin.ModelAdmin):
+    list_display = ['id', 'product', 'color', 'screen', 'rear_camera', 'front_camera', 'OS_CPU', 'memory_storage', 'ket_noi', 'pin_sac', 'tien_ich', 'thongtin_chung']
+    list_filter = ['id', 'product__product_name']  # Định nghĩa các trường khác trong ProductSpecs để lọc
+    search_fields = ['product__product_name']  # Tìm kiếm theo các trường khác trong ProductSpecs và tên sản phẩm
+
+admin.site.register(ProductSpec, ProductSpecsAdmin)
+
 
 class PostAdmin(admin.ModelAdmin):
     list_display = ['title', 'date']
