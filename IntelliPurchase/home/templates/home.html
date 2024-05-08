@@ -20,7 +20,7 @@
                 </a>
                 <ul class="fs-hdmn">
                     <li>
-                        <a href="/home/account.html" title="Tài khoản của tôi">
+                        <a href="account.html" title="Tài khoản của tôi">
                             <span class="lg-name-view">Tài khoản của tôi</span>
                         </a>
                     </li>
@@ -33,8 +33,11 @@
     </header>
     <div class="over-suggest"></div>
     <style>
+        .f-hdtop {
+            background-color: red;
+        }
         .logo_name {
-            color:white;
+            color:rgb(255, 225, 0);
             margin: 0;
             width: 415px;
             position: relative;
@@ -158,7 +161,6 @@
         }
 
         .icon-search {
-            color: #fff;
             font-size: 28px
         }
 
@@ -551,7 +553,7 @@
                         <div class="l-pc-row l-pc-select">
                             <div class="l-pc-product">
                                 <div class="cs-search--lg js--search-product">
-                                    <div class="cs-search-group  ">
+                                    <div class="cs-search-group">
                                         <input type="text" value=""
                                             placeholder="Nhập tên sản phẩm cần so sánh" id="searchpr1"
                                             class="cs-search-input js--input-w-product typo-text--large text-color-normal">
@@ -605,12 +607,13 @@
                             </div>
                             <div class="l-pc-product">
                                 <div class="cs-search--lg js--search-product">
-                                    <div class="cs-search-group  ">
+                                    <div class="cs-search-group">
                                         <input type="text" value=""
                                             placeholder="Nhập tên sản phẩm cần so sánh" id="searchpr2"
                                             class="cs-search-input js--input-w-product typo-text--large text-color-normal">
-                                        <span class="icon-search cs-search-icon"></span>
-                                        <span class="icon-icon-cancel cs-search-icon"></span>
+                                            <img src="{% static 'img/search_icon.png' %}" class="icon-search cs-search-icon">
+                                        <!-- <span class="icon-search cs-search-icon"></span> -->
+                                        <!-- <span class="icon-icon-cancel cs-search-icon"></span> -->
                                     </div>
                                     <ul class="cs-search-suggest js--suggestion-w-product prola">
                                     </ul>
@@ -770,10 +773,10 @@
                                         <li>
                                             <div class="prop">Phi&#xEA;n b&#x1EA3;n CPU</div>
                                             <div class="detail">
-                                                {{phone_1['cpu']}}
+                                                Snapdragon 8 Gen 2
                                             </div>
                                             <div class="detail">
-                                                {{}}
+                                                Apple A17 Pro
                                             </div>
                                         </li>
                                         <li>
@@ -1568,119 +1571,6 @@
                 </div>
             </div>
 
-            <div id="box-login-otp" class="lt-modal-box" style="display: none">
-                <div class="lt-modal-header">
-                    <div class="f-s-p-20 f-s-ui-md-18 text-gray-800 f-w-500">
-                        Xác Thực OTP
-                    </div>
-                    <span class="lt-modal-close js-lt-modal-close base-ic js-modal-lg-close">
-                        <i class="ic-close icon-md f-s-ui-15 f-w-500"></i>
-                    </span>
-                </div>
-                <div class="lt-modal-body text-center">
-                    <div class="image-login">
-                        <picture>
-                            <source media="(max-width:992px )" srcset="Content/v5d/account/images/img-otp-mb.png" />
-                            <img src="Content/v5d/account/images/img-otp.png" alt="Mã OTP" width="156" height="156"
-                                loading="lazy" />
-                        </picture>
-                    </div>
-                    <div class="content-login">
-                        <p class="f-s-p-16">
-                            Mã OTP đã được gửi đến số điện thoại
-                            <span class="f-w-500 lg-phone-step2"></span>
-                        </p>
-                        <p class="lt-cd-expired-box" style="display: none">
-                            có hiệu lực trong <span class="lt-countdown-expired"></span>
-                        </p>
-                        <a href="#" class="link link-icon link-md base-ic m-t-md-4 js-change-back"
-                            aria-controls="dangnhapsodienthoai">
-                            <i class="ic-edit m-r-4"></i>
-                            Đổi số điện thoại nhận mã
-                        </a>
-                    </div>
-                    <div class="form-otp">
-                        <form class="otp" name="one-time-code">
-                            <div class="otp-group">
-                                <input type="number" maxlength="1" value autocomplete="one-time-code" id="codeBox1"
-                                    class="otp-item inputOtp is-invalid1" />
-                                <input type="number" maxlength="1" value autocomplete="one-time-code" id="codeBox2"
-                                    class="otp-item inputOtp is-invalid1" />
-                                <input type="number" maxlength="1" value autocomplete="one-time-code" id="codeBox3"
-                                    class="otp-item inputOtp is-invalid1" />
-                                <input type="number" maxlength="1" value autocomplete="one-time-code" id="codeBox4"
-                                    class="otp-item inputOtp is-invalid1" />
-                                <input type="number" maxlength="1" value autocomplete="one-time-code" id="codeBox5"
-                                    class="otp-item inputOtp is-invalid1" />
-                                <input type="number" maxlength="1" value autocomplete="one-time-code" id="codeBox6"
-                                    class="otp-item inputOtp is-invalid1" />
-                            </div>
-                            <div class="lt-alert-wrapper text-left">
-                                <div
-                                    class="lt-alert lt-alert-md lt-alert-success lt-alert-des m-t-8 text-center base-ic lg-mess-reotp">
-                                    <i class="ic-exclamation ic-circle lt-alert-ic-sm bg-success"></i>
-                                    <span class="f-s-p-16">
-                                        Gửi lại thành công mã OTP, mã mới có hiệu lực trong vòng 5
-                                        phút.
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="lt-alert-wrapper text-left">
-                                <div
-                                    class="lt-alert lt-alert-md lt-alert-danger lt-alert-des base-ic m-t-8 lg-mess-otp">
-                                    <i class="ic-exclamation ic-circle lt-alert-ic-sm bg-danger"></i>
-                                    <span class>Mã OTP không đúng</span>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <style>
-                        .otp legend {
-                            margin: 0 auto 1em;
-                            color: #55f
-                        }
-
-                        input[type="number"]:nth-child(n + 4) {
-                            order: 2
-                        }
-                    </style>
-                </div>
-                <div class="lt-modal-footer">
-                    <button
-                        class="lt-btn lt-btn-primary lt-btn-lg circle js-check-form js-check-phone width-100-mb btnSendOTP">
-                        XÁC NHẬN
-                    </button>
-                    <a class="link btn-get-otp js-resend-otp">Gửi lại mã OTP cho tôi</a>
-                    <div class="lt-alert-wrapper">
-                        <div class="lt-alert lt-alert-md lt-alert-danger lt-alert-des base-ic m-t-8 lg-mess-cdresend"
-                            style="display: none">
-                            <i class="ic-exclamation ic-circle lt-alert-ic-sm bg-danger"></i>
-                            <span>
-                                Bạn có thể gửi lại mã OTP sau
-                                <span class="lt-cd-resend"></span> nữa
-                            </span>
-                        </div>
-                    </div>
-                    <div class="lt-alert-wrapper" style="display: none">
-                        <div class="lt-alert lt-alert-md lt-alert-danger lt-alert-des base-ic m-t-8 lg-mess-cdresendlm"
-                            style="display: none">
-                            <i class="ic-exclamation ic-circle lt-alert-ic-sm bg-danger"></i>
-                            <span>
-                                Bạn đã gửi quá 5 OTP trong vòng 15 phút. Vui lòng gửi lại sau
-                                <span class="lt-cd-resendlm"></span>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="lt-alert-wrapper">
-                        <div class="lt-alert lt-alert-md lt-alert-danger lt-alert-des base-ic m-t-8 lg-mess-otplimit"
-                            style="display: none">
-                            <i class="ic-exclamation ic-circle lt-alert-ic-sm bg-danger"></i>
-                            <span> Mã OTP chỉ được gửi tối đa 5 lần/ngày </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             <div id="box-login-password" class="lt-modal-box lt-modal-login" style="display: none">
                 <div class="lt-modal-header">
                     <div class="text-gray-800 f-w-500">Đăng Nhập Tài Khoản</div>
@@ -1847,6 +1737,10 @@
     </style>
 
     <style>
+        .cs-search-input {
+            background-color: #c7c7c7;
+        }
+
         a.tooltips {
             outline: none
         }
@@ -1974,7 +1868,5 @@
     </style>
 
 </body>
-
-<!-- Mirrored from fptshop.com.vn/so-sanh-san-pham?iphone-15-pro-max-256gb-vs-samsung-galaxy-s23-ultra-256gb by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 May 2024 12:54:12 GMT -->
 
 </html>
