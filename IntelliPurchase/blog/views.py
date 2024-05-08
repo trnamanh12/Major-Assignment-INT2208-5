@@ -21,6 +21,7 @@ from django.shortcuts import render, get_object_or_404
 from .models import Post, Comment
 from .forms import CommentForm
 from django.http import HttpResponseRedirect
+# Create your views here.
 
 def post(request, pk):
     post = get_object_or_404(Post, pk=pk)
@@ -31,4 +32,5 @@ def post(request, pk):
             form.save()
             return HttpResponseRedirect(request.path)
     return render(request, "blog/post.html", {"post": post, "form": form})
+
 

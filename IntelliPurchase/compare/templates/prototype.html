@@ -3,11 +3,15 @@
 
 <head>
 
-    <title>So sánh {{ phone_1 }} vs {{ phone_2 }}</title>
+    <title>So sánh sản phẩm</title>
 
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/bundle.mainaa47.css' %}" type="text/css">
     <link rel="stylesheet" href="{% static 'css/header.footer.css' %}" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="{% static 'js/search.js' %}"></script>
+    <script src="{% static 'js/submit.js' %}"></script>
+
 </head>
 
 <body>
@@ -33,8 +37,11 @@
     </header>
     <div class="over-suggest"></div>
     <style>
+        .f-hdtop {
+            background-color: red;
+        }
         .logo_name {
-            color:white;
+            color:rgb(255, 225, 0);
             margin: 0;
             width: 415px;
             position: relative;
@@ -533,7 +540,7 @@
                 <div class="g-container">
                     <div class="row">
                         <ol class="breadcrumb breadcrumb-margin">
-                            <li class="breadcrumb-item"><a href="home.html">Trang chủ</a></li>
+                            <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
                             <li class="breadcrumb-item active" aria-current="page">So sánh</li>
                         </ol>
                     </div>
@@ -542,29 +549,28 @@
                     <div class="l-pc-top">
                         <h1 class="l-pc-heading typo-headline text-center text-color-heading text-size--lg">
                             So sánh
-                            <strong class="text-size--lg l-pc-name"> Samsung Galaxy S23 Ultra 5G 256GB</strong>
+                            <strong class="text-size--lg l-pc-name"> {{product1.product_name}}</strong>
                             <span class="text-size--lg typo-headline text-color-sub">vs</span>
                             <strong class="l-pc-name text-size--lg">
-                                iPhone 15 Pro Max 256GB
+                                {{product2.product_name}}
                             </strong>
                         </h1>
                         <div class="l-pc-row l-pc-select">
                             <div class="l-pc-product">
                                 <div class="cs-search--lg js--search-product">
-                                    <div class="cs-search-group  ">
-                                        <input type="text" value=""
-                                            placeholder="Nhập tên sản phẩm cần so sánh" id="searchpr1"
+                                    <div class="cs-search-group">
+                                        <input type="text" value="" placeholder="Nhập tên sản phẩm cần so sánh" id="searchpr1"
                                             class="cs-search-input js--input-w-product typo-text--large text-color-normal">
                                         <span class="icon-search cs-search-icon"></span>
                                         <span class="icon-icon-cancel cs-search-icon"></span>
+                                        <div class="search-results-1 dropdown-content"></div>
                                     </div>
                                     <ul class="cs-search-suggest js--suggestion-w-product proff">
                                     </ul>
                                 </div>
                                 <div class="c-pc-product text-center">
                                     <div class="c-pc-product__img">
-                                        <img src="../images.fpt.shop/unsafe/fit-in/240x240/filters_quality(90)_fill(white)/fptshop.com.vn/Uploads/Originals/2024/3/27/638471599704942918_samsung-galaxy-s23-ultra-xanh-dd-AI.jpg"
-                                            alt="Phone 1">
+                                        <img src="{{ product1.image }}" alt="{{ product1.product_name }}">
                                     </div>
                                     <div class="c-pc-product__price typo-into-elevated text-color-normal">
                                         Chỉ từ
@@ -599,18 +605,22 @@
                             </div>
                             <div class="l-pc-line">
                                 <div class="line-ct">
+                                    <button id="submitBtn">Submit</button>
+                                    <div class="test">
+                                        {{test_string}}
+                                    </div>
                                     <hr>
                                     <span class="circle">VS</span>
                                 </div>
                             </div>
                             <div class="l-pc-product">
                                 <div class="cs-search--lg js--search-product">
-                                    <div class="cs-search-group  ">
-                                        <input type="text" value=""
-                                            placeholder="Nhập tên sản phẩm cần so sánh" id="searchpr2"
+                                    <div class="cs-search-group">
+                                        <input type="text" value="" placeholder="Nhập tên sản phẩm cần so sánh" id="searchpr2"
                                             class="cs-search-input js--input-w-product typo-text--large text-color-normal">
                                         <span class="icon-search cs-search-icon"></span>
                                         <span class="icon-icon-cancel cs-search-icon"></span>
+                                        <div class="search-results-2 dropdown-content"></div>
                                     </div>
                                     <ul class="cs-search-suggest js--suggestion-w-product prola">
                                     </ul>
@@ -618,7 +628,7 @@
                                 <div class="c-pc-product text-center">
                                     <div class="c-pc-product__img">
                                         <img src="../images.fpt.shop/unsafe/fit-in/240x240/filters_quality(90)_fill(white)/fptshop.com.vn/Uploads/Originals/2023/10/30/638342502751589917_ip-15-pro-max-dd-bh-2-nam.jpg"
-                                            alt="Phone 2">
+                                            alt="Product 2">
                                     </div>
                                     <div class="c-pc-product__price typo-into-elevated text-color-normal">
                                         Chỉ từ
@@ -770,10 +780,10 @@
                                         <li>
                                             <div class="prop">Phi&#xEA;n b&#x1EA3;n CPU</div>
                                             <div class="detail">
-                                                {{phone_1['cpu']}}
+                                                ABC
                                             </div>
                                             <div class="detail">
-                                                {{}}
+                                                ABC
                                             </div>
                                         </li>
                                         <li>
@@ -1847,6 +1857,14 @@
     </style>
 
     <style>
+        .dropdown-content {
+            position: absolute;
+            z-index: 1; /* Đảm bảo dropdown nằm trên hình ảnh */
+        }
+        .cs-search-input {
+            background-color: #c7c7c7;
+        }
+
         a.tooltips {
             outline: none
         }
