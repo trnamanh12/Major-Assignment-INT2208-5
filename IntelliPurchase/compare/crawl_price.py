@@ -75,7 +75,7 @@ def crawl_fpt(link):
     # Thêm tùy chọn "--headless" để chạy trình duyệt ở chế độ không có giao diện người dùng,
     # nghĩa là không hiển thị cửa sổ trình duyệt lên màn hình
     chrome_options.add_argument("--headless")
-
+    
     # Khởi tạo webdriver với tùy chọn trên và truy cập vào đường link sản phẩm
     driver = webdriver.Chrome(options=chrome_options)
     driver.get(link)

@@ -26,7 +26,15 @@
                 <ul class="fs-hdmn">
                     <li>
                         <a href="/home/account.html" title="Tài khoản của tôi">
-                            <span class="lg-name-view">Tài khoản của tôi</span>
+                            {% if request.user.is_authenticated %}
+                                {% if request.user.is_staff %}
+                                    <span class="lg-name-view">Đăng nhập/Đăng kí</span>
+                                {% else %}
+                                    <span class="lg-name-view">Hello: {{ request.user }}</span>
+                                {% endif %}
+                            {% else %}
+                                <span class="lg-name-view">Đăng nhập/Đăng kí</span>
+                            {% endif %}
                         </a>
                     </li>
                 </ul>
@@ -1169,7 +1177,7 @@
                             </div>
                             <div class="c-compare__row js--collapse-detail" id="data-Giaban">
                                 <div class="c-compare__title">
-                                    <h2 class="title">Giá bán</h2>
+                                    <h2 class="title">Phân loại cảm xúc</h2>
                                 </div>
                                 <div class="l-pc-row compare-product__group">
                                     <div class="c-compare__product">
@@ -1177,12 +1185,12 @@
                                             <div class="product-price">
                                                 <img src="{% static 'img/tgdd.png' %}" alt="tgdd" class="tgdd-logo">
                                                 <div class="text">Chỉ từ</div>
-                                                <div class="price">{{product1_tgdd_price}}</div>
+                                                <div class="price"></div>
                                             </div>
                                             <div class="product-price">
                                                     <img src="{% static 'img/fpt1.png' %}" alt="fpt" class="fpt-logo">
                                                     <div class="text">Chỉ từ</div>
-                                                    <div class="price">{{product1_fpt_price}}</div>
+                                                    <div class="price"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -1191,12 +1199,12 @@
                                             <div class="product-price">
                                                 <img src="{% static 'img/tgdd.png' %}" alt="tgdd" class="tgdd-logo">
                                                 <div class="text">Chỉ từ</div>
-                                                <div class="price">{{product2_tgdd_price}}</div>
+                                                <div class="price"></div>
                                             </div>
                                             <div class="product-price">
                                                     <img src="{% static 'img/fpt1.png' %}" alt="fpt" class="fpt-logo">
                                                     <div class="text">Chỉ từ</div>
-                                                    <div class="price">{{product2_fpt_price}}</div>
+                                                    <div class="price"></div>
                                             </div>
                                         </div>
                                     </div>
