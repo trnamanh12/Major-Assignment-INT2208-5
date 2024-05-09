@@ -115,60 +115,6 @@
     padding-left: 1.5rem
 }
 
-@font-face {
-    font-family: roboto;
-    src: url(../../fonts/Roboto/Roboto-Light.html);
-    src: url(../../fonts/Roboto/Roboto-Lightd41d.html?#iefix) format("embedded-opentype"), url(../../fonts/Roboto/Roboto-Light-2.html) format("woff2"), url(../../fonts/Roboto/Roboto-Light-3.html) format("woff"), url(../../fonts/Roboto/Roboto-Light-4.html) format("truetype"), url(../../fonts/Roboto/Roboto-Light-5.html#Roboto-Light) format("svg");
-    font-weight: 300;
-    font-style: normal;
-    font-display: swap
-}
-
-@font-face {
-    font-family: roboto;
-    src: url(../../fonts/Roboto/Roboto-Thin.html);
-    src: url(../../fonts/Roboto/Roboto-Thind41d.html?#iefix) format("embedded-opentype"), url(../../fonts/Roboto/Roboto-Thin-2.html) format("woff2"), url(../../fonts/Roboto/Roboto-Thin-3.html) format("woff"), url(../../fonts/Roboto/Roboto-Thin-4.html) format("truetype"), url(../../fonts/Roboto/Roboto-Thin-5.html#Roboto-Thin) format("svg");
-    font-weight: 100;
-    font-style: normal;
-    font-display: swap
-}
-
-@font-face {
-    font-family: roboto;
-    src: url(../../fonts/Roboto/Roboto-Regular.html);
-    src: url(../../fonts/Roboto/Roboto-Regulard41d.html?#iefix) format("embedded-opentype"), url(../../fonts/Roboto/Roboto-Regular-2.html) format("woff2"), url(../../fonts/Roboto/Roboto-Regular-3.html) format("woff"), url(../../fonts/Roboto/Roboto-Regular-4.html) format("truetype"), url(../../fonts/Roboto/Roboto-Regular-5.html#Roboto-Regular) format("svg");
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap
-}
-
-@font-face {
-    font-family: roboto;
-    src: url(../../fonts/Roboto/Roboto-Medium.html);
-    src: url(../../fonts/Roboto/Roboto-Mediumd41d.html?#iefix) format("embedded-opentype"), url(../../fonts/Roboto/Roboto-Medium-2.html) format("woff2"), url(../../fonts/Roboto/Roboto-Medium-3.html) format("woff"), url(../../fonts/Roboto/Roboto-Medium-4.html) format("truetype"), url(../../fonts/Roboto/Roboto-Medium-5.html#Roboto-Medium) format("svg");
-    font-weight: 500;
-    font-style: normal;
-    font-display: swap
-}
-
-@font-face {
-    font-family: roboto;
-    src: url(../../fonts/Roboto/Roboto-Black.html);
-    src: url(../../fonts/Roboto/Roboto-Blackd41d.html?#iefix) format("embedded-opentype"), url(../../fonts/Roboto/Roboto-Black-2.html) format("woff2"), url(../../fonts/Roboto/Roboto-Black-3.html) format("woff"), url(../../fonts/Roboto/Roboto-Black-4.html) format("truetype"), url(../../fonts/Roboto/Roboto-Black-5.html#Roboto-Black) format("svg");
-    font-weight: 900;
-    font-style: normal;
-    font-display: swap
-}
-
-@font-face {
-    font-family: roboto;
-    src: url(../../fonts/Roboto/Roboto-Bold.html);
-    src: url(../../fonts/Roboto/Roboto-Boldd41d.html?#iefix) format("embedded-opentype"), url(../../fonts/Roboto/Roboto-Bold-2.html) format("woff2"), url(../../fonts/Roboto/Roboto-Bold-3.html) format("woff"), url(../../fonts/Roboto/Roboto-Bold-4.html) format("truetype"), url(../../fonts/Roboto/Roboto-Bold-5.html#Roboto-Bold) format("svg");
-    font-weight: 700;
-    font-style: normal;
-    font-display: swap
-}
-
 .text-justify {
     text-align: justify !important
 }
@@ -253,7 +199,7 @@ section {
 
 body {
     margin: 0;
-    font-family: roboto, Helvetica, Arial, sans-serif;
+    font-family: Helvetica, Arial, sans-serif;
     font-size: 14px;
     font-weight: 400;
     line-height: 1.3;
@@ -2554,14 +2500,6 @@ textarea.form-control {
     transform: translateY(0)
 }
 
-@font-face {
-    font-family: icon;
-    src: url(../fonts/icomoonba88.eot?l5p4yy&amp;v=01);
-    src: url(../fonts/icomoon6d16.eot?l5p4yy#iefix&v=01) format("embedded-opentype"), url(../fonts/icomoonba88.ttf?l5p4yy&amp;v=01) format("truetype"), url(../fonts/icomoonba88.woff?l5p4yy&amp;v=01) format("woff"), url(../fonts/icomoon6d16.svg?l5p4yy#icomoon&v=01) format("svg");
-    font-weight: 400;
-    font-style: normal;
-    font-display: block
-}
 
 [class^=icon-],
 [class^=ic-],
@@ -5717,13 +5655,6 @@ textarea.form-control {
 /*!lightgallery - v1.8.3 - 2020-09-19
 * http://sachinchoolur.github.io/lightGallery/
 * Copyright (c) 2020 Sachin N; Licensed GPLv3*/
-@font-face {
-    font-family: lg;
-    src: url(../fonts/lg8306.ttf?22t19m) format("truetype"), url(../fonts/lg8306.woff?22t19m) format("woff"), url(../fonts/lg8306.svg?22t19m#lg) format("svg");
-    font-weight: 400;
-    font-style: normal;
-    font-display: block
-}
 
 .lg-icon {
     font-family: lg !important;
@@ -7449,7 +7380,7 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item.lg-complete .lg-object 
 }
 
 .l-main {
-    font-family: roboto, sans-serif;
+    font-family: sans-serif;
     background: #f8f9fa
 }
 
@@ -7530,14 +7461,6 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item.lg-complete .lg-object 
     padding: 0 59.5px
 }
 
-.l-pc-line hr {
-    content: "";
-    height: 100%;
-    background: #e1e4e6;
-    width: 1px;
-    margin: 0
-}
-
 .l-pc-line .line-ct {
     height: 426px;
     display: inline-block;
@@ -7554,18 +7477,11 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item.lg-complete .lg-object 
     background-color: #fff;
     width: 48px;
     height: 48px;
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
     justify-content: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
     align-items: center;
     top: 50%;
     left: 50%;
-    -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%)
 }
 
@@ -8351,7 +8267,7 @@ h6 {
 }
 
 .cs-search-input {
-    font-family: Roboto, sans-serif;
+    font-family: sans-serif;
     -webkit-transition: all .3s ease;
     transition: all .3s ease;
     padding: 5px 35px 5px 43px;
@@ -9673,7 +9589,6 @@ img {
     vertical-align: middle
 }
 
-@charset "UTF-8";
 
 @keyframes progress {
     from {
@@ -11164,7 +11079,7 @@ h6 {
     left: 0;
     z-index: 1000;
     background-color: rgba(0, 0, 0, .7);
-    font-family: roboto, sans-serif;
+    font-family: sans-serif;
     overflow-x: hidden;
     overflow-y: auto;
     color: #464646
@@ -13197,7 +13112,7 @@ h6 {
 }
 
 .l-main {
-    font-family: roboto, sans-serif;
+    font-family: sans-serif;
     background: #f8f9fa
 }
 
@@ -15845,13 +15760,6 @@ h6 {
 
 .unknown {
     color: #0664f9
-}
-
-@font-face {
-    font-family: swiper-icons;
-    src: url("data:application/font-woff;charset=utf-8;base64, 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") format("woff");
-    font-weight: 400;
-    font-style: normal
 }
 
 :root {

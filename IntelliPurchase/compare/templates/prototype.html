@@ -10,7 +10,8 @@
     <link rel="stylesheet" href="{% static 'css/header.footer.css' %}" type="text/css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{% static 'js/search.js' %}"></script>
-    <script src="{% static 'js/submit.js' %}"></script>
+    <!-- <script src="{% static 'js/submit.js' %}"></script> -->
+    <!-- <script src="{% static 'js/update.js' %}"></script> -->
 
 </head>
 
@@ -61,16 +62,6 @@
             text-align: left;
             font-size: 40px;
             color: #000;
-            font-family: Roboto;
-        }
-
-        @font-face {
-            font-family: "header-icon";
-            src: url(Content/v5d/fonts/Icon/header-iconc6a0.html?p330i7&amp;v=17);
-            src: url(Content/v5d/fonts/Icon/header-iconc6a0.html?p330i7&amp;v=17#iefix) format("embedded-opentype"), url(Content/v5d/fonts/Icon/header-iconc6a0.ttf?p330i7&amp;v=17) format("truetype"), url(Content/v5d/fonts/Icon/header-iconc6a0.woff?p330i7&amp;v=17) format("woff"), url(Content/v5d/fonts/Icon/header-iconc6a0.svg?p330i7&amp;v=17#header-icon) format("svg");
-            font-weight: normal;
-            font-style: normal;
-            font-display: block
         }
 
         .fs-hdmn>li>a .user-img {
@@ -549,114 +540,58 @@
                     <div class="l-pc-top">
                         <h1 class="l-pc-heading typo-headline text-center text-color-heading text-size--lg">
                             So sánh
-                            <strong class="text-size--lg l-pc-name"> {{product1.product_name}}</strong>
+                            <strong class="text-size--lg l-pc-name product1_name"> {{product1.product_name}} </strong>
                             <span class="text-size--lg typo-headline text-color-sub">vs</span>
-                            <strong class="l-pc-name text-size--lg">
-                                {{product2.product_name}}
-                            </strong>
+                            <strong class="l-pc-name text-size--lg product2_name"> {{product2.product_name}} </strong>
                         </h1>
-                        <div class="l-pc-row l-pc-select">
-                            <div class="l-pc-product">
-                                <div class="cs-search--lg js--search-product">
-                                    <div class="cs-search-group">
-                                        <input type="text" value="" placeholder="Nhập tên sản phẩm cần so sánh" id="searchpr1"
-                                            class="cs-search-input js--input-w-product typo-text--large text-color-normal">
-                                        <span class="icon-search cs-search-icon"></span>
-                                        <span class="icon-icon-cancel cs-search-icon"></span>
-                                        <div class="search-results-1 dropdown-content"></div>
-                                    </div>
-                                    <ul class="cs-search-suggest js--suggestion-w-product proff">
-                                    </ul>
-                                </div>
-                                <div class="c-pc-product text-center">
-                                    <div class="c-pc-product__img">
-                                        <img src="{{ product1.image }}" alt="{{ product1.product_name }}">
-                                    </div>
-                                    <div class="c-pc-product__price typo-into-elevated text-color-normal">
-                                        Chỉ từ
-                                        <strong class="typo-headline price ">23.990.000đ</strong>
-                                    </div>
-                                    <div class="st-slider">
-                                        <div class="swiper-container js--pd-slider swiper-custom">
-                                            <div class="swiper-wrapper js--slide--full slide-40073">
-                                                <div class="swiper-slide"
-                                                    data-src="https://images.fpt.shop/unsafe/fit-in/960x640/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2023/2/16/638121659738426587_DSC09671.JPG">
-                                                    <img src="../images.fpt.shop/unsafe/fit-in/960x640/filters_quality(90)_fill(white)/fptshop.com.vn/Uploads/Originals/2023/2/16/638121659738426587_DSC09671.JPG"
-                                                        alt="Samsung Galaxy S23 Ultra 5G 256GB" />
-                                                </div>
-                                            </div>
-
-                                            <div class="swiper-pagination"></div>
-
-                                            <div class="swiper-button-next">
-                                                <span>
-                                                    <i class="icon-right-open-big"></i>
-                                                </span>
-                                            </div>
-                                            <div class="swiper-button-prev">
-                                                <span>
-                                                    <i class="icon-left-open-big"></i>
-                                                </span>
-                                            </div>
+                        <form class = 'test' method = 'POST' action =''>
+                            {% csrf_token %}
+                            <div class="l-pc-row l-pc-select">
+                                <div class="l-pc-product">
+                                    <div class="cs-search--lg js--search-product">
+                                        <div class="cs-search-group">
+                                            <input type="text" value="" placeholder="Nhập tên sản phẩm cần so sánh" id="searchpr1" name="searchpr1"
+                                                class="cs-search-input js--input-w-product typo-text--large text-color-normal">
+                                            <div class="search-results-1 dropdown-content"></div>
                                         </div>
-                                        <div class="swiper-container js--pd-slider swiper-custom"></div>
+                                        <ul class="cs-search-suggest js--suggestion-w-product proff">
+                                        </ul>
+                                    </div>
+                                    <div class="c-pc-product text-center">
+                                        <div class="c-pc-product__img">
+                                            <img src="{{ product1.image }}" alt="{{ product1.product_name }}">
+                                        </div>
+                                        <div class="c-pc-product__price typo-into-elevated text-color-normal">
+                                            Chỉ từ
+                                            <strong class="typo-headline price ">{{product1_min_price}}</strong>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="l-pc-line">
-                                <div class="line-ct">
-                                    <button id="submitBtn">Submit</button>
-                                    <div class="test">
-                                        {{test_string}}
+                                <div class="l-pc-line">
+                                    <div class="line-ct">
+                                        <button id="submitBtn">So sánh</button>
+                                        <hr>
+                                        <span class="circle">VS</span>
                                     </div>
-                                    <hr>
-                                    <span class="circle">VS</span>
                                 </div>
-                            </div>
-                            <div class="l-pc-product">
-                                <div class="cs-search--lg js--search-product">
-                                    <div class="cs-search-group">
-                                        <input type="text" value="" placeholder="Nhập tên sản phẩm cần so sánh" id="searchpr2"
-                                            class="cs-search-input js--input-w-product typo-text--large text-color-normal">
-                                        <span class="icon-search cs-search-icon"></span>
-                                        <span class="icon-icon-cancel cs-search-icon"></span>
-                                        <div class="search-results-2 dropdown-content"></div>
-                                    </div>
+                                <div class="l-pc-product">
+                                    <div class="cs-search--lg js--search-product">
+                                        <div class="cs-search-group">
+                                            <input type="text" value="" placeholder="Nhập tên sản phẩm cần so sánh" id="searchpr2" name="searchpr2"
+                                                class="cs-search-input js--input-w-product typo-text--large text-color-normal">
+                                            <div class="search-results-2 dropdown-content"></div>
+                                        </div>
+                        </form>
                                     <ul class="cs-search-suggest js--suggestion-w-product prola">
                                     </ul>
                                 </div>
                                 <div class="c-pc-product text-center">
                                     <div class="c-pc-product__img">
-                                        <img src="../images.fpt.shop/unsafe/fit-in/240x240/filters_quality(90)_fill(white)/fptshop.com.vn/Uploads/Originals/2023/10/30/638342502751589917_ip-15-pro-max-dd-bh-2-nam.jpg"
-                                            alt="Product 2">
+                                        <img src="{{ product2.image }}" alt="{{ product2.product_name }}">
                                     </div>
                                     <div class="c-pc-product__price typo-into-elevated text-color-normal">
                                         Chỉ từ
-                                        <strong class="typo-headline price ">29.690.000đ</strong>
-                                    </div>
-                                    <div class="st-slider">
-                                        <div class="swiper-container js--pd-slider swiper-custom">
-                                            <div class="swiper-wrapper js--slide--full slide-46449">
-                                                <div class="swiper-slide"
-                                                    data-src="https://images.fpt.shop/unsafe/fit-in/960x640/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2024/4/16/638488768374793121_1.jpg">
-                                                    <img src="../images.fpt.shop/unsafe/fit-in/960x640/filters_quality(90)_fill(white)/fptshop.com.vn/Uploads/Originals/2024/4/16/638488768374793121_1.jpg"
-                                                        alt="iPhone 15 Pro Max 256GB" />
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="swiper-pagination"></div>
-
-                                        <div class="swiper-button-next">
-                                            <span>
-                                                <i class="icon-right-open-big"></i>
-                                            </span>
-                                        </div>
-                                        <div class="swiper-button-prev">
-                                            <span>
-                                                <i class="icon-left-open-big"></i>
-                                            </span>
-                                        </div>
+                                        <strong class="typo-headline price ">{{product2_min_price}}</strong>
                                     </div>
                                     <div class="swiper-container js--pd-slider swiper-custom"></div>
                                 </div>
@@ -680,37 +615,19 @@
                                         <li>
                                             <div class="prop">Th&#x1B0;&#x1A1;ng hi&#x1EC7;u</div>
                                             <div class="detail">
-                                                Samsung
+                                                {{product1_brand}}
                                             </div>
                                             <div class="detail">
-                                                Apple
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="prop">Xu&#x1EA5;t x&#x1EE9;</div>
-                                            <div class="detail">
-                                                Vi&#x1EC7;t Nam / Trung Qu&#x1ED1;c
-                                            </div>
-                                            <div class="detail">
-                                                Trung Qu&#x1ED1;c
+                                                {{product2_brand}}
                                             </div>
                                         </li>
                                         <li>
                                             <div class="prop">Th&#x1EDD;i &#x111;i&#x1EC3;m ra m&#x1EAF;t</div>
                                             <div class="detail">
-                                                02/2023
+                                                {{product1_release_date}}
                                             </div>
                                             <div class="detail">
-                                                09/2023
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="prop">Th&#x1EDD;i gian b&#x1EA3;o h&#xE0;nh (th&#xE1;ng)</div>
-                                            <div class="detail">
-                                                12
-                                            </div>
-                                            <div class="detail">
-                                                12
+                                                {{product2_release_date}}
                                             </div>
                                         </li>
                                         <li>
@@ -740,32 +657,50 @@
                                 <div class="c-compare__wrap">
                                     <ul class="c-compare__table">
                                         <li>
-                                            <div class="prop">K&#xED;ch th&#x1B0;&#x1EDB;c</div>
+                                            <div class="prop"> Dài </div>
                                             <div class="detail">
-                                                163.4 x 78.1 x 8.9 mm
+                                                {{product1_height}}
                                             </div>
                                             <div class="detail">
-                                                159.9 x 76.7 x 8.25 mm
+                                                {{product2_height}}
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="prop"> Ngang </div>
+                                            <div class="detail">
+                                                {{product1_width}}
+                                            </div>
+                                            <div class="detail">
+                                                {{product2_width}}
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="prop"> Dày </div>
+                                            <div class="detail">
+                                                {{product1_depth}}
+                                            </div>
+                                            <div class="detail">
+                                                {{product2_depth}}
                                             </div>
                                         </li>
                                         <li>
                                             <div class="prop">Tr&#x1ECD;ng l&#x1B0;&#x1EE3;ng s&#x1EA3;n ph&#x1EA9;m
                                             </div>
                                             <div class="detail">
-                                                234 g
+                                                {{product1_weight}}
                                             </div>
                                             <div class="detail">
-                                                221 g
+                                                {{product2_weight}}
                                             </div>
                                         </li>
                                         <li>
                                             <div class="prop">Chu&#x1EA9;n kh&#xE1;ng n&#x1B0;&#x1EDB;c / B&#x1EE5;i
                                                 b&#x1EA9;n</div>
                                             <div class="detail">
-                                                IP68
+                                                {{product1_water_resistant}}
                                             </div>
                                             <div class="detail">
-                                                IP68
+                                                {{product2_water_resistant}}
                                             </div>
                                         </li>
                                     </ul>
@@ -780,43 +715,28 @@
                                         <li>
                                             <div class="prop">Phi&#xEA;n b&#x1EA3;n CPU</div>
                                             <div class="detail">
-                                                ABC
+                                                {{product1_cpu}}
                                             </div>
                                             <div class="detail">
-                                                ABC
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="prop">Lo&#x1EA1;i CPU</div>
-                                            <div class="detail">
-                                                Octa-Core
-                                            </div>
-                                            <div class="detail">
-                                                6 - Core
+                                                {{product2_cpu}}
                                             </div>
                                         </li>
                                         <li>
-                                            <div class="prop">S&#x1ED1; nh&#xE2;n</div>
+                                            <div class="prop"> Tốc độ CPU </div>
                                             <div class="detail">
-                                                8
+                                                {{product1_cpu_speed}}
                                             </div>
                                             <div class="detail">
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="prop">T&#x1ED1;c &#x111;&#x1ED9; t&#x1ED1;i &#x111;a</div>
-                                            <div class="detail">
-                                                2.2 GHz
-                                            </div>
-                                            <div class="detail">
+                                                {{product2_cpu_speed}}
                                             </div>
                                         </li>
                                         <li>
-                                            <div class="prop">64 Bits</div>
+                                            <div class="prop">Chip đồ họa (GPU)</div>
                                             <div class="detail">
-                                                C&#xF3;
+                                                {{product1_gpu}}
                                             </div>
                                             <div class="detail">
+                                                {{product2_gpu}}
                                             </div>
                                         </li>
                                     </ul>
@@ -831,10 +751,10 @@
                                         <li>
                                             <div class="prop">RAM</div>
                                             <div class="detail">
-                                                8 GB
+                                                {{product1_ram}}
                                             </div>
                                             <div class="detail">
-                                                8 GB
+                                                {{product2_ram}}
                                             </div>
                                         </li>
                                     </ul>
@@ -849,71 +769,55 @@
                                         <li>
                                             <div class="prop">K&#xED;ch th&#x1B0;&#x1EDB;c m&#xE0;n h&#xEC;nh</div>
                                             <div class="detail">
-                                                6.8 inch
+                                                {{product1_screen_size}}
                                             </div>
                                             <div class="detail">
-                                                6.7 inch
+                                                {{product2_screen_size}}
                                             </div>
                                         </li>
                                         <li>
                                             <div class="prop">C&#xF4;ng ngh&#x1EC7; m&#xE0;n h&#xEC;nh</div>
                                             <div class="detail">
-                                                Dynamic AMOLED 2X
+                                                {{product1_screen_tech}}
                                             </div>
                                             <div class="detail">
-                                                OLED
+                                                {{product2_screen_tech}}
                                             </div>
                                         </li>
                                         <li>
                                             <div class="prop">Chu&#x1EA9;n m&#xE0;n h&#xEC;nh</div>
                                             <div class="detail">
-                                                QHD&#x2B;
+                                                {{product1_screen_std}}
                                             </div>
                                             <div class="detail">
-                                                Super Retina XDR
+                                                {{product2_screen_std}}
                                             </div>
                                         </li>
                                         <li>
                                             <div class="prop">&#x110;&#x1ED9; ph&#xE2;n gi&#x1EA3;i</div>
                                             <div class="detail">
-                                                1440 x 3088 Pixels
+                                                {{product1_screen_res}}
                                             </div>
                                             <div class="detail">
-                                                2796 x 1290 Pixels
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="prop">M&#xE0;u m&#xE0;n h&#xEC;nh</div>
-                                            <div class="detail">
-                                                16 Tri&#x1EC7;u
-                                            </div>
-                                            <div class="detail">
+                                                {{product2_screen_res}}
                                             </div>
                                         </li>
                                         <li>
                                             <div class="prop">T&#x1EA7;n s&#x1ED1; qu&#xE9;t</div>
                                             <div class="detail">
-                                                120 Hz
+                                                {{product1_refresh_rate}}
                                             </div>
                                             <div class="detail">
+                                                {{product2_refresh_rate}}
                                             </div>
                                         </li>
                                         <li>
                                             <div class="prop">Ch&#x1EA5;t li&#x1EC7;u m&#x1EB7;t k&#xED;nh</div>
                                             <div class="detail">
-                                                Gorilla Glass Victus
+                                                {{product1_glass}}
                                             </div>
                                             <div class="detail">
-                                                Ph&#x1EE7; Ceramic
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="prop">Lo&#x1EA1;i c&#x1EA3;m &#x1EE9;ng</div>
-                                            <div class="detail">
-                                                &#x110;i&#x1EC7;n dung &#x111;a &#x111;i&#x1EC3;m
-                                            </div>
-                                            <div class="detail">
-                                                &#x110;i&#x1EC7;n dung &#x111;a &#x111;i&#x1EC3;m
+                                                {{product2_glass}}
                                             </div>
                                         </li>
                                     </ul>
@@ -928,26 +832,28 @@
                                         <li>
                                             <div class="prop">B&#x1ED9; nh&#x1EDB; trong</div>
                                             <div class="detail">
-                                                256 GB
+                                                {{product1_rom}}
                                             </div>
                                             <div class="detail">
-                                                256 GB
+                                                {{product2_rom}}
                                             </div>
                                         </li>
                                         <li>
                                             <div class="prop">Danh b&#x1EA1; l&#x1B0;u tr&#x1EEF;</div>
                                             <div class="detail">
-                                                Kh&#xF4;ng gi&#x1EDB;i h&#x1EA1;n
+                                                {{product1_danhba}}
                                             </div>
                                             <div class="detail">
+                                                {{product2_danhba}}
                                             </div>
                                         </li>
                                         <li>
                                             <div class="prop">Th&#x1EBB; nh&#x1EDB; ngo&#xE0;i</div>
                                             <div class="detail">
-                                                Kh&#xF4;ng
+                                                {{product1_sdcard}}
                                             </div>
                                             <div class="detail">
+                                                {{product2_sdcard}}
                                             </div>
                                         </li>
                                     </ul>
@@ -959,166 +865,52 @@
                                 </div>
                                 <div class="c-compare__wrap">
                                     <ul class="c-compare__table">
-                                        <li class="list-in">
-                                            <ul>
-                                                <li>
-                                                    <div class="detail">
-                                                        <span class="order">1</span>
-                                                        <span class="feature">Standard</span>
-                                                    </div>
-                                                    <div class="detail">
-                                                        <span class="order">1</span>
-                                                        <span class="feature">Standard</span>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="prop">
-                                                        Resolution
-                                                    </div>
-                                                    <div class="detail">200.0 MP</div>
-                                                    <div class="detail">48.0 MP</div>
-                                                </li>
-                                                <li>
-                                                    <div class="prop">
-                                                        Aperture
-                                                    </div>
-                                                    <div class="detail">&#x192;/1.8</div>
-                                                    <div class="detail"></div>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li class="list-in">
-                                            <ul>
-                                                <li>
-                                                    <div class="detail">
-                                                        <span class="order">2</span>
-                                                        <span class="feature">Ultra Wide</span>
-                                                    </div>
-                                                    <div class="detail">
-                                                        <span class="order">2</span>
-                                                        <span class="feature">Ultra Wide</span>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="prop">
-                                                        Resolution
-                                                    </div>
-                                                    <div class="detail">12.0 MP</div>
-                                                    <div class="detail">12.0 MP</div>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li class="list-in">
-                                            <ul>
-                                                <li>
-                                                    <div class="detail">
-                                                        <span class="order">3</span>
-                                                        <span class="feature">Telephoto</span>
-                                                    </div>
-                                                    <div class="detail">
-                                                        <span class="order">3</span>
-                                                        <span class="feature">Telephoto</span>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="prop">
-                                                        Resolution
-                                                    </div>
-                                                    <div class="detail">10.0 MP</div>
-                                                    <div class="detail">12.0 MP</div>
-                                                </li>
-                                                <li>
-                                                    <div class="prop">
-                                                        Aperture
-                                                    </div>
-                                                    <div class="detail">&#x192;/2.4</div>
-                                                    <div class="detail"></div>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li class="list-in">
-                                            <ul>
-                                                <li>
-                                                    <div class="detail">
-                                                        <span class="order">4</span>
-                                                        <span class="feature">Telephoto</span>
-                                                    </div>
-                                                    <div class="detail">
-                                                        <span class="order">4</span>
-                                                        <span class="feature">Telephoto</span>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="prop">
-                                                        Resolution
-                                                    </div>
-                                                    <div class="detail">10.0 MP</div>
-                                                    <div class="detail"></div>
-                                                </li>
-                                                <li>
-                                                    <div class="prop">
-                                                        Aperture
-                                                    </div>
-                                                    <div class="detail">&#x192;/4.9</div>
-                                                    <div class="detail"></div>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li class="list-col">
-                                            <div class="prop">
-                                                Quay phim
+                                        <li>
+                                            <div class="prop">Độ phân giải</div>
+                                            <div class="detail">
+                                                {{product1_rear_cam}}
                                             </div>
                                             <div class="detail">
-                                                <ul>
-                                                    <li>4K 2160p@30fps</li>
-                                                    <li>FullHD 1080p@240fps</li>
-                                                </ul>
-                                            </div>
-                                            <div class="detail">
-                                                <ul>
-                                                    <li>HD 720p@30fps</li>
-                                                    <li>FullHD 1080p@30fps</li>
-                                                    <li>4K 2160p@25fps</li>
-                                                    <li>4K 2160p@24fps</li>
-                                                    <li>4K 2160p@30fps</li>
-                                                    <li>4K 2160p@60fps</li>
-                                                    <li>FullHD 1080p@60fps</li>
-                                                    <li>FullHD 1080p@25fps</li>
-                                                </ul>
+                                                {{product2_rear_cam}}
                                             </div>
                                         </li>
-                                        <li class="list-col">
-                                            <div class="prop">
-                                                T&#xED;nh n&#x103;ng
+                                        <li>
+                                            <div class="prop">Quay phim</div>
+                                            <div class="detail">
+                                                {% for feature in product1_rear_cam_video %}
+                                                    {{feature}}
+                                                    <br>
+                                                {% endfor %}
                                             </div>
                                             <div class="detail">
-                                                <ul>
-                                                    <li>Ban &#x111;&#xEA;m (Night Mode)</li>
-                                                    <li>Ch&#x1EE5;p g&#xF3;c r&#x1ED9;ng (Wide)</li>
-                                                    <li>A.I Camera</li>
-                                                    <li>Ch&#x1ED1;ng rung quang ho&#x323;c (OIS)</li>
-                                                    <li>Ch&#x1EE5;p g&#xF3;c si&#xEA;u r&#x1ED9;ng (Ultrawide)</li>
-                                                </ul>
+                                                {% for feature in product2_rear_cam_video %}
+                                                    {{feature}}
+                                                    <br>
+                                                {% endfor %}
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="prop">Đèn Flash</div>
+                                            <div class="detail">
+                                                {{product1_rear_cam_flash}}
                                             </div>
                                             <div class="detail">
-                                                <ul>
-                                                    <li>Ban &#x111;&#xEA;m (Night Mode)</li>
-                                                    <li>Ch&#x1EE5;p g&#xF3;c r&#x1ED9;ng (Wide)</li>
-                                                    <li>Ch&#x1ED1;ng rung quang ho&#x323;c (OIS)</li>
-                                                    <li>Ch&#x1EA1;m l&#x1EA5;y n&#xE9;t</li>
-                                                    <li>Tr&#xF4;i nhanh th&#x1EDD;i gian (Time Lapse)</li>
-                                                    <li>Flash LED</li>
-                                                    <li>Ch&#x1EE5;p g&#xF3;c si&#xEA;u r&#x1ED9;ng (Ultrawide)</li>
-                                                    <li>HDR</li>
-                                                    <li>Quay ch&#x1EAD;m (Slow Motion)</li>
-                                                    <li>T&#x1EF1; &#x111;&#x1ED9;ng l&#x1EA5;y n&#xE9;t (AF)</li>
-                                                    <li>Ch&#x1EE5;p ch&#xE2;n dung</li>
-                                                    <li>Chuy&#xEA;n nghi&#x1EC7;p (Pro)</li>
-                                                    <li>To&#xE0;n c&#x1EA3;nh (Panorama)</li>
-                                                    <li>&#x1ED4;n &#x111;&#x1ECB;nh h&#xEC;nh &#x1EA3;nh quang
-                                                        h&#x1ECD;c</li>
-                                                    <li>Ch&#x1EE5;p chuy&#x1EC3;n &#x111;&#x1ED9;ng</li>
-                                                </ul>
+                                                {{product2_rear_cam_flash}}
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="prop">Tính năng</div>
+                                            <div class="detail">
+                                                {% for feature in product1_rear_cam_features %}
+                                                    {{feature}}
+                                                    <br>
+                                                {% endfor %}
+                                            </div>
+                                            <div class="detail">
+                                                {% for feature in product2_rear_cam_features %}
+                                                    {{feature}}
+                                                    <br>
+                                                {% endfor %}
                                             </div>
                                         </li>
                                     </ul>
@@ -1130,104 +922,28 @@
                                 </div>
                                 <div class="c-compare__wrap">
                                     <ul class="c-compare__table">
-                                        <li class="list-in">
-                                            <ul>
-                                                <li>
-                                                    <div class="detail">
-                                                        <span class="order">1</span>
-                                                        <span class="feature">Selfie</span>
-                                                    </div>
-                                                    <div class="detail">
-                                                        <span class="order">1</span>
-                                                        <span class="feature">Selfie</span>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="prop">
-                                                        Resolution
-                                                    </div>
-                                                    <div class="detail">12.0 MP</div>
-                                                    <div class="detail">12.0 MP</div>
-                                                </li>
-                                                <li>
-                                                    <div class="prop">
-                                                        Aperture
-                                                    </div>
-                                                    <div class="detail">&#x192;/2.2</div>
-                                                    <div class="detail"></div>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li class="list-col">
-                                            <div class="prop">
-                                                Quay phim
+                                        <li>
+                                            <div class="prop">Độ phân giải</div>
+                                            <div class="detail">
+                                                {{product1_front_cam}}
                                             </div>
                                             <div class="detail">
-                                                <ul>
-                                                    <li>Quay phim 4K</li>
-                                                    <li>Quay phim FullHD</li>
-                                                </ul>
-                                            </div>
-                                            <div class="detail">
-                                                <ul>
-                                                    <li>Quay phim 4K</li>
-                                                    <li>Quay phim FullHD</li>
-                                                </ul>
+                                                {{product2_front_cam}}
                                             </div>
                                         </li>
-                                        <li class="list-col">
-                                            <div class="prop">
-                                                T&#xED;nh n&#x103;ng
+                                        <li>
+                                            <div class="prop">Tính năng</div>
+                                            <div class="detail">
+                                                {% for feature in product1_front_cam_features %}
+                                                    {{feature}}
+                                                    <br>
+                                                {% endfor %}
                                             </div>
                                             <div class="detail">
-                                                <ul>
-                                                    <li>L&#xE0;m &#x111;&#x1EB9;p (Beautify)</li>
-                                                    <li>A.I Camera</li>
-                                                    <li>HDR</li>
-                                                </ul>
-                                            </div>
-                                            <div class="detail">
-                                                <ul>
-                                                    <li>Ch&#x1EE5;p g&#xF3;c r&#x1ED9;ng (Wide)</li>
-                                                    <li>Ban &#x111;&#xEA;m (Night Mode)</li>
-                                                    <li>HDR</li>
-                                                    <li>T&#x1EF1; &#x111;&#x1ED9;ng l&#x1EA5;y n&#xE9;t (AF)</li>
-                                                    <li>Ch&#x1EBF; &#x111;&#x1ED9; ch&#xE2;n dung</li>
-                                                    <li>Flash m&#xE0;n h&#xEC;nh</li>
-                                                    <li>&#x1ED4;n &#x111;&#x1ECB;nh h&#xEC;nh &#x1EA3;nh quang
-                                                        h&#x1ECD;c</li>
-                                                </ul>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="c-compare__row js--collapse-detail" id="data-Cmbin">
-                                <div class="c-compare__title">
-                                    <h2 class="title">C&#x1EA3;m bi&#x1EBF;n</h2>
-                                </div>
-                                <div class="c-compare__wrap">
-                                    <ul class="c-compare__table">
-                                        <li class="list-col">
-                                            <div class="prop">
-                                                C&#x1EA3;m bi&#x1EBF;n
-                                            </div>
-                                            <div class="detail">
-                                                <ul>
-                                                    <li>C&#x1EA3;m bi&#x1EBF;n v&#xE2;n tay</li>
-                                                    <li>C&#x1EA3;m bi&#x1EBF;n &#xE1;nh s&#xE1;ng</li>
-                                                    <li>C&#x1EA3;m bi&#x1EBF;n tr&#x1ECD;ng l&#x1EF1;c</li>
-                                                </ul>
-                                            </div>
-                                            <div class="detail">
-                                                <ul>
-                                                    <li>C&#x1EA3;m bi&#x1EBF;n ti&#x1EC7;m c&#x1EAD;n</li>
-                                                    <li>C&#x1EA3;m bi&#x1EBF;n la b&#xE0;n</li>
-                                                    <li>C&#x1EA3;m bi&#x1EBF;n &#xE1;nh s&#xE1;ng</li>
-                                                    <li>Con quay h&#x1ED3;i chuy&#x1EC3;n</li>
-                                                    <li>C&#x1EA3;m bi&#x1EBF;n gia t&#x1ED1;c</li>
-                                                    <li>C&#x1EA3;m bi&#x1EBF;n kh&#xED; &#xE1;p k&#x1EBF;</li>
-                                                </ul>
+                                                {% for feature in product2_front_cam_features %}
+                                                    {{feature}}
+                                                    <br>
+                                                {% endfor %}
                                             </div>
                                         </li>
                                     </ul>
@@ -1235,50 +951,29 @@
                             </div>
                             <div class="c-compare__row js--collapse-detail" id="data-Bomt">
                                 <div class="c-compare__title">
-                                    <h2 class="title">B&#x1EA3;o m&#x1EAD;t</h2>
+                                    <h2 class="title">Bảo mật</h2>
                                 </div>
                                 <div class="c-compare__wrap">
                                     <ul class="c-compare__table">
                                         <li class="list-col">
                                             <div class="prop">
-                                                B&#x1EA3;o m&#x1EAD;t
+                                                Bảo mật
                                             </div>
                                             <div class="detail">
                                                 <ul>
-                                                    <li>M&#x1EDF; kh&#xF3;a khu&#xF4;n m&#x1EB7;t</li>
-                                                    <li>M&#x1EDF; kh&#xF3;a b&#x1EB1;ng m&#x1EAD;t m&#xE3;</li>
+                                                    {% for feature in product1_security %}
+                                                        {{feature}}
+                                                        <br>
+                                                    {% endfor %}
                                                 </ul>
                                             </div>
                                             <div class="detail">
                                                 <ul>
-                                                    <li>M&#x1EDF; kh&#xF3;a khu&#xF4;n m&#x1EB7;t</li>
-                                                    <li>M&#x1EDF; kh&#xF3;a b&#x1EB1;ng m&#x1EAD;t m&#xE3;</li>
+                                                    {% for feature in product1_security %}
+                                                        {{feature}}
+                                                        <br>
+                                                    {% endfor %}
                                                 </ul>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="c-compare__row js--collapse-detail" id="data-Others">
-                                <div class="c-compare__title">
-                                    <h2 class="title">Others</h2>
-                                </div>
-                                <div class="c-compare__wrap">
-                                    <ul class="c-compare__table">
-                                        <li>
-                                            <div class="prop">L&#xE0;m m&#xE1;t</div>
-                                            <div class="detail">
-                                                Kh&#xF4;ng
-                                            </div>
-                                            <div class="detail">
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="prop">Th&#xF4;ng b&#xE1;o LED</div>
-                                            <div class="detail">
-                                                Kh&#xF4;ng
-                                            </div>
-                                            <div class="detail">
                                             </div>
                                         </li>
                                     </ul>
@@ -1290,82 +985,114 @@
                                 </div>
                                 <div class="c-compare__wrap">
                                     <ul class="c-compare__table">
-                                        <li>
-                                            <div class="prop">S&#x1ED1; khe SIM</div>
+                                        <li class="list-col">
+                                            <div class="prop">Mạng di động</div>
                                             <div class="detail">
-                                                1
+                                                {{product1_network}}
                                             </div>
                                             <div class="detail">
-                                                1
+                                                {{product2_network}}
                                             </div>
                                         </li>
                                         <li>
-                                            <div class="prop">Lo&#x1EA1;i SIM</div>
+                                            <div class="prop">SIM</div>
                                             <div class="detail">
-                                                2 Nano SIM ho&#x1EB7;c 1 eSIM, 1 Nano SIM
+                                                {{product1_sim}}
                                             </div>
                                             <div class="detail">
-                                                1 eSIM, 1 Nano SIM
+                                                {{product2_sim}}
                                             </div>
                                         </li>
                                         <li class="list-col">
-                                            <div class="prop">
-                                                H&#x1ED7; tr&#x1EE3; m&#x1EA1;ng
-                                            </div>
+                                            <div class="prop"> Wifi </div>
                                             <div class="detail">
                                                 <ul>
-                                                    <li>5G</li>
-                                                    <li>4G</li>
+                                                    {% for feature in product1_wifi %}
+                                                        {{feature}}
+                                                        <br>
+                                                    {% endfor %}
                                                 </ul>
                                             </div>
                                             <div class="detail">
                                                 <ul>
-                                                    <li>5G</li>
-                                                </ul>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="prop">C&#x1ED5;ng giao ti&#x1EBF;p</div>
-                                            <div class="detail">
-                                                C&#x1ED5;ng s&#x1EA1;c: Type C
-                                            </div>
-                                            <div class="detail">
-                                                Audio Jack: Type C
-                                            </div>
-                                        </li>
-                                        <li class="list-col">
-                                            <div class="prop">
-                                                Wifi
-                                            </div>
-                                            <div class="detail">
-                                                <ul>
-                                                    <li>Dual-band (2.4 GHz/ 5 GHz)</li>
-                                                    <li>802.11 a/b/g/n/ac/ax</li>
-                                                </ul>
-                                            </div>
-                                            <div class="detail">
-                                                <ul>
-                                                    <li>Wifi 6</li>
+                                                    {% for feature in product2_wifi %}
+                                                        {{feature}}
+                                                        <br>
+                                                    {% endfor %}
                                                 </ul>
                                             </div>
                                         </li>
                                         <li>
                                             <div class="prop">GPS</div>
                                             <div class="detail">
-                                                GLONASS
+                                                {% for feature in product1_gps %}
+                                                    {{feature}}
+                                                    <br>
+                                                {% endfor %}
                                             </div>
                                             <div class="detail">
-                                                BEIDOU
+                                                {% for feature in product2_gps %}
+                                                    {{feature}}
+                                                    <br>
+                                                {% endfor %}
+                                            </div>
+                                        </li>
+                                        <li class="list-col">
+                                            <div class="prop"> Bluetooth </div>
+                                            <div class="detail">
+                                                <ul>
+                                                    {% for feature in product1_bluetooth %}
+                                                        {{feature}}
+                                                        <br>
+                                                    {% endfor %}
+                                                </ul>
+                                            </div>
+                                            <div class="detail">
+                                                <ul>
+                                                    {% for feature in product2_bluetooth %}
+                                                        {{feature}}
+                                                        <br>
+                                                    {% endfor %}
+                                                </ul>
                                             </div>
                                         </li>
                                         <li>
-                                            <div class="prop">Bluetooth</div>
+                                            <div class="prop">Cổng kết nối/sạc</div>
                                             <div class="detail">
-                                                v5.3
+                                                {% for feature in product1_port %}
+                                                    {{feature}}
+                                                    <br>
+                                                {% endfor %}
                                             </div>
                                             <div class="detail">
-                                                v5.3
+                                                {% for feature in product2_port %}
+                                                    {{feature}}
+                                                    <br>
+                                                {% endfor %}
                                             </div>
+                                        </li>
+                                        <li>
+                                            <div class="prop">Jack tai nghe</div>
+                                            <div class="detail">
+                                                {{product1_headphone}}
+                                            </div>
+                                            <div class="detail">
+                                                {{product2_headphone}}
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="prop">Kết nối khác</div>
+                                            <div class="detail">
+                                                {% for feature in product1_oth_connect %}
+                                                    {{feature}}
+                                                    <br>
+                                                {% endfor %}
+                                            </div>
+                                            <div class="detail">
+                                                {% for feature in product2_oth_connect %}
+                                                    {{feature}}
+                                                    <br>
+                                                {% endfor %}
                                         </li>
                                     </ul>
                                 </div>
@@ -1379,10 +1106,37 @@
                                         <li>
                                             <div class="prop">Dung l&#x1B0;&#x1EE3;ng pin</div>
                                             <div class="detail">
-                                                5000 mAh
+                                                {{product1_battery_capacity}}
                                             </div>
                                             <div class="detail">
-                                                29
+                                                {{product2_battery_capacity}}
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="prop">Loại pin</div>
+                                            <div class="detail">
+                                                {{product1_battery_type}}
+                                            </div>
+                                            <div class="detail">
+                                                {{product2_battery_type}}
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="prop">Hỗ trợ sạc tối đa</div>
+                                            <div class="detail">
+                                                {{product1_battery_charging}}
+                                            </div>
+                                            <div class="detail">
+                                                {{product2_battery_charging}}
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="prop">Sạc kèm theo máy</div>
+                                            <div class="detail">
+                                                {{product1_changer_include}}
+                                            </div>
+                                            <div class="detail">
+                                                {{product2_changer_include}}
                                             </div>
                                         </li>
                                         <li class="list-col">
@@ -1391,18 +1145,18 @@
                                             </div>
                                             <div class="detail">
                                                 <ul>
-                                                    <li>H&#x1ED7; tr&#x1EE3; s&#x1EA1;c kh&#xF4;ng d&#xE2;y</li>
-                                                    <li>S&#x1EA1;c pin nhanh</li>
-                                                    <li>S&#x1EA1;c ng&#x1B0;&#x1EE3;c cho thi&#x1EBF;t b&#x1ECB;
-                                                        kh&#xE1;c</li>
+                                                    {% for feature in product1_battery_tech %}
+                                                        {{feature}}
+                                                        <br>
+                                                    {% endfor %}
                                                 </ul>
                                             </div>
                                             <div class="detail">
                                                 <ul>
-                                                    <li>H&#x1ED7; tr&#x1EE3; s&#x1EA1;c kh&#xF4;ng d&#xE2;y</li>
-                                                    <li>S&#x1EA1;c pin nhanh</li>
-                                                    <li>S&#x1EA1;c ng&#x1B0;&#x1EE3;c cho thi&#x1EBF;t b&#x1ECB;
-                                                        kh&#xE1;c</li>
+                                                    {% for feature in product2_battery_tech %}
+                                                        {{feature}}
+                                                        <br>
+                                                    {% endfor %}
                                                 </ul>
                                             </div>
                                         </li>
@@ -1418,19 +1172,19 @@
                                         <li>
                                             <div class="prop">OS</div>
                                             <div class="detail">
-                                                Android
+                                                {{product1_os}}
                                             </div>
                                             <div class="detail">
-                                                iOS
+                                                {{product2_os}}
                                             </div>
                                         </li>
                                         <li>
                                             <div class="prop">Version</div>
                                             <div class="detail">
-                                                Android 13.0
+                                                {{product1_os_version}}
                                             </div>
                                             <div class="detail">
-                                                iOS 17
+                                                {{product2_os_version}}
                                             </div>
                                         </li>
                                     </ul>
@@ -1438,53 +1192,26 @@
                             </div>
                             <div class="c-compare__row js--collapse-detail" id="data-Phkintronghp">
                                 <div class="c-compare__title">
-                                    <h2 class="title">Ph&#x1EE5; ki&#x1EC7;n trong h&#x1ED9;p</h2>
+                                    <h2 class="title">Tính năng khác</h2>
                                 </div>
                                 <div class="c-compare__wrap">
                                     <ul class="c-compare__table">
-                                        <li class="list-accessories">
+                                        <li>
+                                            <div class="prop">Tính năng khác</div>
                                             <div class="detail">
                                                 <ul>
-                                                    <li>
-                                                        <div class="access-icon">
-                                                            <i class="ic-sim-eject"></i>
-                                                        </div>
-                                                        Que l&#x1EA5;y SIM
-                                                    </li>
-                                                    <li>
-                                                        <div class="access-icon">
-                                                            <i class="ic-doc"></i>
-                                                        </div>
-                                                        S&#xE1;ch HDSD
-                                                    </li>
-                                                    <li>
-                                                        <div class="access-icon">
-                                                            <i class="ic-apple-cable"></i>
-                                                        </div>
-                                                        C&#xE1;p
-                                                    </li>
+                                                    {% for feature in product1_other_features %}
+                                                        {{feature}}
+                                                        <br>
+                                                    {% endfor %}
                                                 </ul>
                                             </div>
                                             <div class="detail">
                                                 <ul>
-                                                    <li>
-                                                        <div class="access-icon">
-                                                            <i class="ic-sim-eject"></i>
-                                                        </div>
-                                                        Que l&#x1EA5;y SIM
-                                                    </li>
-                                                    <li>
-                                                        <div class="access-icon">
-                                                            <i class="ic-doc"></i>
-                                                        </div>
-                                                        S&#xE1;ch HDSD
-                                                    </li>
-                                                    <li>
-                                                        <div class="access-icon">
-                                                            <i class="ic-apple-cable"></i>
-                                                        </div>
-                                                        C&#xE1;p USB-C to USB-C
-                                                    </li>
+                                                    {% for feature in product2_other_features %}
+                                                        {{feature}}
+                                                        <br>
+                                                    {% endfor %}
                                                 </ul>
                                             </div>
                                         </li>
@@ -1495,33 +1222,31 @@
                                 <div class="l-pc-row compare-product__group">
                                     <div class="c-compare__product">
                                         <div class="product-img">
-                                            <img src="../images.fpt.shop/unsafe/fit-in/240x320/filters_quality(90)_fill(white)/fptshop.com.vn/Uploads/Originals/2024/3/27/638471599704942918_samsung-galaxy-s23-ultra-xanh-dd-AI.jpg"
-                                                alt="Samsung Galaxy S23 Ultra 5G 256GB">
+                                            <img src="{{product1.image}}" alt="{{product1.name}}">
                                         </div>
                                         <div class="product-info">
-                                            <div class="product-name">Samsung Galaxy S23 Ultra 5G 256GB</div>
+                                            <div class="product-name"> {{product1.product_name}} </div>
                                             <div class="product-price">
                                                 <div class="text">Chỉ từ</div>
                                                 <div class="price">23.990.000₫</div>
                                             </div>
                                             <a class="product-link"
-                                                href="dien-thoai/samsung-galaxy-s23-ultra.html?dung-luong=256-gb">Xem
+                                                href=" {{product1.TGDD_product_link}} ">Xem
                                                 chi tiết <span class="carret"></span> </a>
                                         </div>
                                     </div>
                                     <div class="c-compare__product">
                                         <div class="product-img">
-                                            <img src="../images.fpt.shop/unsafe/fit-in/240x320/filters_quality(90)_fill(white)/fptshop.com.vn/Uploads/Originals/2023/10/30/638342502751589917_ip-15-pro-max-dd-bh-2-nam.jpg"
-                                                alt="iPhone 15 Pro Max 256GB">
+                                            <img src="{{product2.image}}" alt="{{product2.name}}">
                                         </div>
                                         <div class="product-info">
-                                            <div class="product-name">iPhone 15 Pro Max 256GB</div>
+                                            <div class="product-name"> {{product2.product_name}} </div>
                                             <div class="product-price">
                                                 <div class="text">Chỉ từ</div>
                                                 <div class="price">29.690.000₫</div>
                                             </div>
                                             <a class="product-link"
-                                                href="dien-thoai/iphone-15-pro-max.html?dung-luong=256gb">Xem chi tiết
+                                                href=" {{product2.TGDD_product_link}} ">Xem chi tiết
                                                 <span class="carret"></span> </a>
                                         </div>
                                     </div>
@@ -1535,321 +1260,6 @@
         </div>
     </main>
 
-    <div class="lt-modal lt-modal-md js-modal-login lt-modal-otp modal-father" data-animation="on">
-        <div class="lt-modal-wrapper" tabindex="-1">
-
-            <div id="box-login-phone" class="lt-modal-box">
-                <div class="lt-modal-header">
-                    <div class="f-w-500">Đăng Nhập Hoặc Tạo Tài Khoản</div>
-                    <span class="lt-modal-close js-lt-modal-close base-ic js-modal-lg-close">
-                        <i class="ic-close icon-md f-s-ui-15 f-w-500"></i>
-                    </span>
-                </div>
-                <div class="lt-modal-body">
-                    <div class="image-login text-center">
-                        <picture>
-                            <source media="(max-width:992px )" srcset="Content/v5d/account/images/img-login-mb.png" />
-                            <img src="Content/v5d/account/images/img-login.png" alt="Nhập số điện thoại" width="156"
-                                height="156" loading="lazy" />
-                        </picture>
-                    </div>
-                    <div class="content-login">
-                        <p class="f-s-p-16 text-gray-700 text-center">
-                            Nhập số điện thoại mua hàng để hưởng <br />
-                            đặc quyền riêng tại FPT Shop
-                        </p>
-                        <div class="form-group">
-                            <input type="text" id="phoneNumber" name="phoneNumber"
-                                class="lt-form-input lt-form-input-lg" placeholder="Nhập số điện thoại"
-                                maxlength="10" />
-                            <div class="lt-alert lt-alert-md text-left lt-alert-danger lt-alert-des base-ic m-t-8 phone-error"
-                                style="display: none">
-                                <i class="ic-exclamation m-r-4 lt-alert-ic-sm ic-circle bg-danger"></i>
-                                <span class="phone-error-mess"></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="lt-modal-footer">
-                    <button
-                        class="lt-btn lt-btn-primary lt-btn-lg width-100-mb js-check-form js-check-phone btnSendPhone">
-                        TIẾP TỤC
-                    </button>
-                </div>
-            </div>
-
-            <div id="box-login-otp" class="lt-modal-box" style="display: none">
-                <div class="lt-modal-header">
-                    <div class="f-s-p-20 f-s-ui-md-18 text-gray-800 f-w-500">
-                        Xác Thực OTP
-                    </div>
-                    <span class="lt-modal-close js-lt-modal-close base-ic js-modal-lg-close">
-                        <i class="ic-close icon-md f-s-ui-15 f-w-500"></i>
-                    </span>
-                </div>
-                <div class="lt-modal-body text-center">
-                    <div class="image-login">
-                        <picture>
-                            <source media="(max-width:992px )" srcset="Content/v5d/account/images/img-otp-mb.png" />
-                            <img src="Content/v5d/account/images/img-otp.png" alt="Mã OTP" width="156" height="156"
-                                loading="lazy" />
-                        </picture>
-                    </div>
-                    <div class="content-login">
-                        <p class="f-s-p-16">
-                            Mã OTP đã được gửi đến số điện thoại
-                            <span class="f-w-500 lg-phone-step2"></span>
-                        </p>
-                        <p class="lt-cd-expired-box" style="display: none">
-                            có hiệu lực trong <span class="lt-countdown-expired"></span>
-                        </p>
-                        <a href="#" class="link link-icon link-md base-ic m-t-md-4 js-change-back"
-                            aria-controls="dangnhapsodienthoai">
-                            <i class="ic-edit m-r-4"></i>
-                            Đổi số điện thoại nhận mã
-                        </a>
-                    </div>
-                    <div class="form-otp">
-                        <form class="otp" name="one-time-code">
-                            <div class="otp-group">
-                                <input type="number" maxlength="1" value autocomplete="one-time-code" id="codeBox1"
-                                    class="otp-item inputOtp is-invalid1" />
-                                <input type="number" maxlength="1" value autocomplete="one-time-code" id="codeBox2"
-                                    class="otp-item inputOtp is-invalid1" />
-                                <input type="number" maxlength="1" value autocomplete="one-time-code" id="codeBox3"
-                                    class="otp-item inputOtp is-invalid1" />
-                                <input type="number" maxlength="1" value autocomplete="one-time-code" id="codeBox4"
-                                    class="otp-item inputOtp is-invalid1" />
-                                <input type="number" maxlength="1" value autocomplete="one-time-code" id="codeBox5"
-                                    class="otp-item inputOtp is-invalid1" />
-                                <input type="number" maxlength="1" value autocomplete="one-time-code" id="codeBox6"
-                                    class="otp-item inputOtp is-invalid1" />
-                            </div>
-                            <div class="lt-alert-wrapper text-left">
-                                <div
-                                    class="lt-alert lt-alert-md lt-alert-success lt-alert-des m-t-8 text-center base-ic lg-mess-reotp">
-                                    <i class="ic-exclamation ic-circle lt-alert-ic-sm bg-success"></i>
-                                    <span class="f-s-p-16">
-                                        Gửi lại thành công mã OTP, mã mới có hiệu lực trong vòng 5
-                                        phút.
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="lt-alert-wrapper text-left">
-                                <div
-                                    class="lt-alert lt-alert-md lt-alert-danger lt-alert-des base-ic m-t-8 lg-mess-otp">
-                                    <i class="ic-exclamation ic-circle lt-alert-ic-sm bg-danger"></i>
-                                    <span class>Mã OTP không đúng</span>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <style>
-                        .otp legend {
-                            margin: 0 auto 1em;
-                            color: #55f
-                        }
-
-                        input[type="number"]:nth-child(n + 4) {
-                            order: 2
-                        }
-                    </style>
-                </div>
-                <div class="lt-modal-footer">
-                    <button
-                        class="lt-btn lt-btn-primary lt-btn-lg circle js-check-form js-check-phone width-100-mb btnSendOTP">
-                        XÁC NHẬN
-                    </button>
-                    <a class="link btn-get-otp js-resend-otp">Gửi lại mã OTP cho tôi</a>
-                    <div class="lt-alert-wrapper">
-                        <div class="lt-alert lt-alert-md lt-alert-danger lt-alert-des base-ic m-t-8 lg-mess-cdresend"
-                            style="display: none">
-                            <i class="ic-exclamation ic-circle lt-alert-ic-sm bg-danger"></i>
-                            <span>
-                                Bạn có thể gửi lại mã OTP sau
-                                <span class="lt-cd-resend"></span> nữa
-                            </span>
-                        </div>
-                    </div>
-                    <div class="lt-alert-wrapper" style="display: none">
-                        <div class="lt-alert lt-alert-md lt-alert-danger lt-alert-des base-ic m-t-8 lg-mess-cdresendlm"
-                            style="display: none">
-                            <i class="ic-exclamation ic-circle lt-alert-ic-sm bg-danger"></i>
-                            <span>
-                                Bạn đã gửi quá 5 OTP trong vòng 15 phút. Vui lòng gửi lại sau
-                                <span class="lt-cd-resendlm"></span>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="lt-alert-wrapper">
-                        <div class="lt-alert lt-alert-md lt-alert-danger lt-alert-des base-ic m-t-8 lg-mess-otplimit"
-                            style="display: none">
-                            <i class="ic-exclamation ic-circle lt-alert-ic-sm bg-danger"></i>
-                            <span> Mã OTP chỉ được gửi tối đa 5 lần/ngày </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="box-login-password" class="lt-modal-box lt-modal-login" style="display: none">
-                <div class="lt-modal-header">
-                    <div class="text-gray-800 f-w-500">Đăng Nhập Tài Khoản</div>
-                    <span class="lt-modal-close js-lt-modal-close base-ic js-modal-lg-close">
-                        <i class="ic-close icon-md f-s-ui-15 f-w-500"></i>
-                    </span>
-                </div>
-                <div class="lt-modal-body">
-                    <div class="image-login text-center">
-                        <picture>
-                            <source media="(max-width:992px )" srcset="Content/v5m/account/images/img-password.png" />
-                            <img src="Content/v5d/account/images/login-password.png" alt="login" />
-                        </picture>
-                    </div>
-                    <div class="content-login">
-                        <p class="f-s-p-16 text-gray-700 text-center m-t-16">
-                            Quý khách vui lòng nhập mật khẩu để đăng nhập tài khoản
-                        </p>
-                        <div class="form-group">
-                            <input type="password" id="login-password" class="lt-form-input lt-form-input-lg"
-                                name="phoneOtp" placeholder="Nhập mật khẩu" />
-                            <span class="base-ic toggle-password">
-                                <i class="ic-eye-off"></i>
-                            </span>
-                            <div class="lt-alert lt-alert-des m-t-8 base-ic" style="display: none"
-                                id="error-login-pass">
-                                <i class="ic-exclamation m-r-4 lt-alert-ic-sm ic-circle bg-danger"></i>
-                                <span class="text text-danger-700">Vui lòng nhập mật khẩu để đăng nhập</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="lt-modal-footer">
-                    <button class="lt-btn lt-btn-primary lt-btn-lg width-100-mb js-check-form js-check-phone btnLogin">
-                        ĐĂNG NHẬP
-                    </button>
-                    <div class="lt-password">
-                        <a class="f-s-p-16 link btn-forget-password"> Quên mật khẩu? </a>
-                    </div>
-                </div>
-            </div>
-
-            <div id="box-create-password" class="lt-modal-box lt-modal-login" style="display: none">
-                <div class="lt-modal-header">
-                    <div class="text-gray-800 f-w-500">Khởi Tạo Mật Khẩu</div>
-                    <span class="lt-modal-close js-lt-modal-close base-ic js-modal-lg-close">
-                        <i class="ic-close icon-md f-s-ui-15 f-w-500"></i>
-                    </span>
-                </div>
-                <div class="lt-modal-body">
-                    <div class="image-login text-center">
-                        <picture>
-                            <source media="(max-width:992px )" srcset="Content/v5m/account/images/img-password.png" />
-                            <img src="Content/v5d/account/images/login-password.png" alt />
-                        </picture>
-                    </div>
-                    <div class="content-login">
-                        <p class="f-s-p-16 text-gray-700 text-center m-t-16">
-                            Mật khẩu có ít nhất 6 ký tự
-                        </p>
-                        <div class="form-group">
-                            <div class="form-item">
-                                <input type="password" onpaste="return false;" oncopy="return false"
-                                    oncut="return false" ondrag="return false" ondrop="return false" maxlength="16"
-                                    autocomplete="off" placeholder="Nhập mật khẩu "
-                                    class="lt-form-input form form-input new-pass" id="new-password" />
-                                <span class="form-float-label data-title fs-p-16 text-gray-600">Mật khẩu</span>
-                                <span class="form-icon base-ic js-icon-eye toggle-password-2">
-                                    <i class="ic-eye-off"></i>
-                                </span>
-                            </div>
-                            <div class="lt-alert lt-alert-des m-t-8 base-ic" style="display: none"
-                                id="error-new-password">
-                                <i class="ic-exclamation m-r-4 lt-alert-ic-sm ic-circle bg-danger"></i>
-                                <span class="text text-danger-700">Mật khẩu không trùng khớp</span>
-                            </div>
-                            <div class="form-item">
-                                <input type="password" onpaste="return false;" oncopy="return false"
-                                    oncut="return false" ondrag="return false" ondrop="return false" maxlength="16"
-                                    autocomplete="off" placeholder="Nhập lại mật khẩu "
-                                    class="lt-form-input form form-input new-pass" id="re-new-password" />
-                                <span class="form-float-label data-title fs-p-16 text-gray-600">Nhập lại mật khẩu</span>
-                                <span class="form-icon base-ic js-icon-eye toggle-password-2">
-                                    <i class="ic-eye-off"></i>
-                                </span>
-                            </div>
-                            <div class="lt-alert lt-alert-des m-t-8 base-ic" style="display: none"
-                                id="error-re-new-password">
-                                <i class="ic-exclamation m-r-4 lt-alert-ic-sm ic-circle bg-danger"></i>
-                                <span class="text text-danger-700">Mật khẩu không trùng khớp</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="lt-modal-footer">
-                    <button
-                        class="lt-btn lt-btn-primary lt-btn-lg width-100-mb js-check-form js-check-phone btnCheckPassword">
-                        XÁC NHẬN
-                    </button>
-                </div>
-            </div>
-
-            <div id="box-login-profile" class="lt-modal-box lt-modal-login" style="display: none">
-                <div class="lt-modal-header">
-                    <h2 class="text-gray-800"></h2>
-                    <span class="lt-modal-close js-lt-modal-close base-ic js-modal-lg-close">
-                        <i class="ic-close icon-md f-s-ui-15 f-w-500"></i>
-                    </span>
-                </div>
-                <div class="lt-modal-body">
-                    <div class="image-login text-center">
-                        <picture>
-                            <source media="(max-width:992px )" srcset="Content/v5d/account/images/img-update-mb.html" />
-                            <img src="Content/v5d/account/images/img-update-info.png" alt="info" />
-                        </picture>
-                    </div>
-                    <div class="content-login">
-                        <p class="f-s-p-16 text-gray-700 text-center">
-                            Cập nhật thông tin tài khoản của quý khách
-                        </p>
-                        <div class="radio-group m-t-16">
-                            <div class="radio radio-md m-r-16">
-                                <input type="radio" value="male" name="gender" id="male" />
-                                <label for="male" class="label label-md">
-                                    <span class="label-text f-w-400">Anh</span>
-                                </label>
-                            </div>
-                            <div class="radio radio-md m-r-16">
-                                <input type="radio" value="female" name="gender" id="female" />
-                                <label for="female" class="label label-md">
-                                    <span class="label-text f-w-400">Chị</span>
-                                </label>
-                            </div>
-                        </div>
-                        <div class="lt-alert lt-alert-des m-t-8 base-ic" style="display: none" id="error-gender">
-                            <i class="ic-exclamation m-r-4 lt-alert-ic-sm ic-circle bg-danger"></i>
-                            <span class="text text-danger-700">Thông tin bắt buộc</span>
-                        </div>
-                        <div class="form-group">
-                            <div class="form-item">
-                                <input type="text" autocomplete="off" placeholder="Nhập họ và tên"
-                                    class="lt-form-input form form-input new-name" id="new-name" />
-                                <span class="form-float-label data-title fs-p-16 text-gray-600">Nhập họ và tên</span>
-                            </div>
-                            <div class="lt-alert lt-alert-des m-t-8 base-ic" style="display: none" id="error-name">
-                                <i class="ic-exclamation m-r-4 lt-alert-ic-sm ic-circle bg-danger"></i>
-                                <span class="text text-danger-700">Thông tin bắt buộc</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="lt-modal-footer">
-                    <button class="lt-btn lt-btn-primary lt-btn-lg width-100-mb js-check-form btnSendProfile">
-                        HOÀN TẤT
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
     <style>
         .lt-modal-otp .lt-modal-box .content-login p {
             max-width: none
@@ -1857,12 +1267,46 @@
     </style>
 
     <style>
-        .dropdown-content {
-            position: absolute;
-            z-index: 1; /* Đảm bảo dropdown nằm trên hình ảnh */
+        .l-pc-product {
+            display: inline-block; /* Hiển thị các sản phẩm trên cùng một hàng */
+            vertical-align: top; /* Đảm bảo chúng được căn chỉnh theo đỉnh */
+            width: 45%; /* Đảm bảo chúng không chiếm quá nhiều không gian */
         }
+
+        .cs-search--lg {
+            margin: 0 auto; /* Canh giữa ô tìm kiếm */
+            text-align: center; /* Canh giữa nội dung trong ô tìm kiếm */
+        }
+
+        .cs-search--lg .cs-search-group input {
+            width: 100%; /* Chiếm toàn bộ chiều rộng của ô tìm kiếm */
+        }
+
+        .l-pc-line hr {
+            content: "";
+            height: 100%;
+            background: #e1e4e6;
+            width: 1px;
+            margin: 0;
+            margin: 50%; /* Tự động căn giữa theo chiều ngang */
+            position: absolute;
+            top: 50%; /* Đặt vị trí tại giữa theo chiều dọc */
+            transform: translateY(-50%);
+        }
+        
+        .dropdown-content:empty {
+            display: none; /* Ẩn dropdown-content khi nó rỗng */
+        }
+
+        .dropdown-content:not(:empty) {
+            position: absolute;
+            background-color: #ece9e9;
+            z-index: 1; /* Đảm bảo dropdown nằm trên hình ảnh */
+            padding: 10px; /* Khoảng cách giữa hình ảnh và khung hình ảnh */
+        }
+
         .cs-search-input {
-            background-color: #c7c7c7;
+            background-color: #f3f3f3;
         }
 
         a.tooltips {
@@ -1993,6 +1437,5 @@
 
 </body>
 
-<!-- Mirrored from fptshop.com.vn/so-sanh-san-pham?iphone-15-pro-max-256gb-vs-samsung-galaxy-s23-ultra-256gb by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 May 2024 12:54:12 GMT -->
 
 </html>

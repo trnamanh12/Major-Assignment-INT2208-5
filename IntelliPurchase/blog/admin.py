@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Product, Post, ProductSpec
+from .models import Product, Sentiment, ProductSpec
 # Register your models here.
 
 class ProductAdmin(admin.ModelAdmin):
@@ -16,10 +16,9 @@ class ProductSpecsAdmin(admin.ModelAdmin):
 
 admin.site.register(ProductSpec, ProductSpecsAdmin)
 
+class SentimentAdmin(admin.ModelAdmin):
+    list_display = ['s_pin', 's_general', 's_service', 's_others']
+    list_filter = ['s_pin']
+    search_fields = ['s_pin']
 
-class PostAdmin(admin.ModelAdmin):
-    list_display = ['title', 'date']
-    list_filter = ['date']
-    search_fields = ['title']
-
-admin.site.register(Post, PostAdmin)
+admin.site.register(Sentiment, SentimentAdmin)

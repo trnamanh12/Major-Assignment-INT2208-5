@@ -8,6 +8,7 @@
             <p>{{ product.product_name }}</p>
         </div>
     </div>
+    <hr class="divider">
 {% empty %}
     <p>No results found</p>
 {% endfor %}
@@ -27,5 +28,11 @@
 
     .product-name {
         margin: 0; /* Loại bỏ khoảng trắng xung quanh văn bản */
+    }
+    
+    .divider {
+        margin: 10px 0; /* Khoảng cách giữa dải ngăn cách và các phần tử */
+        border: none; /* Loại bỏ đường kẻ */
+        border-top: 1px solid #ccc; /* Tạo đường kẻ ngang */
     }
 </style>
