@@ -36,26 +36,18 @@ class ProductSpec(models.Model):
     class Meta:
         db_table = 'technical_details'
 
-class Post(models.Model):
-    title = models.CharField(max_length=100)
-    body = models.TextField()
-    date = models.DateTimeField(auto_now_add=True)
-    image = models.ImageField(null=True, blank=True)
+class Sentiment(models.Model):
+    id = models.AutoField(primary_key=True)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, db_column='product_id')
+    company_id = models.TextField()
+    s_pin = models.TextField(null=True)
+    s_general = models.TextField(null=True)
+    s_service = models.TextField(null=True)
+    s_others = models.TextField(null=True)
 
-    def __str__(self):
-        return self.title
-    
-class Comment(models.Model):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    body = models.TextField()
-    date = models.DateTimeField(auto_now_add=True)
-
-from django.contrib import admin
-
-# Register your models here.
-from .models import Post, Comment
-
-# Register your models here.
-class CommentInline(admin.StackedInline):
-    model = Comment
+    class Meta:
+        db_table = 'average_sa'
+        constraints  = [
+            models.UniqueConstraint(
+                fields=['product_id', 'company_id'], name='unique_sentiment')
+        ]
