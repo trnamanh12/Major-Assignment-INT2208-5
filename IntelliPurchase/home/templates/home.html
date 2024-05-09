@@ -24,6 +24,12 @@
                             <span class="lg-name-view">Tài khoản của tôi</span>
                         </a>
                     </li>
+
+                    <div class="form-inline my-2 my-lg-0">
+                        <span>Hello {{request.user}} </span>
+                        <span><a href="{% url 'logout' %}" class="fw-bold text-body"><u>Đăng xuất</u></a></span>
+                    </div>
+
                 </ul>
             </div>
             <input id="queryID" queryid hidden style="display:none">
