@@ -76,8 +76,8 @@ def compare(request):
             # product1_min_price = min(product1_fpt_price, product1_tgdd_price)
             # product2_min_price = min(product2_fpt_price, product2_tgdd_price)
 
-            plot_sentiment(product1.product_id)
-            
+            # plot_sentiment(product1.product_id)
+
             context = {
                 'product1': product1,
                 'product2': product2,
@@ -167,8 +167,8 @@ def compare(request):
                 'product2_os_version': product2_os_cpu.get('Hệ điều hành:', ''),
                 'product1_other_features': product1_tien_ich.get('Tính năng đặc biệt:', '').split('\n'),
                 'product2_other_features': product2_tien_ich.get('Tính năng đặc biệt:', '').split('\n'),
-                'product1_min_price': product1_min_price,
-                'product2_min_price': product2_min_price,
+                # 'product1_min_price': product1_min_price,
+                # 'product2_min_price': product2_min_price,
                 # 'product1_fpt_price': product1_fpt_price,
                 # 'product2_fpt_price': product2_fpt_price,
                 # 'product1_tgdd_price': product1_tgdd_price,

@@ -1,7 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
-from time import sleep
 from concurrent.futures import ThreadPoolExecutor
 
 
@@ -29,7 +28,6 @@ def crawl_tgdd(link):
     # Khởi tạo webdriver với tùy chọn trên và truy cập vào đường link sản phẩm
     driver = webdriver.Chrome(options=chrome_options)
     driver.get(link)
-    sleep(5)
 
     price = None
 
@@ -52,7 +50,6 @@ def crawl_tgdd(link):
         pass
 
     # Đóng webdriver
-    sleep(5)
     driver.close()
 
     return price
@@ -82,7 +79,6 @@ def crawl_fpt(link):
     # Khởi tạo webdriver với tùy chọn trên và truy cập vào đường link sản phẩm
     driver = webdriver.Chrome(options=chrome_options)
     driver.get(link)
-    sleep(5)
 
     price = None
 
@@ -93,7 +89,6 @@ def crawl_fpt(link):
         pass
 
     # Đóng webdriver
-    sleep(5)
     driver.close()
 
     return price
