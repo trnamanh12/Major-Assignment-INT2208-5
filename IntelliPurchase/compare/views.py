@@ -181,7 +181,7 @@ def compare(request):
             # Xử lý khi sản phẩm không tồn tại
             pass
     # Trả về template và truyền test_string vào context
-    return render(request, 'compare.html', context)
+    return render(request, 'prototype.html', context)
 
 def test(request):
     if request.method == 'POST':

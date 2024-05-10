@@ -20,32 +20,38 @@
     <header class="fs-header">
         <div class="f-hdtop">
             <div class="f-wrap">
-                <a href="home.html">
+                <a href="/">
                     <span class="logo_name">INTELLIPURCHASE</span>
                 </a>
                 <ul class="fs-hdmn">
-                    <li>
-                        <a href="/home/account.html" title="Tài khoản của tôi">
-                            {% if request.user.is_authenticated %}
-                                {% if request.user.is_staff %}
-                                    <span class="lg-name-view">Đăng nhập/Đăng kí</span>
-                                {% else %}
-                                    <span class="lg-name-view">Hello: {{ request.user }}</span>
-                                {% endif %}
-                            {% else %}
-                                <span class="lg-name-view">Đăng nhập/Đăng kí</span>
-                            {% endif %}
+                    {% if request.user.is_authenticated %}
+                        <a href="/account.html" title="Tài khoản của tôi">
+                            <span class="lg-name-view">Hello: {{ request.user }}</span>
                         </a>
-                    </li>
+                    {% else %}
+                        <a href="/login/" title="Tài khoản của tôi">
+                            <span class="lg-name-view">Đăng nhập/Đăng kí</span>
+                        </a>
+                    {% endif %}
                 </ul>
             </div>
-            <input id="queryID" queryid hidden style="display:none">
-            <input id="userIP" ip-user hidden style="display:none">
         </div>
-
     </header>
+    
     <div class="over-suggest"></div>
     <style>
+        .lg-name-view {
+            color: rgb(255, 255, 255);
+            margin: 10px 0 0 0; /* Thêm đơn vị đo(px) cho margin-top */
+            width: 415px;
+            font-size: 0.4em;
+            font-weight: 10; /* font-weight thường được chỉ định bằng các giá trị số từ 100 đến 900 */
+            text-align: right;
+            display: flex;
+            align-items: center; /* Hiển thị về giữa theo chiều dọc */
+            justify-content: flex-end; /* Hiển thị bên phải theo chiều ngang */
+            max-width: 100%;
+        }
         .f-hdtop {
             background-color: red;
         }
@@ -64,7 +70,6 @@
             max-width: 100%;
             z-index: 2;
         }
-
 
         .f-wrap {
             text-align: left;
