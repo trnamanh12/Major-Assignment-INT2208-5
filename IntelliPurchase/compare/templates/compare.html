@@ -1,7 +1,9 @@
-<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load static %}
+{% block main-content %}
 <html lang="en">
 
-<head>
+<!-- <head>
 
     <title>So sánh sản phẩm</title>
 
@@ -10,14 +12,12 @@
     <link rel="stylesheet" href="{% static 'css/header.footer.css' %}" type="text/css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{% static 'js/search.js' %}"></script>
-    <!-- <script src="{% static 'js/submit.js' %}"></script> -->
-    <!-- <script src="{% static 'js/update.js' %}"></script> -->
 
-</head>
+</head> -->
 
-<body>
+<!-- <body> -->
 
-    <header class="fs-header">
+    <!-- <header class="fs-header">
         <div class="f-hdtop">
             <div class="f-wrap">
                 <a href="home.html">
@@ -41,11 +41,11 @@
             </div>
             <input id="queryID" queryid hidden style="display:none">
             <input id="userIP" ip-user hidden style="display:none">
-        </div>
+        </div> -->
 
-    </header>
-    <div class="over-suggest"></div>
-    <style>
+    <!-- </header> -->
+    <!-- <div class="over-suggest"></div> -->
+    <!-- <style>
         .f-hdtop {
             background-color: red;
         }
@@ -421,7 +421,7 @@
         .base-ic .ic-chat:before {
             content: "\e920"
         }
-    </style>
+    </style> -->
 
     <main class="l-main">
         <div class="l-pc">
@@ -1402,7 +1402,8 @@
         }
     </style>
 
-</body>
+<!-- </body> -->
 
 
 </html>
+{% endblock main-content %}
