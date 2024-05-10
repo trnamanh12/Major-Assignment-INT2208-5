@@ -1,110 +1,168 @@
+import threading
+from queue import Queue
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
-from time import sleep
 
 
-def crawl_tgdd(link):
+class CrawlerThread(threading.Thread):
     """
-    Thu thập giá của sản phẩm điện thoại di động trên thế giới di động
+    Một lớp đại diện cho một luồng thu thập giá sản phẩm.
 
-    Parameters:
-    link (str): Đường link dẫn tới sản phẩm.
+    Attributes:
+        link (str): Đường liên kết URL để thu thập dữ liệu.
+        result_queue (Queue): Một hàng đợi để lưu trữ các kết quả thu thập.
 
-    Returns:
-    price (str): Giá của sản phẩm. Nếu price là None thì sản phẩm là Hết hàng hoặc Dừng bán
-
-    Ví dụ:
-    >>> crawl_tgdd("https://www.thegioididong.com/dtdd/iphone-15-pro-max")
-    29.990.000₫
-    """
-
-    # Tạo một đối tượng tùy chọn cho trình duyệt Chrome
-    chrome_options = Options()
-    # Thêm tùy chọn "--headless" để chạy trình duyệt ở chế độ không có giao diện người dùng,
-    # nghĩa là không hiển thị cửa sổ trình duyệt lên màn hình
-    chrome_options.add_argument("--headless")
-
-    # Khởi tạo webdriver với tùy chọn trên và truy cập vào đường link sản phẩm
-    driver = webdriver.Chrome(options=chrome_options)
-    driver.get(link)
-    sleep(5)
-
-    price = None
-
-    # Kiểm tra và lấy giá của sản phẩm
-    try:
-        price = driver.find_element(By.XPATH, "//p[@class='box-price-present']").text
-    except:
-        pass
-
-    # Kiểm tra và lấy giá của sản phẩm
-    try:
-        price = driver.find_element(By.XPATH, "//div[@class='bs_price']/strong").text
-    except:
-        pass
-
-    # Kiểm tra và lấy giá của sản phẩm
-    try:
-        price = driver.find_element(By.XPATH, "//div[@class='item cf-left']/b/b").text
-    except:
-        pass
-
-    # Đóng webdriver
-    sleep(5)
-    driver.close()
-
-    return price
-
-
-def crawl_fpt(link):
-    """
-    Thu thập giá của sản phẩm điện thoại di động trên fptshop
-
-    Parameters:
-    link (str): Đường link dẫn tới sản phẩm.
-
-    Returns:
-    price (str): Giá của sản phẩm. Nếu price là None thì sản phẩm là Hết hàng hoặc Dừng bán
-
-    Ví dụ:
-    >>> crawl_tgdd("https://fptshop.com.vn/dien-thoai/iphone-15-pro-max")
-    29.490.000₫
+    Methods:
+        crawl_tgdd(link): Thu thập giá của sản phẩm điện thoại từ "thegioididong.com".
+        crawl_fpt(link): Thu thập giá của sản phẩm điện thoại từ "fptshop.com.vn".
+        crawl_link(link): Thu thập giá của sản phẩm điện thoại dựa trên liên kết được cung cấp.
+        run(): Gọi phương thức crawl_link và đưa kết quả vào result_queue.
     """
 
-    # Tạo một đối tượng tùy chọn cho trình duyệt Chrome
-    chrome_options = Options()
-    # Thêm tùy chọn "--headless" để chạy trình duyệt ở chế độ không có giao diện người dùng,
-    # nghĩa là không hiển thị cửa sổ trình duyệt lên màn hình
-    chrome_options.add_argument("--headless")
+    def __init__(self, link, result_queue):
+        """Khởi tạo đối tượng CrawlerThread kế thừa từ threading.Thread.
 
-    # Khởi tạo webdriver với tùy chọn trên và truy cập vào đường link sản phẩm
-    driver = webdriver.Chrome(options=chrome_options)
-    driver.get(link)
-    sleep(5)
+        Parameters:
+            link (str): Đường liên kết URL cần thu thập dữ liệu.
+            result_queue (Queue): Một hàng đợi để lưu trữ các kết quả thu thập.
+        """
+        super().__init__()
+        self.link = link
+        self.result_queue = result_queue
 
-    price = None
+    def crawl_tgdd(self, link):
+        """
+        Thu thập giá của sản phẩm điện thoại di động trên thế giới di động
 
-    # Kiểm tra và lấy giá của sản phẩm
-    try:
-        price = driver.find_element(By.XPATH, "//div[@class='st-price-main']").text
-    except:
-        pass
+        Parameters:
+            link (str): Đường link dẫn tới sản phẩm.
 
-    # Đóng webdriver
-    sleep(5)
-    driver.close()
+        Returns:
+            price (str): Giá của sản phẩm. Nếu price là None thì sản phẩm là Hết hàng hoặc Dừng bán
 
-    return price
+        Ví dụ:
+            >>> crawl_tgdd("https://www.thegioididong.com/dtdd/iphone-15-pro-max")
+            29.990.000₫
+        """
+        # Tạo một đối tượng tùy chọn cho trình duyệt Chrome
+        chrome_options = Options()
+        # Thêm tùy chọn "--headless" để chạy trình duyệt ở chế độ không có giao diện người dùng,
+        # nghĩa là không hiển thị cửa sổ trình duyệt lên màn hình
+        chrome_options.add_argument("--headless")
+        # Thêm tùy chọn "--log-level=3" để tắt thông báo lỗi của webdriver
+        chrome_options.add_argument("--log-level=3")
+
+        # Khởi tạo webdriver với tùy chọn trên và truy cập vào đường link sản phẩm
+        driver = webdriver.Chrome(options=chrome_options)
+        driver.get(link)
+
+        css_selectors = [
+            "p.box-price-present",
+            "div.bs_price > strong",
+            "div.item.cf-left > b > b",
+        ]
+        # Kiểm tra tất cả các css_selector và trả về giá nếu tìm thấy
+        for css_selector in css_selectors:
+            try:
+                price = driver.find_element(By.CSS_SELECTOR, css_selector).text
+                if price != "":
+                    driver.quit()
+                    return price
+            except:
+                pass
+
+        # Đóng webdriver
+        driver.quit()
+        return None
+
+    def crawl_fpt(self, link):
+        """
+        Thu thập giá của sản phẩm điện thoại di động trên fptshop
+
+        Parameters:
+            link (str): Đường link dẫn tới sản phẩm.
+
+        Returns:
+            price (str): Giá của sản phẩm. Nếu price là None thì sản phẩm là Hết hàng hoặc Dừng bán
+
+        Ví dụ:
+            >>> crawl_fpt("https://fptshop.com.vn/dien-thoai/iphone-15-pro-max")
+            29.490.000₫
+        """
+        # Tạo một đối tượng tùy chọn cho trình duyệt Chrome
+        chrome_options = Options()
+        # Thêm tùy chọn "--headless" để chạy trình duyệt ở chế độ không có giao diện người dùng,
+        # nghĩa là không hiển thị cửa sổ trình duyệt lên màn hình
+        chrome_options.add_argument("--headless")
+        # Thêm tùy chọn "--log-level=3" để tắt thông báo lỗi của webdriver
+        chrome_options.add_argument("--log-level=3")
+
+        # Khởi tạo webdriver với tùy chọn trên và truy cập vào đường link sản phẩm
+        driver = webdriver.Chrome(options=chrome_options)
+        driver.get(link)
+
+        # Kiểm tra và lấy giá của sản phẩm
+        try:
+            price = driver.find_element(By.CSS_SELECTOR, "div.st-price-main").text
+            if price != "":
+                driver.quit()
+                return price
+        except:
+            pass
+
+        driver.quit()
+        return None
+
+    def crawl_link(self, link):
+        """
+        Thu thập giá của sản phẩm điện thoại di động dựa trên link sản phẩm
+
+        Parameters:
+            link (str): Đường dẫn URL của sản phẩm cần thu thập
+
+        Returns:
+            Sử dung hàm crawl_tgdd hoặc crawl_fpt để thu thập giá sản phẩm dựa trên link sản phẩm tương ứng
+        """
+        if "thegioididong.com" in link:
+            return self.crawl_tgdd(link)
+        elif "fptshop.com.vn" in link:
+            return self.crawl_fpt(link)
+        else:
+            return "Unsupported website"
+
+    def run(self):
+        """
+        Gọi hàm crawl_link và đưa kết quả vào result_queue
+        """
+        result = self.crawl_link(self.link)
+        self.result_queue.put([self.link, result])
 
 
 def main():
+    # Thay đổi links để thu thập giá từ các trang web khác nhau
+    links = [
+        "https://fptshop.com.vn/dien-thoai/xiaomi-redmi-a3",
+        "https://www.thegioididong.com/dtdd/iphone-15-pro-max-1tb",
+        "https://www.thegioididong.com/dtdd/iphone-15-pro-max-512gb",
+        "https://www.thegioididong.com/dtdd/iphone-15-pro-max",
+    ]
 
-    link = "https://fptshop.com.vn/dien-thoai/xiaomi-redmi-a3"
-    if "thegioididong.com" in link:
-        print(crawl_tgdd(link))
-    elif "fptshop.com.vn" in link:
-        print(crawl_fpt(link))
+    result_queue = Queue()
+    threads = []
+
+    for link in links:
+        thread = CrawlerThread(link, result_queue)
+        threads.append(thread)
+        thread.start()
+
+    for thread in threads:
+        thread.join()
+
+    # Lấy kết quả từ hàng đợi và in ra màn hình (có thể thay đổi tùy mục đích sử dụng)
+    while not result_queue.empty():
+        link, result = result_queue.get()
+        print(f"{link} : {result}")
 
 
 if __name__ == "__main__":
