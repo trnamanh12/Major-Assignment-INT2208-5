@@ -5,3 +5,5 @@ test.ipynb
 IntelliPurchase/blog/migrations/__pycache__/
 IntelliPurchase/home/migrations/__pycache__/
 IntelliPurchase/user/migrations/__pycache__/
+IntelliPurchase/dbs.sqlite3
+IntelliPurchase/blog/migrations/__pycache__/__init__.cpython-310.pyc

@@ -1,0 +1,8 @@
+# HTTrack Website Copier Cookie File
+# This file format is compatible with Netscape cookies
+lichsugia.com	TRUE	/	FALSE	1999999999	PHPSESSID	qfjpug425nn1un8m4feiulfocc
+.lichsugia.com	TRUE	/	FALSE	1999999999	us_id	927cacc455c50d0da38671cb6a0e2aca
+lichsugia.com	TRUE	/	FALSE	1999999999	SameSite	None
+.onesignal.com	TRUE	/	FALSE	1999999999	__cf_bm	b4jaDld7uV1DZVomFLSG284oa9DrbVtZlBUbDyOnZ88-1715312044-1.0.1.1-k.vGA4Cr_L0cVnUh2S9Tl1WFZLx8kNYHW.wUUGdVG2ceUqfRJl8Xx8S2QNVvYh_pCK_fWsU00W0_VWKjwCUIKQ
+cdn.onesignal.com	TRUE	/	FALSE	1999999999	SameSite	None
+
