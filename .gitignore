@@ -1,9 +1,10 @@
-IntelliPurchase/blog/__pycache__/
 IntelliPurchase/home/__pycache__/
 IntelliPurchase/compare/__pycache__/
+IntelliPurchase/user/__pycache__/
+IntelliPurchase/product/__pycache__/
 test.ipynb
-IntelliPurchase/blog/migrations/__pycache__/
 IntelliPurchase/home/migrations/__pycache__/
 IntelliPurchase/user/migrations/__pycache__/
+IntelliPurchase/product/migrations/__pycache__/
+IntelliPurchase/compare/migrations/__pycache__/
 IntelliPurchase/dbs.sqlite3
-IntelliPurchase/blog/migrations/__pycache__/__init__.cpython-310.pyc
