@@ -26,7 +26,6 @@ from compare import views as compare_views
 urlpatterns = [
     path('', views.home, name='home'),
     path('admin/', admin.site.urls),
-    path('blog/', include('blog.urls')),
     path('compare/', include('compare.urls')),
     path('register/', user_views.register, name='register'),
     path('login/', user_views.loginUser, name='login'),
