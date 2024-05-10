@@ -9,3 +9,6 @@ def contact(request):
 
 def error(request, exception):
    return render(request, 'error.html', {'message': exception})
+
+def test(request):
+   return render(request, 'test.html')

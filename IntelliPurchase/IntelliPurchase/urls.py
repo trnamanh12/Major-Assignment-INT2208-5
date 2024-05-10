@@ -21,6 +21,7 @@ from django.conf.urls import handler404
 from django.conf.urls.static import static
 from django.conf import settings
 from user import views as user_views
+from compare import views as compare_views
 
 urlpatterns = [
     path('', views.home, name='home'),
@@ -30,6 +31,7 @@ urlpatterns = [
     path('register/', user_views.register, name='register'),
     path('login/', user_views.loginUser, name='login'),
     path('logout/', user_views.logoutUser, name='logout'),
+    path('test/', views.test, name='test'),
 ]
 
 

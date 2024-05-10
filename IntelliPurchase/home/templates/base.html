@@ -1,15 +1,131 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-   <title>{% block title %}{% endblock %}</title>
-</head>
-<body>
-   Nội dung
-   {% block content %}
-  
-   {% endblock %}
-</body>
+   <head>
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+
+      <title>IntelliPurchase</title>
+      <link rel="canonical" href="index.html" />
+      <link rel="manifest" href="{% static 'manifest.json' %}" />
+      <link rel="apple-touch-icon" sizes="144x144" href="{% static 'assets/logo_1x1.png' %}">
+      <link rel="shortcut icon" href="{% static 'assets/phone.png' %}">
+         <!-- BEGIN PLUGINS STYLES -->
+      <link rel="stylesheet" href="{% static 'cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css' %}" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+      <link rel="stylesheet" href="{% static 'cdnjs.cloudflare.com/ajax/libs/cookieconsent/3.1.1/cookieconsent.min.css' %}" integrity="sha512-LQ97camar/lOliT/MqjcQs5kWgy6Qz/cCRzzRzUCfv0fotsCTC9ZHXaPQmJV8Xu/PVALfJZ7BDezl5lW3/qBxg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+      <!-- <link rel="stylesheet" href="/assets/vendor/fontawesome/css/all.min.css" />
+      <link rel="stylesheet" href="/assets/vendor/cookieconsent/cookieconsent.min.css"> -->
+      
+      <link rel="stylesheet" href="{% static 'assets/vendor/aos/aos.css' %}">
+      <link rel="stylesheet" href="{% static 'assets/vendor/sweetalert2/sweetalert2.min.css' %}" /><!-- END PLUGINS STYLES -->
+      <link rel="stylesheet" href="{% static 'css/bundle.mainaa47.css' %}" type="text/css">
+      <link rel="stylesheet" href="{% static 'css/header.footer.css' %}" type="text/css">
+      <!-- BEGIN THEME STYLES -->
+      <link rel="stylesheet" href="{% static 'assets/stylesheets/theme.min2.css' %}"/>
+      <link rel="stylesheet" href="{% static 'assets/stylesheets/custome1e2.css?v=1715312035' %}" />
+      <!-- BEGIN BASE JS -->
+      <script src="{% static 'cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js' %}" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+      <script src="{% static 'cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js' %}" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+      <script src="{% static 'stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js' %}" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+      <script defer src="app-load76bd.js?v=21082001"></script>
+   </head>
+   <body>
+      <!--header-->
+      <nav class="navbar navbar-expand-lg bg-body-tertiary">
+         <div class="container-fluid">
+           <a class="navbar-brand" href="{% url 'home' %}">IntelliPuchase</a>
+           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+             <span class="navbar-toggler-icon"></span>
+           </button>
+           <div class="collapse navbar-collapse" id="navbarSupportedContent">
+             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+               <li class="nav-item">
+                 <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Trang chủ</a>
+               </li>
+               <li class="nav-item">
+                 <a class="nav-link" href="{% url 'compare' %}">So sánh</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" href="#">Lịch sử giá</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" href="#">Giới thiệu</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" href="#">Liên hệ</a>
+               </li>
+               <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                  </ul>
+                </li>
+             </ul>
+             <form class="d-flex" role="search">
+               <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+               <button class="btn btn-outline-success" type="submit">Search</button>
+             </form>
+             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+               <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    {{request.user}}
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Thông tin tài khoản</a></li>
+                    <li><a class="dropdown-item" href="#">Các so sánh đã lưu</a></li>
+                    <li><a class="dropdown-item" href="#">Các so sánh gần đây</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="{% url 'logout' %}">Đăng xuất</a></li>
+                  </ul>
+                </li>
+               <li class="nav-item">
+                  <a class="nav-link" href="{% url 'login' %}">Đăng nhập</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'register' %}">Đăng kí</a>
+                </li>
+             </ul>
+           </div>
+         </div>
+       </nav>
+
+       
+
+   
+
+       <!--main body-->
+       {% block main-content %}
+       {% endblock main-content %}
+
+       <!--footer-->
+       <footer class="app-footer">
+         <div id="fb-root"></div>
+         <p>Dữ liệu được cập nhật và phân tích mỗi ngày.</p>
+         <p>Dữ liệu trên được cập nhật và thống kê từ Internet, chúng tôi không chịu trách nhiệm về tính xác thực.</p>
+         <hr>
+         <div class="mb-0">Thấy chất lượng Không quên <b>#LIKE</b> và <b>#Share</b> để ủng hộ bên mình (mình mới đổi sang link của Viện AI 😂)
+            <a class="btn btn-subtle-primary" href="https://www.facebook.com/iaiuet" target="_blank" rel="nofollow">Like share Viện Trí tuệ nhân tạo</a>
+         </div>
+         <ul class="list-inline mt-3">
+            <li class="list-inline-item">
+               <a class="text-muted" href="pages/support.html">Support</a>
+            </li>
+            <li class="list-inline-item">
+               <a class="text-muted" href="pages/privacy.html">Privacy</a>
+            </li>
+            <li class="list-inline-item">
+               <a class="text-muted" href="pages/terms.html">Terms of Service</a>
+            </li>
+         </ul>
+         <div class="copyright"> V1.0.0 Copyright © 2021. LichSuGia.com </div>
+      </footer>
+   </body>
 </html>
