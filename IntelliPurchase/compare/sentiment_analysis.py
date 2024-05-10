@@ -1,20 +1,40 @@
-from blog.models import Sentiment
-import plotly.express as px
+import re
 from plotly.subplots import make_subplots
 import plotly.graph_objects as go
+from products.models import Sentiment
 
 def plot_sentiment(product_id, company_id):
     aspects = ['Pin', 'Tổng quan', 'Dịch vụ CSKH', 'Những khía cạnh khác']
-    sentiments = ['Positive', 'Neutral', 'Negative']
+    sentiments = ['Negative', 'Neutral', 'Positive']
 
     sentiment = Sentiment.objects.filter(product_id=product_id, company_id=company_id)[0]
 
-    sentiments_ratio = [                                     
-        eval(sentiment.s_pin.replace(' 0', ',0')),
-        eval(sentiment.s_general.replace(' 0', ',0')),
-        eval(sentiment.s_service.replace(' 0', ',0')),
-        eval(sentiment.s_others.replace(' 0', ',0'))
-    ]
+    if sentiment:
+        sentiments_ratio = []
+        if sentiment.s_pin:
+            sentiments_ratio.append(eval(re.sub(r'\s+', ',', sentiment.s_pin)))
+        else:
+            sentiments_ratio.append([0, 0, 0])
+        
+        if sentiment.s_general:
+            sentiments_ratio.append(eval(re.sub(r'\s+', ',', sentiment.s_general)))
+        else:
+            sentiments_ratio.append([0, 0, 0])
+        
+        if sentiment.s_service:
+            print(sentiment.s_service)
+            print(type(sentiment.s_service))
+            sentiments_ratio.append(eval(re.sub(r'\s+', ',', sentiment.s_service)))
+        else:
+            sentiments_ratio.append([0, 0, 0])
+        
+        if sentiment.s_others:
+            sentiments_ratio.append(eval(re.sub(r'\s+', ',', sentiment.s_others)))
+        else:
+            sentiments_ratio.append([0, 0, 0])
+    else:
+        # Handle the case when sentiment object does not exist
+        sentiments_ratio = [[0, 0, 0] for _ in range(4)]
     
         # Tạo subplot với loại 'pie' và khoảng trống
     fig = make_subplots(rows=2, cols=2, subplot_titles=aspects, specs=[[{'type':'pie'}, {'type':'pie'}],[{'type':'pie'}, {'type':'pie'}]], horizontal_spacing=0.05, vertical_spacing=0.2)
