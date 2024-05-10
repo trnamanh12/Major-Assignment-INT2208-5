@@ -1,12 +1,13 @@
 import json
 from django.shortcuts import render
-from django.http import HttpResponseRedirect, JsonResponse
+from django.http import HttpResponse, HttpResponseNotAllowed, HttpResponseRedirect, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.core.serializers import serialize
 from .crawl_price import get_price
 from concurrent.futures import ThreadPoolExecutor
 from .sentiment_analysis import plot_sentiment
 from products.models import Product, ProductSpec
+from user.models import History
 # Create your views here.
 
 def search(request):
@@ -14,6 +15,26 @@ def search(request):
         search_text = request.GET.get('search_text', '')
         products = Product.objects.filter(product_name__icontains=search_text)
         return render(request, 'search_results.html', {'products': products})
+@csrf_exempt
+def save_history(request):
+    if request.method == 'POST':
+        product1_id = request.POST.get('product1_id')
+        product2_id = request.POST.get('product2_id')        
+
+        # Kiểm tra xem cặp product1_id và product2_id đã tồn tại trong lịch sử hay chưa
+        existing_history = History.objects.filter_by_products(product1_id=product1_id, product2_id=product2_id).first()
+
+        # Nếu đã tồn tại, xoá cặp này khỏi lịch sử
+        if existing_history:
+            existing_history.delete()
+            return HttpResponse("Data deleted successfully", status=200)
+        else:
+            # Nếu chưa tồn tại, tạo một bản ghi mới trong lịch sử với cặp product1_id và product2_id mới
+            History.objects.create(product1_id=product1_id, product2_id=product2_id)
+            return HttpResponse("Data added successfully", status=200)
+    else:
+        # Trong trường hợp không phải là phương thức POST, bạn có thể trả về một HttpResponse khác
+        return HttpResponseNotAllowed(['POST'])
 
 @csrf_exempt
 def compare(request):
@@ -46,7 +67,6 @@ def compare(request):
             product1_memory_storage = json.loads(product1_specs[0].memory_storage.replace("'", '"'))
             product2_memory_storage = json.loads(product2_specs[0].memory_storage.replace("'", '"'))
 
-            # Load JSON strings back to dictionaries
             product1_screen = json.loads(json.dumps(eval(product1_specs[0].screen))) if product1_specs[0].screen is not None else {}
             product2_screen = json.loads(json.dumps(eval(product2_specs[0].screen))) if product2_specs[0].screen is not None else {}
 
@@ -72,9 +92,9 @@ def compare(request):
             #                                                                                             product1.TGDD_product_link,
             #                                                                                             product2.FPT_product_link,
             #                                                                                             product2.TGDD_product_link)
-
-            # product1_min_price = min(product1_fpt_price, product1_tgdd_price)
-            # product2_min_price = min(product2_fpt_price, product2_tgdd_price)
+            
+            # product1_min_price = min(product1_fpt_price, product1_tgdd_price) if product1_fpt_price is not None and product1_tgdd_price is not None else product1_tgdd_price if product1_fpt_price is None else product1_fpt_price
+            # product2_min_price = min(product2_fpt_price, product2_tgdd_price) if product2_fpt_price is not None and product2_tgdd_price is not None else product2_tgdd_price if product2_fpt_price is None else product2_fpt_price
 
             product1_tgdd_sa = plot_sentiment(product1.product_id, company_id=1).to_html(full_html=False, include_plotlyjs='cdn')
             product1_fpt_sa = plot_sentiment(product1.product_id, company_id=2).to_html(full_html=False, include_plotlyjs='cdn')
@@ -177,10 +197,13 @@ def compare(request):
                 # 'product2_fpt_price': product2_fpt_price,
                 # 'product1_tgdd_price': product1_tgdd_price,
                 # 'product2_tgdd_price': product2_tgdd_price,
+                'product1_min_price': 5,
                 'product1_tgdd_sa': product1_tgdd_sa,
                 'product1_fpt_sa': product1_fpt_sa,
                 'product2_tgdd_sa': product2_tgdd_sa,
                 'product2_fpt_sa': product2_fpt_sa,
+                'product1_id': product1.product_id,
+                'product2_id': product2.product_id,
             }
 
             return render(request, 'prototype.html', context)
@@ -191,9 +214,3 @@ def compare(request):
     # Trả về template và truyền test_string vào context
     return render(request, 'prototype.html', context)
 
-def test(request):
-    if request.method == 'POST':
-        searchpr1 = request.POST.get('searchpr1')
-        print(searchpr1)
-        return render(request, 'test_fe_be.html', {'test_string': 'Hello World'})
-    return render(request, 'test_fe_be.html', {'test_string': 'Chua co gi ca!!!!'})

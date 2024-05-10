@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{% static 'css/header.footer.css' %}" type="text/css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{% static 'js/search.js' %}"></script>
+    <script src="{% static 'js/heart.js' %}"></script>
     <!-- <script src="{% static 'js/submit.js' %}"></script> -->
     <!-- <script src="{% static 'js/update.js' %}"></script> -->
 
@@ -476,7 +477,54 @@
                                     <div class="line-ct">
                                         <button id="submitBtn">So sánh</button>
                                         <hr>
-                                        <span class="circle">VS</span>
+                                        <div class="circle-container" id="heart-container" data-product1-id="{{ product1.product_id }}" data-product2-id="{{ product2.product_id }}">
+                                            <div class="circle" id="heart-button">
+                                                <img src="{% static 'img/heart-off.png' %}" alt="Heart" id="heart-img">
+                                            </div>
+                                        </div>
+                                        <style>
+                                            .circle-container {
+                                                position: absolute;
+                                                width: 50px; /* Kích thước vòng tròn */
+                                                height: 50px; /* Kích thước vòng tròn */
+                                                top: 50%;
+                                                left: 50%;
+                                                transform: translate(-50%, -50%);
+                                            }
+
+                                            .circle {
+                                                border-radius: 1000px; /* Độ cong lớn */
+                                                border: solid 1px #cbd1d6;
+                                                background-color: #fff;
+                                                width: 100%;
+                                                height: 100%;
+                                                display: flex;
+                                                justify-content: center;
+                                                align-items: center;
+                                                cursor: pointer;
+                                            }
+
+                                            .circle img {
+                                                width: 80%; /* Độ rộng hình ảnh */
+                                                height: auto;
+                                            }
+
+                                            .circle {
+                                                color: #939ca3;
+                                                position: absolute;
+                                                border-radius: 1000px;
+                                                border: solid 1px #cbd1d6;
+                                                background-color: #fff;
+                                                width: 50px;
+                                                height: 50px;
+                                                display: flex;
+                                                justify-content: center;
+                                                align-items: center;
+                                                top: 50%;
+                                                left: 50%;
+                                                transform: translate(-50%, -50%)
+                                            }
+                                        </style>
                                     </div>
                                 </div>
                                 <div class="l-pc-product">
@@ -1143,14 +1191,26 @@
                                             <div class="product-price">
                                                 <img src="{% static 'img/tgdd.png' %}" alt="tgdd" class="tgdd-logo">
                                                 <div class="text">Chỉ từ</div>
-                                                <div class="price">{{product1_tgdd_price}}</div>
+                                                <div class="price">
+                                                    {% if product1_tgdd_price is not None %}
+                                                        {{ product1_tgdd_price }}
+                                                    {% else %}
+                                                        Sản phẩm ngừng kinh doanh
+                                                    {% endif %}
+                                                </div>
                                             </div>
                                             <a class="product-link"
                                                 href=" {{product1.TGDD_product_link}} ">Đến nơi bán <span class="carret"></span> </a>
                                             <div class="product-price">
                                                     <img src="{% static 'img/fpt1.png' %}" alt="fpt" class="fpt-logo">
                                                     <div class="text">Chỉ từ</div>
-                                                    <div class="price">{{product1_fpt_price}}</div>
+                                                    <div class="price">
+                                                        {% if product1_fpt_price is not None %}
+                                                            {{ product1_fpt_price }}
+                                                        {% else %}
+                                                            Sản phẩm ngừng kinh doanh
+                                                        {% endif %}
+                                                    </div>
                                             </div>
                                             <a class="product-link"
                                                 href=" {{product1.FPT_product_link}} ">Đến nơi bán <span class="carret"></span> </a>
@@ -1165,14 +1225,26 @@
                                             <div class="product-price">
                                                 <img src="{% static 'img/tgdd.png' %}" alt="tgdd" class="tgdd-logo">
                                                 <div class="text">Chỉ từ</div>
-                                                <div class="price">{{product2_tgdd_price}}</div>
+                                                <div class="price">
+                                                    {% if product2_tgdd_price is not None %}
+                                                        {{ product2_tgdd_price }}
+                                                    {% else %}
+                                                        Sản phẩm ngừng kinh doanh
+                                                    {% endif %}
+                                                </div>
                                             </div>
                                             <a class="product-link"
                                                 href=" {{product2.TGDD_product_link}} ">Đến nơi bán <span class="carret"></span> </a>
                                             <div class="product-price">
                                                     <img src="{% static 'img/fpt1.png' %}" alt="fpt" class="fpt-logo">
                                                     <div class="text">Chỉ từ</div>
-                                                    <div class="price">{{product2_fpt_price}}</div>
+                                                    <div class="price">
+                                                        {% if product2_fpt_price is not None %}
+                                                            {{ product2_fpt_price }}
+                                                        {% else %}
+                                                            Sản phẩm ngừng kinh doanh
+                                                        {% endif %}
+                                                    </div>
                                             </div>
                                             <a class="product-link"
                                                 href=" {{product2.FPT_product_link}} ">Đến nơi bán <span class="carret"></span> </a>

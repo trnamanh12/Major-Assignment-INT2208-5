@@ -142,10 +142,7 @@ class CrawlerThread(threading.Thread):
 def main():
     # Thay đổi links để thu thập giá từ các trang web khác nhau
     links = [
-        "https://fptshop.com.vn/dien-thoai/xiaomi-redmi-a3",
-        "https://www.thegioididong.com/dtdd/iphone-15-pro-max-1tb",
-        "https://www.thegioididong.com/dtdd/iphone-15-pro-max-512gb",
-        "https://www.thegioididong.com/dtdd/iphone-15-pro-max",
+        "https://fptshop.com.vn/dien-thoai/vivo-y22s",
     ]
 
     result_queue = Queue()

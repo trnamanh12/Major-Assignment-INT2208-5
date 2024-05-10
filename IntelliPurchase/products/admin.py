@@ -17,7 +17,7 @@ class ProductSpecsAdmin(admin.ModelAdmin):
 admin.site.register(ProductSpec, ProductSpecsAdmin)
 
 class SentimentAdmin(admin.ModelAdmin):
-    list_display = ['company_name', 'product_name', 'product_tgdd_link', 'fpt_link', 's_pin', 's_general', 's_service', 's_others']
+    list_display = ['product_name', 'company_name', 'product_tgdd_link', 'fpt_link', 's_pin', 's_general', 's_service', 's_others']
     list_filter = ['product__product_name']
     search_fields = ['product__product_name']
 
