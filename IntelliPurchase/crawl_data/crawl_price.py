@@ -104,7 +104,9 @@ def crawl_link(link):
         return "Unsupported website"
 
 
-def get_price(product1_FPT_link, product1_TGDD_link, product2_FPT_link, product2_TGDD_link):
+def get_price(
+    product1_FPT_link, product1_TGDD_link, product2_FPT_link, product2_TGDD_link
+):
     """
     Hàm này nhận vào các liên kết sản phẩm từ FPT và Thế Giới Di Động và trả về giá của các sản phẩm.
 
@@ -128,3 +130,20 @@ def get_price(product1_FPT_link, product1_TGDD_link, product2_FPT_link, product2
         results = list(executor.map(crawl_link, links))
 
     return results[0], results[1], results[2], results[3]
+
+
+def main():
+    price1, price2, price3, price4 = get_price(
+        "https://www.thegioididong.com/dtdd/iphone-15-pro-max",
+        "https://fptshop.com.vn/dien-thoai/iphone-15-pro-max",
+        "https://www.thegioididong.com/dtdd/samsung-galaxy-s24-ultra-5g",
+        "https://fptshop.com.vn/dien-thoai/samsung-galaxy-s24-ultra",
+    )
+    print(price1)
+    print(price2)
+    print(price3)
+    print(price4)
+
+
+if __name__ == "__main__":
+    main()
