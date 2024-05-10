@@ -13,21 +13,23 @@ def register(request):
         form = CreateUserForm(request.POST)
         if form.is_valid():
             form.save()
+            return redirect('login')
     return render(request, 'users/register.html', context)
 
 def loginUser(request):
+    message = ''
     if request.user.is_authenticated:
-        return redirect('home')
+        return redirect('/')
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('home')
+            return redirect('/')
         else:
-            messages.info(request, 'Username or password is incorrect!')
-    context = {}
+            message = 'Mật khẩu không chính xác!'
+    context = {'message': message}
     return render(request, 'users/login.html', context)
 
 def logoutUser(request):

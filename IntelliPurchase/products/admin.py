@@ -17,8 +17,25 @@ class ProductSpecsAdmin(admin.ModelAdmin):
 admin.site.register(ProductSpec, ProductSpecsAdmin)
 
 class SentimentAdmin(admin.ModelAdmin):
-    list_display = ['s_pin', 's_general', 's_service', 's_others']
-    list_filter = ['s_pin']
-    search_fields = ['s_pin']
+    list_display = ['company_name', 'product_name', 'product_tgdd_link', 'fpt_link', 's_pin', 's_general', 's_service', 's_others']
+    list_filter = ['product__product_name']
+    search_fields = ['product__product_name']
 
+    def company_name(self, obj):
+        return obj.company_id.company_name
+
+    def product_name(self, obj):
+        return obj.product.product_name
+    
+    def product_tgdd_link(self, obj):
+        return obj.product.TGDD_product_link
+
+    def fpt_link(self, obj):
+        return obj.product.FPT_product_link
+
+    company_name.short_description = 'Company'
+    product_name.short_description = 'Product'
+    product_tgdd_link.short_description = 'TGDD Link'
+    fpt_link.short_description = 'FPT Link'
+    
 admin.site.register(Sentiment, SentimentAdmin)

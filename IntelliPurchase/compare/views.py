@@ -1,12 +1,12 @@
 import json
 from django.shortcuts import render
-from blog.models import Product, ProductSpec
 from django.http import HttpResponseRedirect, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.core.serializers import serialize
 from .crawl_price import get_price
 from concurrent.futures import ThreadPoolExecutor
 from .sentiment_analysis import plot_sentiment
+from products.models import Product, ProductSpec
 # Create your views here.
 
 def search(request):
@@ -47,8 +47,8 @@ def compare(request):
             product2_memory_storage = json.loads(product2_specs[0].memory_storage.replace("'", '"'))
 
             # Load JSON strings back to dictionaries
-            product1_screen = json.loads(json.dumps(eval(product1_specs[0].screen)))
-            product2_screen = json.loads(json.dumps(eval(product2_specs[0].screen)))
+            product1_screen = json.loads(json.dumps(eval(product1_specs[0].screen))) if product1_specs[0].screen is not None else {}
+            product2_screen = json.loads(json.dumps(eval(product2_specs[0].screen))) if product2_specs[0].screen is not None else {}
 
             product1_size_refresh_rate = product1_screen.get('Màn hình rộng:', '').split(' - ')
             product2_size_refresh_rate = product2_screen.get('Màn hình rộng:', '').split(' - ')
@@ -56,27 +56,31 @@ def compare(request):
             product1_resolution = product1_screen.get('Độ phân giải:', '').split('(')
             product2_resolution = product2_screen.get('Độ phân giải:', '').split('(')
 
-            product1_rear_cam = json.loads(json.dumps(eval(product1_specs[0].rear_camera)))
-            product2_rear_cam = json.loads(json.dumps(eval(product2_specs[0].rear_camera)))
+            product1_rear_cam = json.loads(json.dumps(eval(product1_specs[0].rear_camera))) if product1_specs[0].rear_camera is not None else {}
+            product2_rear_cam = json.loads(json.dumps(eval(product2_specs[0].rear_camera))) if product2_specs[0].rear_camera is not None else {}
 
-            product1_front_cam = json.loads(json.dumps(eval(product1_specs[0].front_camera)))
-            product2_front_cam = json.loads(json.dumps(eval(product2_specs[0].front_camera)))
+            product1_front_cam = json.loads(json.dumps(eval(product1_specs[0].front_camera))) if product1_specs[0].front_camera is not None else {}
+            product2_front_cam = json.loads(json.dumps(eval(product2_specs[0].front_camera))) if product2_specs[0].front_camera is not None else {}
 
-            product1_ket_noi = json.loads(json.dumps(eval(product1_specs[0].ket_noi)))
-            product2_ket_noi = json.loads(json.dumps(eval(product2_specs[0].ket_noi)))
+            product1_ket_noi = json.loads(json.dumps(eval(product1_specs[0].ket_noi))) if product1_specs[0].ket_noi is not None else {}
+            product2_ket_noi = json.loads(json.dumps(eval(product2_specs[0].ket_noi))) if product2_specs[0].ket_noi is not None else {}
 
-            product1_battery = json.loads(json.dumps(eval(product1_specs[0].pin_sac)))
-            product2_battery = json.loads(json.dumps(eval(product2_specs[0].pin_sac)))
+            product1_battery = json.loads(json.dumps(eval(product1_specs[0].pin_sac))) if product1_specs[0].pin_sac is not None else {}
+            product2_battery = json.loads(json.dumps(eval(product2_specs[0].pin_sac))) if product2_specs[0].pin_sac is not None else {}
 
-            product1_fpt_price, product1_tgdd_price, product2_fpt_price, product2_tgdd_price = get_price(product1.FPT_product_link, 
-                                                                                                        product1.TGDD_product_link,
-                                                                                                        product2.FPT_product_link,
-                                                                                                        product2.TGDD_product_link)
+            # product1_fpt_price, product1_tgdd_price, product2_fpt_price, product2_tgdd_price = get_price(product1.FPT_product_link, 
+            #                                                                                             product1.TGDD_product_link,
+            #                                                                                             product2.FPT_product_link,
+            #                                                                                             product2.TGDD_product_link)
 
-            product1_min_price = min(product1_fpt_price, product1_tgdd_price)
-            product2_min_price = min(product2_fpt_price, product2_tgdd_price)
+            # product1_min_price = min(product1_fpt_price, product1_tgdd_price)
+            # product2_min_price = min(product2_fpt_price, product2_tgdd_price)
 
-            # plot_sentiment(product1.product_id)
+            product1_tgdd_sa = plot_sentiment(product1.product_id, company_id=1).to_html(full_html=False, include_plotlyjs='cdn')
+            product1_fpt_sa = plot_sentiment(product1.product_id, company_id=2).to_html(full_html=False, include_plotlyjs='cdn')
+
+            product2_tgdd_sa = plot_sentiment(product2.product_id, company_id=1).to_html(full_html=False, include_plotlyjs='cdn')
+            product2_fpt_sa = plot_sentiment(product2.product_id, company_id=2).to_html(full_html=False, include_plotlyjs='cdn')
 
             context = {
                 'product1': product1,
@@ -105,14 +109,14 @@ def compare(request):
                 'product2_ram': product2_memory_storage.get('RAM:', ''),
                 'product1_screen_size': product1_size_refresh_rate[0],
                 'product2_screen_size': product2_size_refresh_rate[0],
-                'product1_refresh_rate': product1_size_refresh_rate[1],
-                'product2_refresh_rate': product2_size_refresh_rate[1],
+                'product1_refresh_rate': product1_size_refresh_rate[1] if len(product1_size_refresh_rate) > 1 else '',
+                'product2_refresh_rate': product2_size_refresh_rate[1] if len(product2_size_refresh_rate) > 1 else '',
                 'product1_screen_tech': product1_screen.get('Công nghệ màn hình:', ''),
                 'product2_screen_tech': product2_screen.get('Công nghệ màn hình:', ''),
                 'product1_screen_std': product1_resolution[0],
                 'product2_screen_std': product2_resolution[0],
-                'product1_screen_res': product1_resolution[1].replace(')', ''),
-                'product2_screen_res': product2_resolution[1].replace(')', ''),
+                'product1_screen_res': product1_resolution[1].replace(')', '') if len(product1_resolution) > 1 else '',
+                'product2_screen_res': product2_resolution[1].replace(')', '') if len(product2_resolution) > 1 else '',
                 'product1_glass': product1_screen.get('Mặt kính cảm ứng:', ''),
                 'product2_glass': product2_screen.get('Mặt kính cảm ứng:', ''),
                 'product1_rom': product1_memory_storage.get('Dung lượng lưu trữ:', ''),
@@ -167,12 +171,16 @@ def compare(request):
                 'product2_os_version': product2_os_cpu.get('Hệ điều hành:', ''),
                 'product1_other_features': product1_tien_ich.get('Tính năng đặc biệt:', '').split('\n'),
                 'product2_other_features': product2_tien_ich.get('Tính năng đặc biệt:', '').split('\n'),
-                'product1_min_price': product1_min_price,
-                'product2_min_price': product2_min_price,
-                'product1_fpt_price': product1_fpt_price,
-                'product2_fpt_price': product2_fpt_price,
-                'product1_tgdd_price': product1_tgdd_price,
-                'product2_tgdd_price': product2_tgdd_price,
+                # 'product1_min_price': product1_min_price,
+                # 'product2_min_price': product2_min_price,
+                # 'product1_fpt_price': product1_fpt_price,
+                # 'product2_fpt_price': product2_fpt_price,
+                # 'product1_tgdd_price': product1_tgdd_price,
+                # 'product2_tgdd_price': product2_tgdd_price,
+                'product1_tgdd_sa': product1_tgdd_sa,
+                'product1_fpt_sa': product1_fpt_sa,
+                'product2_tgdd_sa': product2_tgdd_sa,
+                'product2_fpt_sa': product2_fpt_sa,
             }
 
             return render(request, 'prototype.html', context)

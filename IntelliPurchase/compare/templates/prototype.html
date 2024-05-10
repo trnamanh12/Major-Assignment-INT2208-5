@@ -42,7 +42,7 @@
     <style>
         .lg-name-view {
             color: rgb(255, 255, 255);
-            margin: 10px 0 0 0; /* Thêm đơn vị đo(px) cho margin-top */
+            margin: 12px 0 0 0; /* Thêm đơn vị đo(px) cho margin-top */
             width: 415px;
             font-size: 0.4em;
             font-weight: 10; /* font-weight thường được chỉ định bằng các giá trị số từ 100 đến 900 */
@@ -1182,37 +1182,50 @@
                             </div>
                             <div class="c-compare__row js--collapse-detail" id="data-Giaban">
                                 <div class="c-compare__title">
-                                    <h2 class="title">Phân loại cảm xúc</h2>
+                                    <h2 class="title">Phân tích cảm xúc</h2>
                                 </div>
                                 <div class="l-pc-row compare-product__group">
-                                    <div class="c-compare__product">
-                                        <div class="product-info">
-                                            <div class="product-price">
-                                                <img src="{% static 'img/tgdd.png' %}" alt="tgdd" class="tgdd-logo">
-                                                <div class="text">Chỉ từ</div>
-                                                <div class="price"></div>
-                                            </div>
-                                            <div class="product-price">
-                                                    <img src="{% static 'img/fpt1.png' %}" alt="fpt" class="fpt-logo">
-                                                    <div class="text">Chỉ từ</div>
-                                                    <div class="price"></div>
-                                            </div>
-                                        </div>
+                                    <div class="c-compare__sa">
+                                        <div class="sa">{{product1_tgdd_sa | safe}}</div>
+                                        <img src="{% static 'img/tgdd.png' %}" alt="tgdd" class="tgdd-logo1">
+                                        <br>
+                                        <div class="sa">{{product1_fpt_sa | safe}}</div>
+                                        <img src="{% static 'img/fpt1.png' %}" alt="fpt" class="fpt-logo1">
                                     </div>
-                                    <div class="c-compare__product">
-                                        <div class="product-info">
-                                            <div class="product-price">
-                                                <img src="{% static 'img/tgdd.png' %}" alt="tgdd" class="tgdd-logo">
-                                                <div class="text">Chỉ từ</div>
-                                                <div class="price"></div>
-                                            </div>
-                                            <div class="product-price">
-                                                    <img src="{% static 'img/fpt1.png' %}" alt="fpt" class="fpt-logo">
-                                                    <div class="text">Chỉ từ</div>
-                                                    <div class="price"></div>
-                                            </div>
-                                        </div>
+                                    <hr class="vertical-line">
+                                    <div class="c-compare__sa">
+                                        <div class="sa">{{product2_tgdd_sa | safe}}</div>
+                                        <img src="{% static 'img/tgdd.png' %}" alt="tgdd" class="tgdd-logo1">
+                                        <br>
+                                        <div class="sa">{{product2_fpt_sa | safe}}</div>
+                                        <img src="{% static 'img/fpt1.png' %}" alt="fpt" class="fpt-logo1">
                                     </div>
+                                    <style>
+                                        .compare-product__group {
+                                            display: flex;
+                                            justify-content: space-between;
+                                            align-items: center;
+                                        }
+
+                                        .c-compare__sa {
+                                            display: flex;
+                                            flex-direction: column;
+                                            align-items: center;
+                                        }
+
+                                        .c-compare__sa .sa {
+                                            width: 600px;
+                                            height: 350px;
+                                            border: 1px solid #ccc; /* Biên cho biểu đồ */
+                                        }
+                                        
+                                        .vertical-line {
+                                            border: none;
+                                            border-left: 1px solid #ccc;
+                                            height: 700px; /* Chiều cao của các biểu đồ */
+                                            margin: 0 0px; /* Khoảng cách giữa đường kẻ và cột */
+                                        }
+                                    </style>
                                 </div>
                             </div>
                         </div>
@@ -1236,8 +1249,21 @@
             margin-right: 10px; /* Khoảng cách bên phải giữa hình ảnh và văn bản */
         }
 
+        .tgdd-logo1 {
+            max-width: 60px; /* Độ rộng tối đa của hình ảnh */
+            height: auto; /* Chiều cao của hình ảnh tự điều chỉnh để giữ tỷ lệ */
+            margin-right: 10px; /* Khoảng cách bên phải giữa hình ảnh và văn bản */
+        }
+
         .fpt-logo {
             max-width: 30px; /* Độ rộng tối đa của hình ảnh */
+            height: auto; /* Chiều cao của hình ảnh tự điều chỉnh để giữ tỷ lệ */
+            margin-left: -5px; /* Khoảng cách bên trái giữa hình ảnh và văn bản */
+            margin-right: 5px; /* Khoảng cách bên phải giữa hình ảnh và văn bản */
+        }
+
+        .fpt-logo1 {
+            max-width: 90px; /* Độ rộng tối đa của hình ảnh */
             height: auto; /* Chiều cao của hình ảnh tự điều chỉnh để giữ tỷ lệ */
             margin-left: -5px; /* Khoảng cách bên trái giữa hình ảnh và văn bản */
             margin-right: 5px; /* Khoảng cách bên phải giữa hình ảnh và văn bản */

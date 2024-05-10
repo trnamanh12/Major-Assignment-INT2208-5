@@ -36,18 +36,34 @@ class ProductSpec(models.Model):
     class Meta:
         db_table = 'technical_details'
 
+class Company(models.Model):
+    company_id = models.AutoField(primary_key=True)
+    company_name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.company_name
+
+    class Meta:
+        db_table = 'company'
+
+class SentimentManager(models.Manager):
+    def filler(self, product_id, company_id):
+        return self.filter(product_id=product_id, company_id=company_id)
+
 class Sentiment(models.Model):
     id = models.AutoField(primary_key=True)
     product = models.ForeignKey(Product, on_delete=models.CASCADE, db_column='product_id')
-    company_id = models.TextField()
+    company_id = models.ForeignKey(Company, on_delete=models.CASCADE, db_column='company_id')
     s_pin = models.TextField(null=True)
     s_general = models.TextField(null=True)
     s_service = models.TextField(null=True)
     s_others = models.TextField(null=True)
 
+    objects = SentimentManager()  # Sử dụng custom manager
+
+    def __str__(self):
+        return self.product.product_name
+    
     class Meta:
         db_table = 'average_sa'
-        constraints  = [
-            models.UniqueConstraint(
-                fields=['product_id', 'company_id'], name='unique_sentiment')
-        ]
+
