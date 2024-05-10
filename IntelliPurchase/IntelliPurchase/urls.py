@@ -23,13 +23,14 @@ from django.conf import settings
 from user import views as user_views
 
 urlpatterns = [
-    path('', views.home, name='home'),
+    path('', include('home.urls')),
     path('admin/', admin.site.urls),
     path('blog/', include('blog.urls')),
     path('compare/', include('compare.urls')),
     path('register/', user_views.register, name='register'),
     path('login/', user_views.loginUser, name='login'),
     path('logout/', user_views.logoutUser, name='logout'),
+
 ]
 
 
