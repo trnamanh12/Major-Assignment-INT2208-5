@@ -27,8 +27,7 @@ def crawl_tgdd(link):
     chrome_options.add_argument("--log-level=3")
 
     # Khởi tạo webdriver với tùy chọn trên và truy cập vào đường link sản phẩm
-    chromedriver_path = "Major-Assignment-INT2208-5/IntelliPurchase/compare/chromedriver.exe"
-    driver = webdriver.Chrome(executable_path=chromedriver_path, options=chrome_options)
+    driver = webdriver.Chrome(options=chrome_options)
     driver.get(link)
 
     css_selectors = [
@@ -71,8 +70,7 @@ def crawl_fpt(link):
     chrome_options.add_argument("--headless")
 
     # Khởi tạo webdriver với tùy chọn trên và truy cập vào đường link sản phẩm
-    chromedriver_path = "Major-Assignment-INT2208-5/IntelliPurchase/compare/chromedriver.exe"
-    driver = webdriver.Chrome(executable_path=chromedriver_path, options=chrome_options)
+    driver = webdriver.Chrome(options=chrome_options)
     driver.get(link)
 
     # Kiểm tra và lấy giá của sản phẩm
