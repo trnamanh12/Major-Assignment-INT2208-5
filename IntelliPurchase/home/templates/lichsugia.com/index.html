@@ -2,31 +2,7 @@
 {% load static %}
 {% block main-content %}
 <html lang="vi">
-
-<!-- <head>
-    {% load static %}
-    <title>Lịch Sử Giá - LichSuGia.com</title>
-    <link rel="canonical" href="index.html" />
-    <link rel="manifest" href="{% static 'manifest.json' %}" />
-    <link rel="apple-touch-icon" sizes="144x144" href="{% static 'assets/logo_1x1.png' %}">
-    <link rel="shortcut icon" href="{% static 'assets/favicon.png' %}">
-        
-    <link rel="stylesheet" href="{% static 'cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css' %}" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="{% static 'cdnjs.cloudflare.com/ajax/libs/cookieconsent/3.1.1/cookieconsent.min.css' %}" integrity="sha512-LQ97camar/lOliT/MqjcQs5kWgy6Qz/cCRzzRzUCfv0fotsCTC9ZHXaPQmJV8Xu/PVALfJZ7BDezl5lW3/qBxg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    
-    
-    <link rel="stylesheet" href="{% static 'assets/vendor/aos/aos.css' %}">
-    <link rel="stylesheet" href="{% static 'assets/vendor/sweetalert2/sweetalert2.min.css' %}" />
-    <link rel="stylesheet" href="{% static 'css/header.footer.css' %}" type="text/css">
-
-    <link rel="stylesheet" href="{% static 'assets/stylesheets/theme.min2.css' %}"/>
-    <link rel="stylesheet" href="{% static 'assets/stylesheets/custome1e2.css?v=1715312035' %}" />
-
-    <script src="{% static 'cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js' %}" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="{% static 'cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js' %}" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="{% static 'stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js' %}" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-    </head>
-<body data-token="ec4c8xg89pssoc40o0s8gokcwg88sg0"> -->
+<body data-token="ec4c8xg89pssoc40o0s8gokcwg88sg0">
 
     <!-- <header class="fs-header">
         <div class="f-hdtop">
@@ -283,10 +259,10 @@
             <div class="card shadow">
                 <div class="card-body p-4">
                     <div class="d-sm-flex align-items-start text-center text-sm-left">
-                        <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/assets/images/illustration/visual_data.svg" class="mr-sm-4 mb-3 mb-sm-0 " alt="" width="72">
+                        <img src="{% static 'assets/images/illustration/visual_data.svg' %}" class="mr-sm-4 mb-3 mb-sm-0 " alt="" width="72">
                         <div class="flex-fill">
-                            <h5 class="mt-0"> Biểu đồ lịch sử giá </h5>
-                            <p class="text-muted font-size-lg"> Khi mua một sản phẩm trực tuyến? Chờ đã, Hãy kiểm tra biểu đồ Lịch sử Giá trước. Tiết kiệm tiền khi mua sắm.</p>
+                            <h5 class="mt-0"> So sánh sản phẩm </h5>
+                            <p class="text-muted font-size-lg"> Khi phân vân giữa 2 sản phẩm? Hãy sử dụng tính năng so sánh trước. Đưa ra lựa chọn tối ưu khi mua sắm.</p>
                         </div>
                     </div>
                 </div>
@@ -294,34 +270,10 @@
             <div class="card shadow">
                 <div class="card-body p-4">
                     <div class="d-sm-flex align-items-start text-center text-sm-left">
-                        <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/assets/images/illustration/data_2.svg" class="mr-sm-4 mb-3 mb-sm-0 " alt="" width="72">
+                        <img src="{% static 'assets/images/illustration/data_2.svg' %}" class="mr-sm-4 mb-3 mb-sm-0 " alt="" width="72">
                         <div class="flex-fill">
-                            <h5 class="mt-0"> Công cụ theo dõi giá </h5>
-                            <p class="text-muted font-size-lg"> Theo dõi giá của sản phẩm với Lịch sử giá. Bạn sẽ được thông báo bất cứ khi nào giá giảm so với giá bạn đã đặt. </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="card-deck-lg">
-            <div class="card shadow">
-                <div class="card-body p-4">
-                    <div class="d-sm-flex align-items-start text-center text-sm-left">
-                        <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/assets/images/illustration/online_shopping.svg" class="mr-sm-4 mb-3 mb-sm-0 " alt="" width="72">
-                        <div class="flex-fill">
-                            <h5 class="mt-0"> Ưu đãi và Giảm </h5>
-                            <p class="text-muted font-size-lg"> Kiểm tra các sản phẩm giảm giá mới nhất ngay trên điện thoại di động hoặc máy tính của bạn. Không bỏ lỡ các Deal tốt nhất.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card shadow">
-                <div class="card-body p-4">
-                    <div class="d-sm-flex align-items-start text-center text-sm-left">
-                        <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/assets/images/illustration/trends.svg" class="mr-sm-4 mb-3 mb-sm-0 " alt="" width="72">
-                        <div class="flex-fill">
-                            <h5 class="mt-0"> Sản phẩm yêu thích </h5>
-                            <p class="text-muted font-size-lg"> Bạn có thể lên danh sách mong muốn các sản phẩm yêu thích của mình để truy cập nhanh vào biểu đồ giá hoặc đặt thông báo giá cho chúng.</p>
+                            <h5 class="mt-0"> So sánh giá </h5>
+                            <p class="text-muted font-size-lg"> So sánh giá của sản phẩm trên Thế giới di dộng và FPTShop. </p>
                         </div>
                     </div>
                 </div>
@@ -331,7 +283,31 @@
             <div class="card shadow">
                 <div class="card-body p-4">
                     <div class="d-sm-flex align-items-start text-center text-sm-left">
-                        <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/assets/images/illustration/search_engines.svg" class="mr-sm-4 mb-3 mb-sm-0 " alt="" width="72">
+                        <img src="{% static 'assets/images/illustration/online_shopping.svg' %}" class="mr-sm-4 mb-3 mb-sm-0 " alt="" width="72">
+                        <div class="flex-fill">
+                            <h5 class="mt-0"> Tổng quan đánh giá </h5>
+                            <p class="text-muted font-size-lg"> Phân tích điểm trung bình của đánh giá theo chiều huớng tính cực/tiêu cực/trung lập, giúp bạn dễ dàng hiểu đuợc ưu điểm và nhược điểm của sản phẩm</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card shadow">
+                <div class="card-body p-4">
+                    <div class="d-sm-flex align-items-start text-center text-sm-left">
+                        <img src="{% static 'assets/images/illustration/trends.svg' %}" class="mr-sm-4 mb-3 mb-sm-0 " alt="" width="72">
+                        <div class="flex-fill">
+                            <h5 class="mt-0"> So sánh yêu thích </h5>
+                            <p class="text-muted font-size-lg"> Bạn có thể lên danh sách các cặp sản phẩm so sánh yêu thích của mình để không phải tìm kiếm lại trong tương lai.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-deck-lg">
+            <div class="card shadow">
+                <div class="card-body p-4">
+                    <div class="d-sm-flex align-items-start text-center text-sm-left">
+                        <img src="{% static 'assets/images/illustration/search_engines.svg' %}" class="mr-sm-4 mb-3 mb-sm-0 " alt="" width="72">
                         <div class="flex-fill">
                             <h5 class="mt-0"> Miễn phí </h5>
                             <p class="text-muted font-size-lg"> Chúng tôi sẽ không tính phí bạn khi sử dụng bất kỳ tính năng nào của chúng tôi. Chúng tôi kiếm tiền qua tiếp thị sản phẩm và quảng cáo. </p>
@@ -342,7 +318,7 @@
             <div class="card shadow">
                 <div class="card-body p-4">
                     <div class="d-sm-flex align-items-start text-center text-sm-left">
-                        <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/assets/images/illustration/server_status.svg" class="mr-sm-4 mb-3 mb-sm-0 " alt="" width="72">
+                        <img src="{% static 'assets/images/illustration/server_status.svg' %}" class="mr-sm-4 mb-3 mb-sm-0 " alt="" width="72">
                         <div class="flex-fill">
                             <h5 class="mt-0"> Hỗ trợ tích cực </h5>
                             <p class="text-muted font-size-lg"> Có bất kỳ vấn đề hoặc phản hồi? Liên hệ với chúng tôi qua email của chúng tôi, chúng tôi sẽ cung cấp cho bạn sự trợ giúp tốt nhất. </p>
@@ -356,41 +332,73 @@
 <section class="position-relative py-3 bg-white">
     <div class="sticker">
         <div class="sticker-item sticker-bottom-left sticker-soften">
-            <img class="" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/assets/images/decoration/bubble2.svg" alt="">
+            <img class="" src="{% static 'assets/images/decoration/bubble2.svg' %}" alt="">
         </div>
     </div>
     <div class="container position-relative">
-        <h2 class="text-center text-sm-left"> Chia sẻ bởi </h2>
+        <h2 class="text-center text-sm-left"> Được xây dựng bởi </h2>
         <p class="lead text-muted text-center text-sm-left mb-5"></p>
-        <div class="card-deck-lg">
-            <a href="pages/support.html" class="card shadow aos-init aos-animate text-decoration-none">
-                <div class="card-body p-4">
-                    <div class="d-sm-flex align-items-start text-center text-sm-left">
-                        <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/assets/images/illustration/easy-config.svg" class="mr-sm-4 mb-3 mb-sm-0 " alt="" width="72">
-                        <div class="flex-fill">
-                            <h5 class="mt-0"> Tên của bạn </h5>
-                            <p class="text-muted font-size-lg">Nội dung của bạn</p>
-                        </div>
+<div class="row">
+    <div class="col-lg-6 mb-4">
+        <a class="card shadow aos-init aos-animate text-decoration-none">
+            <div class="card-body p-4">
+                <div class="d-sm-flex align-items-start text-center text-sm-left">
+                    <img src="{% static 'assets/images/illustration/easy-config.svg' %}" class="mr-sm-4 mb-3 mb-sm-0 " alt="" width="72">
+                    <div class="flex-fill">
+                        <h5 class="mt-0"> Bùi Đức Mạnh </h5>
+                        <p class="text-muted font-size-lg">22022602</p>
                     </div>
                 </div>
-            </a>
-            <a href="pages/support.html" class="card shadow aos-init aos-animate text-decoration-none">
-                <div class="card-body p-4">
-                    <div class="d-sm-flex align-items-start text-center text-sm-left">
-                        <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/assets/images/illustration/easy-config.svg" class="mr-sm-4 mb-3 mb-sm-0 " alt="" width="72">
-                        <div class="flex-fill">
-                            <h5 class="mt-0"> Tên của bạn </h5>
-                            <p class="text-muted font-size-lg">Nội dung của bạn</p>
-                        </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-lg-6 mb-4">
+        <a class="card shadow aos-init aos-animate text-decoration-none">
+            <div class="card-body p-4">
+                <div class="d-sm-flex align-items-start text-center text-sm-left">
+                    <img src="{% static 'assets/images/illustration/easy-config.svg' %}" class="mr-sm-4 mb-3 mb-sm-0 " alt="" width="72">
+                    <div class="flex-fill">
+                        <h5 class="mt-0"> Đàm Thái Ninh </h5>
+                        <p class="text-muted font-size-lg">22022522</p>
                     </div>
                 </div>
-            </a>
-        </div>
+            </div>
+        </a>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-6 mb-4">
+        <a class="card shadow aos-init aos-animate text-decoration-none">
+            <div class="card-body p-4">
+                <div class="d-sm-flex align-items-start text-center text-sm-left">
+                    <img src="{% static 'assets/images/illustration/easy-config.svg' %}" class="mr-sm-4 mb-3 mb-sm-0 " alt="" width="72">
+                    <div class="flex-fill">
+                        <h5 class="mt-0"> Lê Việt Hùng </h5>
+                        <p class="text-muted font-size-lg">22022666</p>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-lg-6 mb-4">
+        <a class="card shadow aos-init aos-animate text-decoration-none">
+            <div class="card-body p-4">
+                <div class="d-sm-flex align-items-start text-center text-sm-left">
+                    <img src="{% static 'assets/images/illustration/easy-config.svg' %}" class="mr-sm-4 mb-3 mb-sm-0 " alt="" width="72">
+                    <div class="flex-fill">
+                        <h5 class="mt-0"> Trần Nam Anh </h5>
+                        <p class="text-muted font-size-lg">22022569</p>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
     </div>
 </section><section class="position-relative py-3 bg-white">
     <div class="sticker">
         <div class="sticker-item sticker-bottom-left sticker-soften">
-            <img class="" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/assets/images/decoration/bubble2.svg" alt="">
+            <img class="" src="{% static '/assets/images/decoration/bubble2.svg' %}" alt="">
         </div>
     </div>
     <div class="py-3 my-6"></div>
@@ -407,8 +415,8 @@
                         <figure>
                             <img class="mr-2" src="{% static '/assets/images/decoration/quote.svg' %}" alt="" height="32">
                         </figure>
-                        <p class="mb-0">Ứng dụng đơn giản miễn phí và có thể giúp bạn biết khi nào là thời điểm thích hợp nhất để mua thứ gì đó trên mạng. Nó thật tuyệt - và tôi thực sự khuyên bạn nên thử nó!</p>
-                        <footer class="blockquote-footer"> Admin, <cite title="Lịch Sử Giá">Lịch Sử Giá</cite>
+                        <p class="mb-0">Ứng dụng đơn giản miễn phí và có thể giúp bạn lựa chọn sản phẩm tốt nhất. Nó thật tuyệt - và tôi thực sự khuyên bạn nên thử nó!</p>
+                        <footer class="blockquote-footer"> Admin, <cite title="Lịch Sử Giá">IntelliPurchase</cite>
                         </footer>
                     </blockquote>
                 </div>
@@ -423,241 +431,49 @@
         	            <div class="faq-item card card-expansion-item shadow-none">
                 <div class="card-header border-secondary" id="headingFaq0">
                     <div class="d-flex justify-content-between text-left" data-toggle="collapse" data-target="#collapseFaq0" aria-expanded="false" aria-controls="collapseFaq0">
-                        <h3 class="font-weight-normal lead">Lịch sử giá là gì?</h3>
+                        <h3 class="font-weight-normal lead">IntelliPurchase là gì?</h3>
                         <span class="collapse-indicator"><i class="fa fa-fw fa-chevron-down"></i></span>
                     </div>
                 </div>
                 <div id="collapseFaq0" class="collapse" aria-labelledby="headingFaq0" >
-                    <div class="card-body"><p>Lịch sử giá là một trang web miễn phí cho giao diện đồ họa để xem biểu đồ giá lịch sử của một sản phẩm cụ thể cho các cửa hàng thương mại điện tử khác nhau. Nó cũng giúp bạn chọn được thời điểm tốt nhất để mua được sản phẩm với giá tốt nhất.</p></div>
+                    <div class="card-body"><p>IntelliPurchase là hệ thống giúp nguời dùng so sánh giá, các chi tiết kĩ thuật của sản phẩm, phân tích đánh giá của nguời đã mua sản phẩm giúp nguời dùng biết đưọc các ưu điểm và nhuợc điểm của sàn phấm và đưa ra quyết định phù hợp khi mua sản phấm.</p></div>
                 </div>
             </div>
         	            <div class="faq-item card card-expansion-item shadow-none">
                 <div class="card-header border-secondary" id="headingFaq1">
                     <div class="d-flex justify-content-between text-left" data-toggle="collapse" data-target="#collapseFaq1" aria-expanded="false" aria-controls="collapseFaq1">
-                        <h3 class="font-weight-normal lead">Công cụ theo dõi giá là gì?</h3>
+                        <h3 class="font-weight-normal lead">IntelliPurchase hỗ trợ so sánh sản phẩm của các nhà bán lẻ nào?</h3>
                         <span class="collapse-indicator"><i class="fa fa-fw fa-chevron-down"></i></span>
                     </div>
                 </div>
                 <div id="collapseFaq1" class="collapse" aria-labelledby="headingFaq1" >
-                    <div class="card-body"><p>Công cụ theo dõi giá là một thuật ngữ được sử dụng để đại diện cho một công cụ tự động theo dõi giá của sản phẩm cho bạn, vì vậy bạn không phải kiểm tra giá theo cách thủ công nhiều lần trong ngày.</p></div>
+                    <div class="card-body"><p>IntelliPurchase hiện tại hỗ trợ so sánh giá của 2 nhà bán lẻ đó là FPTShop và Thế giới di động.</p></div>
                 </div>
             </div>
         	            <div class="faq-item card card-expansion-item shadow-none">
                 <div class="card-header border-secondary" id="headingFaq2">
                     <div class="d-flex justify-content-between text-left" data-toggle="collapse" data-target="#collapseFaq2" aria-expanded="false" aria-controls="collapseFaq2">
-                        <h3 class="font-weight-normal lead">Cảnh báo giảm giá là gì?</h3>
+                        <h3 class="font-weight-normal lead">Làm thế nào để sử dụng IntelliPurchase?</h3>
                         <span class="collapse-indicator"><i class="fa fa-fw fa-chevron-down"></i></span>
                     </div>
                 </div>
                 <div id="collapseFaq2" class="collapse" aria-labelledby="headingFaq2" >
-                    <div class="card-body"><p>Cảnh báo giảm giá là một thông báo mà bạn sẽ nhận được trên thiết bị hoặc e-mail của mình sau khi giá của sản phẩm bạn đang theo dõi đạt đến giá mục tiêu đã đặt của bạn. Lịch sử giá theo dõi giá của một sản phẩm và cũng thông báo cho bạn.</p></div>
+                    <div class="card-body"><p>Bạn có thể sử dụng ngay cả khi không cần đăng nhập tài khoản. Để sử dụng IntelliPurchase bạn chỉ cần chọn sản phẩm tuơng ứng mà bạn muốn so sánh.</p></div>
                 </div>
             </div>
         	            <div class="faq-item card card-expansion-item shadow-none">
                 <div class="card-header border-secondary" id="headingFaq3">
                     <div class="d-flex justify-content-between text-left" data-toggle="collapse" data-target="#collapseFaq3" aria-expanded="false" aria-controls="collapseFaq3">
-                        <h3 class="font-weight-normal lead">Làm cách nào để đặt Thông báo giá?</h3>
+                        <h3 class="font-weight-normal lead">IntelliPurchase có cập nhật giá sản phẩm thuờng xuyên không?</h3>
                         <span class="collapse-indicator"><i class="fa fa-fw fa-chevron-down"></i></span>
                     </div>
                 </div>
                 <div id="collapseFaq3" class="collapse" aria-labelledby="headingFaq3" >
-                    <div class="card-body"><p>Mở sản phẩm trong Lịch sử giá mà bạn đang muốn mua. Ở góc dưới cùng bên phải, bạn có thể nhấn vào biểu tượng chuông và sau đó nhấn vào nút "đặt cảnh báo giá". Bạn có thể nhập giá mục tiêu theo cách thủ công và nhấn nút lưu.</p></div>
+                    <div class="card-body"><p>IntelliPurchase luôn cố gắng cập nhật giá các sản phẩm chính xác nhất.</p></div>
                 </div>
             </div>
-        	            <div class="faq-item card card-expansion-item shadow-none">
-                <div class="card-header border-secondary" id="headingFaq4">
-                    <div class="d-flex justify-content-between text-left" data-toggle="collapse" data-target="#collapseFaq4" aria-expanded="false" aria-controls="collapseFaq4">
-                        <h3 class="font-weight-normal lead">Việc sử dụng Lịch sử giá là gì?</h3>
-                        <span class="collapse-indicator"><i class="fa fa-fw fa-chevron-down"></i></span>
-                    </div>
-                </div>
-                <div id="collapseFaq4" class="collapse" aria-labelledby="headingFaq4" >
-                    <div class="card-body"><p>Các cửa hàng thương mại điện tử thay đổi giá sản phẩm của họ rất thường xuyên. Bạn nên xem biểu đồ lịch sử giá của sản phẩm bạn đang muốn mua. Biểu đồ giá có thể giúp bạn quyết định có nên mua sản phẩm hay không. Bạn có thể phân tích dữ liệu giá của sản phẩm từ vài tháng đến thậm chí vài năm.</p></div>
-                </div>
-            </div>
-        	            <div class="faq-item card card-expansion-item shadow-none">
-                <div class="card-header border-secondary" id="headingFaq5">
-                    <div class="d-flex justify-content-between text-left" data-toggle="collapse" data-target="#collapseFaq5" aria-expanded="false" aria-controls="collapseFaq5">
-                        <h3 class="font-weight-normal lead">Các lợi ích của Cảnh báo Giá là gì?</h3>
-                        <span class="collapse-indicator"><i class="fa fa-fw fa-chevron-down"></i></span>
-                    </div>
-                </div>
-                <div id="collapseFaq5" class="collapse" aria-labelledby="headingFaq5" >
-                    <div class="card-body"><p>Thông báo giá là một cách tuyệt vời để luôn cập nhật giá của sản phẩm. Thay vì kiểm tra giá sản phẩm theo cách thủ công bây giờ và sau đó, với tính năng cảnh báo giá, bạn có thể nhận được thông báo ngay lập tức khi giá sản phẩm giảm xuống. Bạn cũng có thể nhận được thông báo khi sản phẩm của bạn có hàng trở lại.</p></div>
-                </div>
-            </div>
-        	            <div class="faq-item card card-expansion-item shadow-none">
-                <div class="card-header border-secondary" id="headingFaq6">
-                    <div class="d-flex justify-content-between text-left" data-toggle="collapse" data-target="#collapseFaq6" aria-expanded="false" aria-controls="collapseFaq6">
-                        <h3 class="font-weight-normal lead">Làm thế nào để sử dụng Công cụ theo dõi giá?</h3>
-                        <span class="collapse-indicator"><i class="fa fa-fw fa-chevron-down"></i></span>
-                    </div>
-                </div>
-                <div id="collapseFaq6" class="collapse" aria-labelledby="headingFaq6" >
-                    <div class="card-body"><p>Bạn có thể theo dõi giá của sản phẩm bằng trình theo dõi giá miễn phí của chúng tôi.</p><p>Dán URL của sản phẩm lên đầu trang này và bạn sẽ được chuyển đến biểu đồ lịch sử giá.</p><p>Chỉ cần nhấn vào nút Đặt thông báo giá, điền giá mục tiêu và nhấn đặt thông báo giá. Giờ đây, bạn có thể yên tâm làm những việc khác và trình theo dõi giá của chúng tôi sẽ gửi cho bạn thông báo về việc giảm giá của bạn.</p></div>
-                </div>
-            </div>
-        	            <div class="faq-item card card-expansion-item shadow-none">
-                <div class="card-header border-secondary" id="headingFaq7">
-                    <div class="d-flex justify-content-between text-left" data-toggle="collapse" data-target="#collapseFaq7" aria-expanded="false" aria-controls="collapseFaq7">
-                        <h3 class="font-weight-normal lead">Những cửa hàng nào được Lịch sử giá hỗ trợ?</h3>
-                        <span class="collapse-indicator"><i class="fa fa-fw fa-chevron-down"></i></span>
-                    </div>
-                </div>
-                <div id="collapseFaq7" class="collapse" aria-labelledby="headingFaq7" >
-                    <div class="card-body">Lịch sử giá hỗ trợ các cửa hàng thương mại điện tử lớn như: Lazada, Tiki. Chúng tôi đang nỗ lực bổ sung thêm nhiều cửa hàng và sẽ sớm hỗ trợ họ.</div>
-                </div>
-            </div>
-        	            <div class="faq-item card card-expansion-item shadow-none">
-                <div class="card-header border-secondary" id="headingFaq8">
-                    <div class="d-flex justify-content-between text-left" data-toggle="collapse" data-target="#collapseFaq8" aria-expanded="false" aria-controls="collapseFaq8">
-                        <h3 class="font-weight-normal lead">Công cụ Theo dõi Giá này sẽ thông báo cho tôi như thế nào?</h3>
-                        <span class="collapse-indicator"><i class="fa fa-fw fa-chevron-down"></i></span>
-                    </div>
-                </div>
-                <div id="collapseFaq8" class="collapse" aria-labelledby="headingFaq8" >
-                    <div class="card-body"><p>Công cụ theo dõi giá sẽ gửi cho bạn thông báo giảm giá qua các kênh sau:</p><p>- Địa chỉ e-mail đã đăng ký của bạn</p></div>
-                </div>
-            </div>
-        	            <div class="faq-item card card-expansion-item shadow-none">
-                <div class="card-header border-secondary" id="headingFaq9">
-                    <div class="d-flex justify-content-between text-left" data-toggle="collapse" data-target="#collapseFaq9" aria-expanded="false" aria-controls="collapseFaq9">
-                        <h3 class="font-weight-normal lead">Biểu đồ giá của Lịch sử giá chính xác đến mức nào?</h3>
-                        <span class="collapse-indicator"><i class="fa fa-fw fa-chevron-down"></i></span>
-                    </div>
-                </div>
-                <div id="collapseFaq9" class="collapse" aria-labelledby="headingFaq9" >
-                    <div class="card-body">Chúng tôi thu thập dữ liệu từ các cửa hàng của bên thứ ba như Tiki, Lazada, v.v. Chúng tôi cam kết 99% dữ liệu hiển thị trên Lịch sử giá là chính xác. Có thể có một số biến động giá lớn xảy ra do các vấn đề kỹ thuật. Nhưng có, hầu hết dữ liệu của chúng tôi là chính xác và được Công cụ theo dõi giá của chúng tôi xác minh nhiều lần.</div>
-                </div>
-            </div>
-        	            <div class="faq-item card card-expansion-item shadow-none">
-                <div class="card-header border-secondary" id="headingFaq10">
-                    <div class="d-flex justify-content-between text-left" data-toggle="collapse" data-target="#collapseFaq10" aria-expanded="false" aria-controls="collapseFaq10">
-                        <h3 class="font-weight-normal lead">Làm thế nào tôi có thể theo dõi các sản phẩm hết hàng?</h3>
-                        <span class="collapse-indicator"><i class="fa fa-fw fa-chevron-down"></i></span>
-                    </div>
-                </div>
-                <div id="collapseFaq10" class="collapse" aria-labelledby="headingFaq10" >
-                    <div class="card-body"><p>Khi bạn gửi URL sản phẩm, bạn sẽ được chào đón bằng biểu đồ lịch sử giá và các nút hành động.</p><p>Trong các nút hành động, bạn có thể nhấn vào nút Đặt cảnh báo hàng tồn kho và nổ! Chúng tôi đang theo dõi sản phẩm của bạn và bạn sẽ được thông báo khi sản phẩm của bạn có hàng trở lại.</p></div>
-                </div>
-            </div>
-        	            <div class="faq-item card card-expansion-item shadow-none">
-                <div class="card-header border-secondary" id="headingFaq11">
-                    <div class="d-flex justify-content-between text-left" data-toggle="collapse" data-target="#collapseFaq11" aria-expanded="false" aria-controls="collapseFaq11">
-                        <h3 class="font-weight-normal lead">Làm thế nào để phân tích biểu đồ giá?</h3>
-                        <span class="collapse-indicator"><i class="fa fa-fw fa-chevron-down"></i></span>
-                    </div>
-                </div>
-                <div id="collapseFaq11" class="collapse" aria-labelledby="headingFaq11" >
-                    <div class="card-body"><p>Để phân tích biểu đồ/đồ thị giá, bạn phải ghi nhớ giá hiện tại. Di chuột qua biểu đồ lịch sử giá để kiểm tra giá cho những ngày cụ thể. Mỗi ngày cũng có thể có nhiều mức giá. Bạn cũng có thể chuyển chế độ xem sang 1 tháng, 3 tháng, 6 tháng và 1 năm.</p></div>
-                </div>
-            </div>
-        	        </div>
+        </div> 
     </div>
-    <script type="application/ld+json">
-    {
-		"@context": "https://schema.org/",
-		"@type": "FAQPage",
-		"mainEntity": [
-					{
-				"@type": "Question",
-				"name": "Lịch sử giá là gì?",
-				"acceptedAnswer": {
-					"@type": "Answer",
-					"text": "<p>Lịch sử giá là một trang web miễn phí cho giao diện đồ họa để xem biểu đồ giá lịch sử của một sản phẩm cụ thể cho các cửa hàng thương mại điện tử khác nhau. Nó cũng giúp bạn chọn được thời điểm tốt nhất để mua được sản phẩm với giá tốt nhất.</p>"
-				}
-			}
-			,					{
-				"@type": "Question",
-				"name": "Công cụ theo dõi giá là gì?",
-				"acceptedAnswer": {
-					"@type": "Answer",
-					"text": "<p>Công cụ theo dõi giá là một thuật ngữ được sử dụng để đại diện cho một công cụ tự động theo dõi giá của sản phẩm cho bạn, vì vậy bạn không phải kiểm tra giá theo cách thủ công nhiều lần trong ngày.</p>"
-				}
-			}
-			,					{
-				"@type": "Question",
-				"name": "Cảnh báo giảm giá là gì?",
-				"acceptedAnswer": {
-					"@type": "Answer",
-					"text": "<p>Cảnh báo giảm giá là một thông báo mà bạn sẽ nhận được trên thiết bị hoặc e-mail của mình sau khi giá của sản phẩm bạn đang theo dõi đạt đến giá mục tiêu đã đặt của bạn. Lịch sử giá theo dõi giá của một sản phẩm và cũng thông báo cho bạn.</p>"
-				}
-			}
-			,					{
-				"@type": "Question",
-				"name": "Làm cách nào để đặt Thông báo giá?",
-				"acceptedAnswer": {
-					"@type": "Answer",
-					"text": "<p>Mở sản phẩm trong Lịch sử giá mà bạn đang muốn mua. Ở góc dưới cùng bên phải, bạn có thể nhấn vào biểu tượng chuông và sau đó nhấn vào nút 'đặt cảnh báo giá'. Bạn có thể nhập giá mục tiêu theo cách thủ công và nhấn nút lưu.</p>"
-				}
-			}
-			,					{
-				"@type": "Question",
-				"name": "Việc sử dụng Lịch sử giá là gì?",
-				"acceptedAnswer": {
-					"@type": "Answer",
-					"text": "<p>Các cửa hàng thương mại điện tử thay đổi giá sản phẩm của họ rất thường xuyên. Bạn nên xem biểu đồ lịch sử giá của sản phẩm bạn đang muốn mua. Biểu đồ giá có thể giúp bạn quyết định có nên mua sản phẩm hay không. Bạn có thể phân tích dữ liệu giá của sản phẩm từ vài tháng đến thậm chí vài năm.</p>"
-				}
-			}
-			,					{
-				"@type": "Question",
-				"name": "Các lợi ích của Cảnh báo Giá là gì?",
-				"acceptedAnswer": {
-					"@type": "Answer",
-					"text": "<p>Thông báo giá là một cách tuyệt vời để luôn cập nhật giá của sản phẩm. Thay vì kiểm tra giá sản phẩm theo cách thủ công bây giờ và sau đó, với tính năng cảnh báo giá, bạn có thể nhận được thông báo ngay lập tức khi giá sản phẩm giảm xuống. Bạn cũng có thể nhận được thông báo khi sản phẩm của bạn có hàng trở lại.</p>"
-				}
-			}
-			,					{
-				"@type": "Question",
-				"name": "Làm thế nào để sử dụng Công cụ theo dõi giá?",
-				"acceptedAnswer": {
-					"@type": "Answer",
-					"text": "<p>Bạn có thể theo dõi giá của sản phẩm bằng trình theo dõi giá miễn phí của chúng tôi.</p><p>Dán URL của sản phẩm lên đầu trang này và bạn sẽ được chuyển đến biểu đồ lịch sử giá.</p><p>Chỉ cần nhấn vào nút Đặt thông báo giá, điền giá mục tiêu và nhấn đặt thông báo giá. Giờ đây, bạn có thể yên tâm làm những việc khác và trình theo dõi giá của chúng tôi sẽ gửi cho bạn thông báo về việc giảm giá của bạn.</p>"
-				}
-			}
-			,					{
-				"@type": "Question",
-				"name": "Những cửa hàng nào được Lịch sử giá hỗ trợ?",
-				"acceptedAnswer": {
-					"@type": "Answer",
-					"text": "Lịch sử giá hỗ trợ các cửa hàng thương mại điện tử lớn như: Lazada, Tiki. Chúng tôi đang nỗ lực bổ sung thêm nhiều cửa hàng và sẽ sớm hỗ trợ họ."
-				}
-			}
-			,					{
-				"@type": "Question",
-				"name": "Công cụ Theo dõi Giá này sẽ thông báo cho tôi như thế nào?",
-				"acceptedAnswer": {
-					"@type": "Answer",
-					"text": "<p>Công cụ theo dõi giá sẽ gửi cho bạn thông báo giảm giá qua các kênh sau:</p><p>- Địa chỉ e-mail đã đăng ký của bạn</p>"
-				}
-			}
-			,					{
-				"@type": "Question",
-				"name": "Biểu đồ giá của Lịch sử giá chính xác đến mức nào?",
-				"acceptedAnswer": {
-					"@type": "Answer",
-					"text": "Chúng tôi thu thập dữ liệu từ các cửa hàng của bên thứ ba như Tiki, Lazada, v.v. Chúng tôi cam kết 99% dữ liệu hiển thị trên Lịch sử giá là chính xác. Có thể có một số biến động giá lớn xảy ra do các vấn đề kỹ thuật. Nhưng có, hầu hết dữ liệu của chúng tôi là chính xác và được Công cụ theo dõi giá của chúng tôi xác minh nhiều lần."
-				}
-			}
-			,					{
-				"@type": "Question",
-				"name": "Làm thế nào tôi có thể theo dõi các sản phẩm hết hàng?",
-				"acceptedAnswer": {
-					"@type": "Answer",
-					"text": "<p>Khi bạn gửi URL sản phẩm, bạn sẽ được chào đón bằng biểu đồ lịch sử giá và các nút hành động.</p><p>Trong các nút hành động, bạn có thể nhấn vào nút Đặt cảnh báo hàng tồn kho và nổ! Chúng tôi đang theo dõi sản phẩm của bạn và bạn sẽ được thông báo khi sản phẩm của bạn có hàng trở lại.</p>"
-				}
-			}
-			,					{
-				"@type": "Question",
-				"name": "Làm thế nào để phân tích biểu đồ giá?",
-				"acceptedAnswer": {
-					"@type": "Answer",
-					"text": "<p>Để phân tích biểu đồ/đồ thị giá, bạn phải ghi nhớ giá hiện tại. Di chuột qua biểu đồ lịch sử giá để kiểm tra giá cho những ngày cụ thể. Mỗi ngày cũng có thể có nhiều mức giá. Bạn cũng có thể chuyển chế độ xem sang 1 tháng, 3 tháng, 6 tháng và 1 năm.</p>"
-				}
-			}
-							]
-	}
-    </script>
 </div>
 <section class="py-3 position-relative bg-light">
     <div class="sticker">
@@ -671,7 +487,7 @@
         <div class="card bg-success text-white position-relative overflow-hidden shadow rounded-lg p-4 mb-0">
             <div class="sticker">
                 <div class="sticker-item sticker-middle-left">
-                    <img class="flip-y " src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/assets/images/decoration/bubble4.svg" alt="">
+                    <img class="flip-y " src="{% static '/assets/images/decoration/bubble4.svg' %}" alt="">
                 </div>
             </div>
             <div class="card-body d-md-flex justify-content-between align-items-center text-center position-relative">
@@ -680,122 +496,8 @@
         </div>
     </div>
 </section>
-<script type="text/javascript">
-    document.getElementById("paste").addEventListener("click", function(a) {
-        a = document.getElementById("paste");
-        var c = document.getElementById("in_product_url");
-        '<span><i class="fa fa-times pr-1" aria-hidden="true"></i>Xóa</span>' === a.innerHTML ? (c.value = "", a.innerHTML = '<i class="fa fa-clipboard pr-1" aria-hidden="true"></i>Dán</span>') : navigator.clipboard.readText().then(function(f) {
-            return c.value = f
-        }, a.innerHTML = '<span><i class="fa fa-times pr-1" aria-hidden="true"></i>Xóa</span>')
-    });
-
-    function process_lsg(){
-        $("#buttoncheck").text('Đang Kiểm Tra...');
-        var url = $("#in_product_url").val();
-        if (url == '') return false;
-        $.post("process_lsg.html", {product_url: url}).done(function(data) {
-            $("#process_lsg").html(data);
-            $("#buttoncheck").text('Xem Lịch Sử Giá');
-        });
-    }
-    </script>
-<div id="cookieDemo"></div>
 </div>
-</div><!-- .app-footer -->
-<!-- <footer class="app-footer">
-    <div id="fb-root"></div>
-    <p>Dữ liệu được cập nhật và phân tích mỗi ngày.</p>
-    <p>Dữ liệu trên được cập nhật và thống kê từ Internet, chúng tôi không chịu trách nhiệm về tính xác thực.</p>
-    <hr>
-    <div class="mb-0">Thấy chất lượng Không quên <b>#LIKE</b> và <b>#Share</b> để ủng hộ bên mình
-        <a class="btn btn-subtle-primary" href="https://www.facebook.com/dialog/share?app_id=570608294084473&amp;display=popup&amp;href=https%3A%2F%2Flichsugia.com&amp;quote=L%E1%BB%8Bch+S%E1%BB%AD+Gi%C3%A1+-+LichSuGia.com" target="_blank" rel="nofollow">Chia sẻ Facebook</a>
-    </div>
-    <ul class="list-inline mt-3">
-        <li class="list-inline-item">
-            <a class="text-muted" href="/support">Support</a>
-        </li>
-        <li class="list-inline-item">
-            <a class="text-muted" href="/privacy">Privacy</a>
-        </li>
-        <li class="list-inline-item">
-            <a class="text-muted" href="/terms">Terms of Service</a>
-        </li>
-    </ul>
-    <div class="copyright"> V1.0.0 Copyright © 2021. LichSuGia.com </div>
-</footer>/.app-footer -->
-<!-- /.wrapper -->
-</main><!-- /.app-main -->
-</div><!-- /.app -->
-
-
-<!-- BEGIN BASE JS -->
-<!-- END BASE JS -->
-<!-- BEGIN PLUGINS JS -->
-<script src="../cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js" integrity="sha512-q583ppKrCRc7N5O0n2nzUiJ+suUv7Et1JGels4bXOaMFQcamPk9HjdUknZuuFjBNs7tsMuadge5k9RzdmO+1GQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="../cdnjs.cloudflare.com/ajax/libs/js-cookie/2.2.1/js.cookie.min.js" integrity="sha512-Meww2sXqNHxI1+5Dyh/9KAtvI9RZSA4c1K2k5iL02oiPO/RH3Q30L3M1albtqMg50u4gRTYdV4EXOQqXEI336A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="../cdnjs.cloudflare.com/ajax/libs/cookieconsent/3.1.1/cookieconsent.min.js" integrity="sha512-yXXqOFjdjHNH1GND+1EO0jbvvebABpzGKD66djnUfiKlYME5HGMUJHoCaeE4D5PTG2YsSJf6dwqyUUvQvS0vaA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<!-- <script src="/assets/vendor/lazysizes/lazysizes.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
-<script src="/assets/vendor/cookieconsent/cookieconsent.min.js"></script> -->
-
-    <script src="assets/vendor/aos/aos.js"></script>
-    <script src="assets/vendor/sweetalert2/sweetalert2.min.js"></script>
-    <script src="../cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"></script>
-    <script src="../cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
-    <script src="../cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/1.0.2/chartjs-plugin-annotation.min.js"></script><!-- END PLUGINS JS -->
-<!-- BEGIN THEME JS -->
-<script src="assets/javascript/theme.min.js"></script> <!-- END THEME JS -->
-<!-- BEGIN PAGE LEVEL JS -->
-<script src="assets/javascript/pages/cookieconsent-demo.js"></script>
-<!-- END PAGE LEVEL JS -->
-<!-- pwa -->
-<script type="text/javascript">
-    window.addEventListener('beforeinstallprompt', function(e) {
-        e.userChoice.then(function(choiceResult) {
-            console.log(choiceResult.outcome);
-                if(choiceResult.outcome == 'dismissed') {
-                console.log('User cancelled home screen install');
-            }
-            else {
-                console.log('User added to home screen');
-            }
-        });
-    });
-</script>
-<!-- pwa end -->
-</script>
-
-<script src="../cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
-<script>
-    window.OneSignal = window.OneSignal || [];
-    OneSignal.push(function() {
-        OneSignal.init({
-            appId: "57f27aca-bafe-4485-8f8a-c9bf20b76bff",
-            autoResubscribe: false,
-            welcomeNotification: {
-                title: 'Lichsugia.com',
-                message: 'Lịch Sử Giá sẽ gửi THÔNG BÁO GIẢM GIÁ khi sản phẩm giảm giá hoặc FlashSale',
-                url: 'https://lichsugia.com'
-            },
-        });
-    });
-</script>
-<script type="text/javascript">
-    $(window).on("load",function(){
-        window.OneSignal.getUserId().then(function(player_id) {
-            Cookies.set('player_id', player_id, { domain: '.lichsugia.com', expires: 365, path: '/' });
-            console.log("player_id: ", player_id);
-        });
-        window.OneSignal.getExternalUserId().then(function(externalUserId){
-            console.log("externalUserId: ", externalUserId);
-            if (!externalUserId && Cookies.get('us_id')){
-                let externalUserId = Cookies.get('us_id');
-                window.OneSignal.setExternalUserId(externalUserId);
-            }
-        });
-    });
-</script>
-<div class="tab-pane" id="app-load">
+</div>
 </body>
 
 <!-- Mirrored from lichsugia.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 10 May 2024 03:34:04 GMT -->
