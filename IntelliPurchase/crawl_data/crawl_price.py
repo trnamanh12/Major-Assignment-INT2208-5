@@ -136,7 +136,7 @@ class CrawlerThread(threading.Thread):
         Gọi hàm crawl_link và đưa kết quả vào result_queue
         """
         result = self.crawl_link(self.link)
-        self.result_queue.put(result)
+        self.result_queue.put([self.link, result])
 
 
 def main():
@@ -161,8 +161,8 @@ def main():
 
     # Lấy kết quả từ hàng đợi và in ra màn hình (có thể thay đổi tùy mục đích sử dụng)
     while not result_queue.empty():
-        result = result_queue.get()
-        print(result)
+        link, result = result_queue.get()
+        print(f"{link} : {result}")
 
 
 if __name__ == "__main__":
