@@ -68,8 +68,6 @@ def crawl_fpt(link):
     # Thêm tùy chọn "--headless" để chạy trình duyệt ở chế độ không có giao diện người dùng,
     # nghĩa là không hiển thị cửa sổ trình duyệt lên màn hình
     chrome_options.add_argument("--headless")
-    # Thêm tùy chọn "--log-level=3" để tắt thông báo lỗi của webdriver
-    chrome_options.add_argument("--log-level=3")
 
     # Khởi tạo webdriver với tùy chọn trên và truy cập vào đường link sản phẩm
     driver = webdriver.Chrome(options=chrome_options)
@@ -84,24 +82,46 @@ def crawl_fpt(link):
     except:
         pass
 
+    # Đóng webdriver
     driver.quit()
     return None
 
 def crawl_link(link):
+    """
+    Thu thập giá của sản phẩm điện thoại di động dựa trên link sản phẩm
+
+    Parameters:
+        link (str): Đường dẫn URL của sản phẩm cần thu thập
+
+    Returns:
+        Sử dung hàm crawl_tgdd hoặc crawl_fpt để thu thập giá sản phẩm dựa trên link sản phẩm tương ứng
+    """
     if "thegioididong.com" in link:
         return crawl_tgdd(link)
     elif "fptshop.com.vn" in link:
         return crawl_fpt(link)
     else:
         return "Unsupported website"
-    
-def get_price(product1_FPT_link, product1_TGDD_link, product2_FPT_link, product2_TGDD_link):
 
+
+def get_price(product1_FPT_link, product1_TGDD_link, product2_FPT_link, product2_TGDD_link):
+    """
+    Hàm này nhận vào các liên kết sản phẩm từ FPT và Thế Giới Di Động và trả về giá của các sản phẩm.
+
+    Parameters:
+        product1_FPT_link (str): Liên kết sản phẩm 1 từ FPT.
+        product1_TGDD_link (str): Liên kết sản phẩm 1 từ Thế Giới Di Động.
+        product2_FPT_link (str): Liên kết sản phẩm 2 từ FPT.
+        product2_TGDD_link (str): Liên kết sản phẩm 2 từ Thế Giới Di Động.
+
+    Returns:
+        tuple: Một tuple chứa giá của các sản phẩm lần lượt từ FPT và Thế Giới Di Động.
+    """
     links = [
         product1_FPT_link,
         product1_TGDD_link,
         product2_FPT_link,
-        product2_TGDD_link
+        product2_TGDD_link,
     ]
 
     with ThreadPoolExecutor(max_workers=4) as executor:
