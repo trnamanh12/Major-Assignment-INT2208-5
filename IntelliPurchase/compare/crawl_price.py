@@ -23,6 +23,8 @@ def crawl_tgdd(link):
     # Thêm tùy chọn "--headless" để chạy trình duyệt ở chế độ không có giao diện người dùng,
     # nghĩa là không hiển thị cửa sổ trình duyệt lên màn hình
     chrome_options.add_argument("--headless")
+    # Thêm tùy chọn "--log-level=3" để tắt thông báo lỗi của webdriver
+    chrome_options.add_argument("--log-level=3")
 
     # Khởi tạo webdriver với tùy chọn trên và truy cập vào đường link sản phẩm
     driver = webdriver.Chrome(options=chrome_options)
@@ -46,7 +48,6 @@ def crawl_tgdd(link):
     # Đóng webdriver
     driver.quit()
     return None
-
 
 def crawl_fpt(link):
     """
@@ -84,7 +85,6 @@ def crawl_fpt(link):
     # Đóng webdriver
     driver.quit()
     return None
-
 
 def crawl_link(link):
     """

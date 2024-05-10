@@ -5,7 +5,7 @@ from products.models import Sentiment
 
 def plot_sentiment(product_id, company_id):
     aspects = ['Pin', 'Tổng quan', 'Dịch vụ CSKH', 'Những khía cạnh khác']
-    sentiments = ['Negative', 'Neutral', 'Positive']
+    sentiments = ['Xấu', 'Bình thường', 'Tốt']
 
     sentiment = Sentiment.objects.filter(product_id=product_id, company_id=company_id)[0]
 
@@ -22,8 +22,6 @@ def plot_sentiment(product_id, company_id):
             sentiments_ratio.append([0, 0, 0])
         
         if sentiment.s_service:
-            print(sentiment.s_service)
-            print(type(sentiment.s_service))
             sentiments_ratio.append(eval(re.sub(r'\s+', ',', sentiment.s_service)))
         else:
             sentiments_ratio.append([0, 0, 0])

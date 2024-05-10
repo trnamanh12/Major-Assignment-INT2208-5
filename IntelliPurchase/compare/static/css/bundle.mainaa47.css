@@ -7467,24 +7467,6 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item.lg-complete .lg-object 
     position: relative
 }
 
-.l-pc-line .circle {
-    font-size: 24px;
-    font-weight: 500;
-    color: #939ca3;
-    position: absolute;
-    border-radius: 100px;
-    border: solid 1px #cbd1d6;
-    background-color: #fff;
-    width: 48px;
-    height: 48px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%)
-}
-
 .l-pc-body {
     border-radius: 6px;
     padding: 32px 0
