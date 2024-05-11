@@ -18,8 +18,11 @@ def crawl_tgdd(link):
         >>> crawl_tgdd("https://www.thegioididong.com/dtdd/iphone-15-pro-max")
         29.990.000₫
     """
+    DRIVER_LOCATION = "/usr/bin/chromedriver" 
+    BINARY_LOCATION = "/usr/bin/google-chrome" 
     # Tạo một đối tượng tùy chọn cho trình duyệt Chrome
     chrome_options = Options()
+    chrome_options.binary_location = BINARY_LOCATION 
     # Thêm tùy chọn "--headless" để chạy trình duyệt ở chế độ không có giao diện người dùng,
     # nghĩa là không hiển thị cửa sổ trình duyệt lên màn hình
     chrome_options.add_argument("--headless")
@@ -27,7 +30,7 @@ def crawl_tgdd(link):
     chrome_options.add_argument("--log-level=3")
 
     # Khởi tạo webdriver với tùy chọn trên và truy cập vào đường link sản phẩm
-    driver = webdriver.Chrome(options=chrome_options)
+    driver = webdriver.Chrome(executable_path=DRIVER_LOCATION, options=chrome_options)
     driver.get(link)
 
     css_selectors = [
@@ -63,14 +66,19 @@ def crawl_fpt(link):
         >>> crawl_fpt("https://fptshop.com.vn/dien-thoai/iphone-15-pro-max")
         29.490.000₫
     """
+    DRIVER_LOCATION = "/usr/bin/chromedriver" 
+    BINARY_LOCATION = "/usr/bin/google-chrome" 
     # Tạo một đối tượng tùy chọn cho trình duyệt Chrome
     chrome_options = Options()
+    chrome_options.binary_location = BINARY_LOCATION 
     # Thêm tùy chọn "--headless" để chạy trình duyệt ở chế độ không có giao diện người dùng,
     # nghĩa là không hiển thị cửa sổ trình duyệt lên màn hình
     chrome_options.add_argument("--headless")
+    # Thêm tùy chọn "--log-level=3" để tắt thông báo lỗi của webdriver
+    chrome_options.add_argument("--log-level=3")
 
     # Khởi tạo webdriver với tùy chọn trên và truy cập vào đường link sản phẩm
-    driver = webdriver.Chrome(options=chrome_options)
+    driver = webdriver.Chrome(executable_path=DRIVER_LOCATION, options=chrome_options)
     driver.get(link)
 
     # Kiểm tra và lấy giá của sản phẩm
