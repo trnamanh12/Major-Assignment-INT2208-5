@@ -12,7 +12,7 @@
       <link rel="canonical" href="index.html" />
       <link rel="manifest" href="{% static 'manifest.json' %}" />
       <link rel="apple-touch-icon" sizes="144x144" href="{% static 'assets/logo_1x1.png' %}">
-      <link rel="shortcut icon" href="{% static 'assets/phone.png' %}">
+      <link rel="shortcut icon" href="{% static 'assets/favicon.png' %}">
          <!-- BEGIN PLUGINS STYLES -->
       <link rel="stylesheet" href="{% static 'cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css' %}" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
       <link rel="stylesheet" href="{% static 'cdnjs.cloudflare.com/ajax/libs/cookieconsent/3.1.1/cookieconsent.min.css' %}" integrity="sha512-LQ97camar/lOliT/MqjcQs5kWgy6Qz/cCRzzRzUCfv0fotsCTC9ZHXaPQmJV8Xu/PVALfJZ7BDezl5lW3/qBxg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -34,69 +34,63 @@
    </head>
    <body>
       <!--header-->
-      <nav class="navbar navbar-expand-lg bg-body-tertiary">
-         <div class="container-fluid">
-           <a class="navbar-brand" href="{% url 'home' %}">IntelliPuchase</a>
-           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-             <span class="navbar-toggler-icon"></span>
-           </button>
-           <div class="collapse navbar-collapse" id="navbarSupportedContent">
-             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-               <li class="nav-item">
-                 <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Trang chủ</a>
-               </li>
-               <li class="nav-item">
-                 <a class="nav-link" href="{% url 'compare' %}">So sánh</a>
-               </li>
-               <li class="nav-item">
-                  <a class="nav-link" href="#">Lịch sử giá</a>
-               </li>
-               <li class="nav-item">
-                  <a class="nav-link" href="#">Giới thiệu</a>
-               </li>
-               <li class="nav-item">
-                  <a class="nav-link" href="#">Liên hệ</a>
-               </li>
-               <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    
-                  </a>
-                  <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                  </ul>
-                </li>
-             </ul>
-             <form class="d-flex" role="search">
-               <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-               <button class="btn btn-outline-success" type="submit">Search</button>
-             </form>
-             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-               <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    {{request.user}}
-                  </a>
-                  <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Thông tin tài khoản</a></li>
-                    <li><a class="dropdown-item" href="/user/saved_history">Các so sánh đã lưu</a></li>
-                    <li><a class="dropdown-item" href="/user/recent_history">Các so sánh gần đây</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="{% url 'logout' %}">Đăng xuất</a></li>
-                  </ul>
-                </li>
-               <li class="nav-item">
-                  <a class="nav-link" href="{% url 'login' %}">Đăng nhập</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'register' %}">Đăng kí</a>
-                </li>
-             </ul>
-           </div>
+   <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+         <a class="navbar-brand" href="{% url 'home' %}">IntelliPuchase</a>
+         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+         </button>
+         <div class="collapse navbar-collapse  justify-content-center" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+               <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Trang chủ</a>
+            </li>
+            <li class="nav-item">
+               <a class="nav-link" href="{% url 'compare' %}">So sánh</a>
+            </li>
+            <li class="nav-item">
+               <a class="nav-link" href="#">Giới thiệu</a>
+            </li>
+            <li class="nav-item">
+               <a class="nav-link" href="#">Liên hệ</a>
+            </li>
+            </ul>
+            <form class="d-flex" role="search">
+            </form>
          </div>
-       </nav>
-
+         <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+               {% if request.user.is_authenticated %}
+                  <li class="nav-item dropdown">
+                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                     {{request.user}}
+                     </a>
+                     <ul class="dropdown-menu">
+                     <li><a class="dropdown-item" href="#">Thông tin tài khoản</a></li>
+                     <li><a class="dropdown-item" href="/user/saved_history">Các so sánh đã lưu</a></li>
+                     <li><a class="dropdown-item" href="/user/recent_history">Các so sánh gần đây</a></li>
+                     <li><hr class="dropdown-divider"></li>
+                     <li><a class="dropdown-item" href="{% url 'logout' %}">Đăng xuất</a></li>
+                     </ul>
+                  </li>
+               {% else %}
+                  <li class="nav-item">
+                     <a class="nav-link" href="{% url 'login' %}">Đăng nhập</a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="{% url 'register' %}">Đăng kí</a>
+                  </li>
+               {% endif %}
+            </ul>
+         </div>
+      </div>
+      </nav>
+      <style>
+         .nav-item {
+            margin: 0px 100px;
+            font-size: 100px;
+         }
+      </style>
        
 
    
@@ -125,7 +119,21 @@
                <a class="text-muted" href="pages/terms.html">Terms of Service</a>
             </li>
          </ul>
-         <div class="copyright"> V1.0.0 Copyright © 2021. LichSuGia.com </div>
+         <div class="copyright"> V1.0.0 Copyright © 2024. Major Assignment INT2208 5 </div>
       </footer>
+      <style>
+         html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+         }
+
+         .app-footer {
+            margin-top: auto;
+            height: 20%;
+         }
+      </style>
    </body>
 </html>
