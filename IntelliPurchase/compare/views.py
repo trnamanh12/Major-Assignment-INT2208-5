@@ -88,13 +88,13 @@ def compare(request):
             product1_battery = json.loads(json.dumps(eval(product1_specs[0].pin_sac))) if product1_specs[0].pin_sac is not None else {}
             product2_battery = json.loads(json.dumps(eval(product2_specs[0].pin_sac))) if product2_specs[0].pin_sac is not None else {}
 
-            product1_fpt_price, product1_tgdd_price, product2_fpt_price, product2_tgdd_price = get_price(product1.FPT_product_link, 
-                                                                                                        product1.TGDD_product_link,
-                                                                                                        product2.FPT_product_link,
-                                                                                                        product2.TGDD_product_link)
+            # product1_fpt_price, product1_tgdd_price, product2_fpt_price, product2_tgdd_price = get_price(product1.FPT_product_link, 
+            #                                                                                             product1.TGDD_product_link,
+            #                                                                                             product2.FPT_product_link,
+            #                                                                                             product2.TGDD_product_link)
 
-            product1_min_price = min(product1_fpt_price, product1_tgdd_price)
-            product2_min_price = min(product2_fpt_price, product2_tgdd_price)
+            # product1_min_price = min(product1_fpt_price, product1_tgdd_price)
+            # product2_min_price = min(product2_fpt_price, product2_tgdd_price)
 
             product1_tgdd_sa = plot_sentiment(product1.product_id, company_id=1).to_html(full_html=False, include_plotlyjs='cdn')
             product1_fpt_sa = plot_sentiment(product1.product_id, company_id=2).to_html(full_html=False, include_plotlyjs='cdn')
@@ -191,12 +191,12 @@ def compare(request):
                 'product2_os_version': product2_os_cpu.get('Hệ điều hành:', ''),
                 'product1_other_features': product1_tien_ich.get('Tính năng đặc biệt:', '').split('\n'),
                 'product2_other_features': product2_tien_ich.get('Tính năng đặc biệt:', '').split('\n'),
-                'product1_min_price': product1_min_price,
-                'product2_min_price': product2_min_price,
-                'product1_fpt_price': product1_fpt_price,
-                'product2_fpt_price': product2_fpt_price,
-                'product1_tgdd_price': product1_tgdd_price,
-                'product2_tgdd_price': product2_tgdd_price,
+                # 'product1_min_price': product1_min_price,
+                # 'product2_min_price': product2_min_price,
+                # 'product1_fpt_price': product1_fpt_price,
+                # 'product2_fpt_price': product2_fpt_price,
+                # 'product1_tgdd_price': product1_tgdd_price,
+                # 'product2_tgdd_price': product2_tgdd_price,
                 'product1_tgdd_sa': product1_tgdd_sa,
                 'product1_fpt_sa': product1_fpt_sa,
                 'product2_tgdd_sa': product2_tgdd_sa,
