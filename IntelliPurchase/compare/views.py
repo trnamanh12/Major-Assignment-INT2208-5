@@ -1,13 +1,11 @@
 import json
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseNotAllowed, HttpResponseRedirect, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.core.serializers import serialize
 from .crawl_price import get_price
 from concurrent.futures import ThreadPoolExecutor
 from .sentiment_analysis import plot_sentiment
 from products.models import Product, ProductSpec
-from user.models import History
 # Create your views here.
 
 def search(request):
@@ -15,26 +13,6 @@ def search(request):
         search_text = request.GET.get('search_text', '')
         products = Product.objects.filter(product_name__icontains=search_text)
         return render(request, 'search_results.html', {'products': products})
-@csrf_exempt
-def save_history(request):
-    if request.method == 'POST':
-        product1_id = request.POST.get('product1_id')
-        product2_id = request.POST.get('product2_id')        
-
-        # Kiểm tra xem cặp product1_id và product2_id đã tồn tại trong lịch sử hay chưa
-        existing_history = History.objects.filter_by_products(product1_id=product1_id, product2_id=product2_id).first()
-
-        # Nếu đã tồn tại, xoá cặp này khỏi lịch sử
-        if existing_history:
-            existing_history.delete()
-            return HttpResponse("Data deleted successfully", status=200)
-        else:
-            # Nếu chưa tồn tại, tạo một bản ghi mới trong lịch sử với cặp product1_id và product2_id mới
-            History.objects.create(product1_id=product1_id, product2_id=product2_id)
-            return HttpResponse("Data added successfully", status=200)
-    else:
-        # Trong trường hợp không phải là phương thức POST, bạn có thể trả về một HttpResponse khác
-        return HttpResponseNotAllowed(['POST'])
 
 @csrf_exempt
 def compare(request):
@@ -111,12 +89,12 @@ def compare(request):
                 'product2_release_date': product2_thongtin_chung.get('Thời điểm ra mắt:', ''),
                 'product1_height':prod1_size_weight[0],
                 'product2_height': prod2_size_weight[0],
-                'product1_width': prod1_size_weight[1],
-                'product2_width': prod2_size_weight[1],
-                'product1_depth': prod1_size_weight[2],
-                'product2_depth': prod2_size_weight[2],
-                'product1_weight': prod1_size_weight[3],
-                'product2_weight': prod2_size_weight[3],
+                'product1_width': prod1_size_weight[1] if len(prod1_size_weight) > 1 else '',
+                'product2_width': prod2_size_weight[1] if len(prod2_size_weight) > 1 else '',
+                'product1_depth': prod1_size_weight[2] if len(prod1_size_weight) > 2 else '',
+                'product2_depth': prod2_size_weight[2] if len(prod2_size_weight) > 2 else '',
+                'product1_weight': prod1_size_weight[3] if len(prod1_size_weight) > 3 else '',
+                'product2_weight': prod2_size_weight[3] if len(prod2_size_weight) > 3 else '',
                 'product1_water_resistant': product1_tien_ich.get('Kháng nước, bụi:', ''),
                 'product2_water_resistant': product2_tien_ich.get('Kháng nước, bụi:', ''),
                 'product1_cpu': product1_os_cpu.get('Chip xử lý (CPU):', ''),
