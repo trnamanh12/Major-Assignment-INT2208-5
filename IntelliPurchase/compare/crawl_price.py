@@ -1,5 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from concurrent.futures import ThreadPoolExecutor
 
@@ -20,6 +21,7 @@ def crawl_tgdd(link):
     """
     DRIVER_LOCATION = "/usr/bin/chromedriver" 
     BINARY_LOCATION = "/usr/bin/google-chrome" 
+    service = Service(executable_path=DRIVER_LOCATION)
     # Tạo một đối tượng tùy chọn cho trình duyệt Chrome
     chrome_options = Options()
     chrome_options.binary_location = BINARY_LOCATION 
@@ -30,7 +32,7 @@ def crawl_tgdd(link):
     chrome_options.add_argument("--log-level=3")
 
     # Khởi tạo webdriver với tùy chọn trên và truy cập vào đường link sản phẩm
-    driver = webdriver.Chrome(executable_path=DRIVER_LOCATION, options=chrome_options)
+    driver = webdriver.Chrome(service=service, options=chrome_options)
     driver.get(link)
 
     css_selectors = [
@@ -68,6 +70,7 @@ def crawl_fpt(link):
     """
     DRIVER_LOCATION = "/usr/bin/chromedriver" 
     BINARY_LOCATION = "/usr/bin/google-chrome" 
+    service = Service(executable_path=DRIVER_LOCATION)
     # Tạo một đối tượng tùy chọn cho trình duyệt Chrome
     chrome_options = Options()
     chrome_options.binary_location = BINARY_LOCATION 
@@ -78,7 +81,7 @@ def crawl_fpt(link):
     chrome_options.add_argument("--log-level=3")
 
     # Khởi tạo webdriver với tùy chọn trên và truy cập vào đường link sản phẩm
-    driver = webdriver.Chrome(executable_path=DRIVER_LOCATION, options=chrome_options)
+    driver = webdriver.Chrome(service=service, options=chrome_options)
     driver.get(link)
 
     # Kiểm tra và lấy giá của sản phẩm
