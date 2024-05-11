@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.db import models
-from django.db.models import JSONField, Q
+from products.models import Product
 
 class CreateUserForm(UserCreationForm):
     class Meta:
@@ -22,18 +22,28 @@ class CreateUserForm(UserCreationForm):
 
 class HistoryManager(models.Manager):
     def filter_by_products(self, product1_id, product2_id):
-        return self.filter(Q(product_id__contains=[product1_id]) | Q(product_id__contains=[product2_id]))
+        queryset1 = self.filter(product1_id=product1_id, product2_id=product2_id)
+        queryset2 = self.filter(product1_id=product2_id, product2_id=product1_id)
+        return queryset1.union(queryset2)
 
 class History(models.Model):
     id = models.AutoField(primary_key=True)
-    account_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    product_id = JSONField()
+    product1 = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='product1')
+    product2 = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='product2')
     time = models.DateTimeField(auto_now_add=True)
 
     objects = HistoryManager()  # Sử dụng custom manager
 
     def __str__(self):
-        return str(self.product_id)
+        return self.product1.product_name + ' - ' + self.product2.product_name
 
-    class Meta:
-        db_table = 'history'
+    
+class SavedHistory(models.Model):
+    id = models.AutoField(primary_key=True, null=False)
+    product1 = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='saved_product1')
+    product2 = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='saved_product2')
+
+    objects = HistoryManager()  # Sử dụng custom manager
+    
+    def __str__(self):
+        return self.product1.product_name + ' - ' + self.product2.product_name

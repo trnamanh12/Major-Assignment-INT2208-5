@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
             if (product1Id && product2Id) {
                 // Gửi product_id về server
                 const xhr = new XMLHttpRequest();
-                xhr.open("POST", "/compare/save_history/", true);
+                xhr.open("POST", "/save_history/", true);
                 xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
                 xhr.onreadystatechange = function () {
                     if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {

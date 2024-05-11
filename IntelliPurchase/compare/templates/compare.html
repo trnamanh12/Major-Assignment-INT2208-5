@@ -1,9 +1,7 @@
-{% extends 'base.html' %}
-{% load static %}
-{% block main-content %}
-<!-- <html lang="en"> -->
+<!DOCTYPE html>
+<html lang="en">
 
-<!-- <head>
+<head>
 
     <title>So sánh sản phẩm</title>
 
@@ -12,40 +10,49 @@
     <link rel="stylesheet" href="{% static 'css/header.footer.css' %}" type="text/css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{% static 'js/search.js' %}"></script>
+    <script src="{% static 'js/heart.js' %}"></script>
+    <!-- <script src="{% static 'js/submit.js' %}"></script> -->
+    <!-- <script src="{% static 'js/update.js' %}"></script> -->
 
-</head> -->
+</head>
 
-<!-- <body> -->
+<body>
 
-    <!-- <header class="fs-header">
+    <header class="fs-header">
         <div class="f-hdtop">
             <div class="f-wrap">
-                <a href="home.html">
+                <a href="/">
                     <span class="logo_name">INTELLIPURCHASE</span>
                 </a>
                 <ul class="fs-hdmn">
-                    <li>
-                        <a href="/home/account.html" title="Tài khoản của tôi">
-                            {% if request.user.is_authenticated %}
-                                {% if request.user.is_staff %}
-                                    <span class="lg-name-view">Đăng nhập/Đăng kí</span>
-                                {% else %}
-                                    <span class="lg-name-view">Hello: {{ request.user }}</span>
-                                {% endif %}
-                            {% else %}
-                                <span class="lg-name-view">Đăng nhập/Đăng kí</span>
-                            {% endif %}
+                    {% if request.user.is_authenticated %}
+                        <a href="/account.html" title="Tài khoản của tôi">
+                            <span class="lg-name-view">Hello: {{ request.user }}</span>
                         </a>
-                    </li>
+                    {% else %}
+                        <a href="/login/" title="Tài khoản của tôi">
+                            <span class="lg-name-view">Đăng nhập/Đăng kí</span>
+                        </a>
+                    {% endif %}
                 </ul>
             </div>
-            <input id="queryID" queryid hidden style="display:none">
-            <input id="userIP" ip-user hidden style="display:none">
-        </div> -->
-
-    <!-- </header> -->
-    <!-- <div class="over-suggest"></div> -->
-    <!-- <style>
+        </div>
+    </header>
+    
+    <div class="over-suggest"></div>
+    <style>
+        .lg-name-view {
+            color: rgb(255, 255, 255);
+            margin: 12px 0 0 0; /* Thêm đơn vị đo(px) cho margin-top */
+            width: 415px;
+            font-size: 0.4em;
+            font-weight: 10; /* font-weight thường được chỉ định bằng các giá trị số từ 100 đến 900 */
+            text-align: right;
+            display: flex;
+            align-items: center; /* Hiển thị về giữa theo chiều dọc */
+            justify-content: flex-end; /* Hiển thị bên phải theo chiều ngang */
+            max-width: 100%;
+        }
         .f-hdtop {
             background-color: red;
         }
@@ -64,7 +71,6 @@
             max-width: 100%;
             z-index: 2;
         }
-
 
         .f-wrap {
             text-align: left;
@@ -421,7 +427,7 @@
         .base-ic .ic-chat:before {
             content: "\e920"
         }
-    </style> -->
+    </style>
 
     <main class="l-main">
         <div class="l-pc">
@@ -471,7 +477,83 @@
                                     <div class="line-ct">
                                         <button id="submitBtn">So sánh</button>
                                         <hr>
-                                        <span class="circle">VS</span>
+                                        <div class="circle-container" id="heart-container" data-product1-id="{{ product1.product_id }}" data-product2-id="{{ product2.product_id }}">
+                                            <div class="circle" id="heart-button">
+                                                <img src="{% static 'img/heart-off.png' %}" alt="Heart" id="heart-img">
+                                            </div>
+                                        </div>
+                                        <script>
+                                            $(document).ready(function () {
+                                                // Bắt sự kiện click nút submit
+                                                $("#submitBtn").click(function () {
+                                                    // Lấy giá trị từ ô tìm kiếm 1 và 2
+                                                    var searchpr1 = $('#searchpr1').val();
+                                                    var searchpr2 = $('#searchpr2').val();
+
+                                                    // Gửi yêu cầu POST
+                                                    $.ajax({
+                                                        url: "{% url 'recent_history' %}", // Địa chỉ URL của endpoint xử lý tìm kiếm
+                                                        method: 'POST',
+                                                        data: {
+                                                            'product1_name': searchpr1, // Truyền giá trị của ô tìm kiếm 1
+                                                            'product2_name': searchpr2, // Truyền giá trị của ô tìm kiếm 2
+                                                            'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val() // Đảm bảo gửi CSRF token
+                                                        },
+                                                        success: function (data) {
+                                                            // Xử lý dữ liệu trả về nếu cần
+                                                            console.log(data);
+                                                        },
+                                                        error: function (xhr, errmsg, err) {
+                                                            // Xử lý lỗi nếu có
+                                                            console.log(xhr.status + ": " + xhr.responseText);
+                                                        }
+                                                    });
+                                                });
+                                            });
+                                        </script>
+                                        <style>
+                                            .circle-container {
+                                                position: absolute;
+                                                width: 50px; /* Kích thước vòng tròn */
+                                                height: 50px; /* Kích thước vòng tròn */
+                                                top: 50%;
+                                                left: 50%;
+                                                transform: translate(-50%, -50%);
+                                            }
+
+                                            .circle {
+                                                border-radius: 1000px; /* Độ cong lớn */
+                                                border: solid 1px #cbd1d6;
+                                                background-color: #fff;
+                                                width: 100%;
+                                                height: 100%;
+                                                display: flex;
+                                                justify-content: center;
+                                                align-items: center;
+                                                cursor: pointer;
+                                            }
+
+                                            .circle img {
+                                                width: 80%; /* Độ rộng hình ảnh */
+                                                height: auto;
+                                            }
+
+                                            .circle {
+                                                color: #939ca3;
+                                                position: absolute;
+                                                border-radius: 1000px;
+                                                border: solid 1px #cbd1d6;
+                                                background-color: #fff;
+                                                width: 50px;
+                                                height: 50px;
+                                                display: flex;
+                                                justify-content: center;
+                                                align-items: center;
+                                                top: 50%;
+                                                left: 50%;
+                                                transform: translate(-50%, -50%)
+                                            }
+                                        </style>
                                     </div>
                                 </div>
                                 <div class="l-pc-product">
@@ -1138,14 +1220,26 @@
                                             <div class="product-price">
                                                 <img src="{% static 'img/tgdd.png' %}" alt="tgdd" class="tgdd-logo">
                                                 <div class="text">Chỉ từ</div>
-                                                <div class="price">{{product1_tgdd_price}}</div>
+                                                <div class="price">
+                                                    {% if product1_tgdd_price is not None %}
+                                                        {{ product1_tgdd_price }}
+                                                    {% else %}
+                                                        Sản phẩm ngừng kinh doanh
+                                                    {% endif %}
+                                                </div>
                                             </div>
                                             <a class="product-link"
                                                 href=" {{product1.TGDD_product_link}} ">Đến nơi bán <span class="carret"></span> </a>
                                             <div class="product-price">
-                                                    <img src="{% static 'img/fpt1.png' %}" alt="fpt" class="fpt-logo">
+                                                    <img src="{% static 'img/fpt.png' %}" alt="fpt" class="fpt-logo">
                                                     <div class="text">Chỉ từ</div>
-                                                    <div class="price">{{product1_fpt_price}}</div>
+                                                    <div class="price">
+                                                        {% if product1_fpt_price is not None %}
+                                                            {{ product1_fpt_price }}
+                                                        {% else %}
+                                                            Sản phẩm ngừng kinh doanh
+                                                        {% endif %}
+                                                    </div>
                                             </div>
                                             <a class="product-link"
                                                 href=" {{product1.FPT_product_link}} ">Đến nơi bán <span class="carret"></span> </a>
@@ -1160,14 +1254,26 @@
                                             <div class="product-price">
                                                 <img src="{% static 'img/tgdd.png' %}" alt="tgdd" class="tgdd-logo">
                                                 <div class="text">Chỉ từ</div>
-                                                <div class="price">{{product2_tgdd_price}}</div>
+                                                <div class="price">
+                                                    {% if product2_tgdd_price is not None %}
+                                                        {{ product2_tgdd_price }}
+                                                    {% else %}
+                                                        Sản phẩm ngừng kinh doanh
+                                                    {% endif %}
+                                                </div>
                                             </div>
                                             <a class="product-link"
                                                 href=" {{product2.TGDD_product_link}} ">Đến nơi bán <span class="carret"></span> </a>
                                             <div class="product-price">
-                                                    <img src="{% static 'img/fpt1.png' %}" alt="fpt" class="fpt-logo">
+                                                    <img src="{% static 'img/fpt.png' %}" alt="fpt" class="fpt-logo">
                                                     <div class="text">Chỉ từ</div>
-                                                    <div class="price">{{product2_fpt_price}}</div>
+                                                    <div class="price">
+                                                        {% if product2_fpt_price is not None %}
+                                                            {{ product2_fpt_price }}
+                                                        {% else %}
+                                                            Sản phẩm ngừng kinh doanh
+                                                        {% endif %}
+                                                    </div>
                                             </div>
                                             <a class="product-link"
                                                 href=" {{product2.FPT_product_link}} ">Đến nơi bán <span class="carret"></span> </a>
@@ -1177,37 +1283,50 @@
                             </div>
                             <div class="c-compare__row js--collapse-detail" id="data-Giaban">
                                 <div class="c-compare__title">
-                                    <h2 class="title">Phân loại cảm xúc</h2>
+                                    <h2 class="title">Phân tích cảm xúc</h2>
                                 </div>
                                 <div class="l-pc-row compare-product__group">
-                                    <div class="c-compare__product">
-                                        <div class="product-info">
-                                            <div class="product-price">
-                                                <img src="{% static 'img/tgdd.png' %}" alt="tgdd" class="tgdd-logo">
-                                                <div class="text">Chỉ từ</div>
-                                                <div class="price"></div>
-                                            </div>
-                                            <div class="product-price">
-                                                    <img src="{% static 'img/fpt1.png' %}" alt="fpt" class="fpt-logo">
-                                                    <div class="text">Chỉ từ</div>
-                                                    <div class="price"></div>
-                                            </div>
-                                        </div>
+                                    <div class="c-compare__sa">
+                                        <div class="sa">{{product1_tgdd_sa | safe}}</div>
+                                        <img src="{% static 'img/tgdd.png' %}" alt="tgdd" class="tgdd-logo1">
+                                        <br>
+                                        <div class="sa">{{product1_fpt_sa | safe}}</div>
+                                        <img src="{% static 'img/fpt.png' %}" alt="fpt" class="fpt-logo1">
                                     </div>
-                                    <div class="c-compare__product">
-                                        <div class="product-info">
-                                            <div class="product-price">
-                                                <img src="{% static 'img/tgdd.png' %}" alt="tgdd" class="tgdd-logo">
-                                                <div class="text">Chỉ từ</div>
-                                                <div class="price"></div>
-                                            </div>
-                                            <div class="product-price">
-                                                    <img src="{% static 'img/fpt1.png' %}" alt="fpt" class="fpt-logo">
-                                                    <div class="text">Chỉ từ</div>
-                                                    <div class="price"></div>
-                                            </div>
-                                        </div>
+                                    <hr class="vertical-line">
+                                    <div class="c-compare__sa">
+                                        <div class="sa">{{product2_tgdd_sa | safe}}</div>
+                                        <img src="{% static 'img/tgdd.png' %}" alt="tgdd" class="tgdd-logo1">
+                                        <br>
+                                        <div class="sa">{{product2_fpt_sa | safe}}</div>
+                                        <img src="{% static 'img/fpt.png' %}" alt="fpt" class="fpt-logo1">
                                     </div>
+                                    <style>
+                                        .compare-product__group {
+                                            display: flex;
+                                            justify-content: space-between;
+                                            align-items: center;
+                                        }
+
+                                        .c-compare__sa {
+                                            display: flex;
+                                            flex-direction: column;
+                                            align-items: center;
+                                        }
+
+                                        .c-compare__sa .sa {
+                                            width: 600px;
+                                            height: 350px;
+                                            border: 1px solid #ccc; /* Biên cho biểu đồ */
+                                        }
+                                        
+                                        .vertical-line {
+                                            border: none;
+                                            border-left: 1px solid #ccc;
+                                            height: 700px; /* Chiều cao của các biểu đồ */
+                                            margin: 0 0px; /* Khoảng cách giữa đường kẻ và cột */
+                                        }
+                                    </style>
                                 </div>
                             </div>
                         </div>
@@ -1231,8 +1350,21 @@
             margin-right: 10px; /* Khoảng cách bên phải giữa hình ảnh và văn bản */
         }
 
+        .tgdd-logo1 {
+            max-width: 60px; /* Độ rộng tối đa của hình ảnh */
+            height: auto; /* Chiều cao của hình ảnh tự điều chỉnh để giữ tỷ lệ */
+            margin-right: 10px; /* Khoảng cách bên phải giữa hình ảnh và văn bản */
+        }
+
         .fpt-logo {
             max-width: 30px; /* Độ rộng tối đa của hình ảnh */
+            height: auto; /* Chiều cao của hình ảnh tự điều chỉnh để giữ tỷ lệ */
+            margin-left: -5px; /* Khoảng cách bên trái giữa hình ảnh và văn bản */
+            margin-right: 5px; /* Khoảng cách bên phải giữa hình ảnh và văn bản */
+        }
+
+        .fpt-logo1 {
+            max-width: 90px; /* Độ rộng tối đa của hình ảnh */
             height: auto; /* Chiều cao của hình ảnh tự điều chỉnh để giữ tỷ lệ */
             margin-left: -5px; /* Khoảng cách bên trái giữa hình ảnh và văn bản */
             margin-right: 5px; /* Khoảng cách bên phải giữa hình ảnh và văn bản */
@@ -1402,8 +1534,7 @@
         }
     </style>
 
-<!-- </body> -->
+</body>
 
 
 </html>
-{% endblock main-content %}
