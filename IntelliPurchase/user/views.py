@@ -86,14 +86,14 @@ def recent_history(request):
 
 def get_recent_history(request):
     # Lấy ra 5 lịch sử gần đây nhất
-    recent_histories = History.objects.all().order_by('-time')
+    products = History.objects.all().order_by('-time')
     # Chuyển đổi các lịch sử thành một danh sách các từ điển
 
-    return render(request, 'recent_history.html', {'recent_histories': recent_histories})
+    return render(request, 'recent_history.html', {'products': products})
 
 def get_saved_history(request):
     # Lấy ra 5 lịch sử gần đây nhất
-    saved_histories = SavedHistory.objects.all()
+    products = SavedHistory.objects.all()
     # Chuyển đổi các lịch sử thành một danh sách các từ điển
 
-    return render(request, 'recent_history.html', {'recent_histories': saved_histories})
+    return render(request, 'saved_history.html', {'products': products})

@@ -33,6 +33,9 @@ urlpatterns = [
     path('recent_history/', user_views.recent_history, name='recent_history'),
     path('save_history/', user_views.save_history, name='save_history'),
     path('user/', include('user.urls')),
+    path('support/', views.support, name='support'),
+    path('privacy/', views.privacy, name='privacy'),
+    path('terms/', views.terms, name='term'),
 ]
 
 

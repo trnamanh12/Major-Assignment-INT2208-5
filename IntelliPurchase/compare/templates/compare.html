@@ -466,7 +466,11 @@
                                     </div>
                                     <div class="c-pc-product text-center">
                                         <div class="c-pc-product__img">
-                                            <img src="{{ product1.image }}" alt="{{ product1.product_name }}">
+                                            {% if product1_brand %}
+                                                <img src="{{ product1.image }}" alt="{{ product1.product_name }}">
+                                            {% else %}
+                                                <img src="{% static 'assets/phone.png' %}" alt="No image">
+                                            {% endif %}
                                         </div>
                                         {% if product1_brand %}
                                             <div class="c-pc-product__price typo-into-elevated text-color-normal">
@@ -576,7 +580,11 @@
                                 </div>
                                 <div class="c-pc-product text-center">
                                     <div class="c-pc-product__img">
-                                        <img src="{{ product2.image }}" alt="{{ product2.product_name }}">
+                                        {% if product1_brand %}
+                                            <img src="{{ product2.image }}" alt="{{ product2.product_name }}">
+                                        {% else %}
+                                            <img src="{% static 'assets/phone.png' %}" alt="No image">
+                                        {% endif %}
                                     </div>
                                     {% if product1_brand %}
                                         <div class="c-pc-product__price typo-into-elevated text-color-normal">

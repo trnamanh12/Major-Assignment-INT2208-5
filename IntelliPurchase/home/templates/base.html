@@ -52,7 +52,7 @@
                <a class="nav-link" href="#">Giới thiệu</a>
             </li>
             <li class="nav-item">
-               <a class="nav-link" href="#">Liên hệ</a>
+               <a class="nav-link" href="{% url 'support' %}">Liên hệ</a>
             </li>
             </ul>
             <form class="d-flex" role="search">
@@ -110,30 +110,16 @@
          </div>
          <ul class="list-inline mt-3">
             <li class="list-inline-item">
-               <a class="text-muted" href="pages/support.html">Support</a>
+               <a class="text-muted" href="{% url 'support' %}">Support</a>
             </li>
             <li class="list-inline-item">
-               <a class="text-muted" href="pages/privacy.html">Privacy</a>
+               <a class="text-muted" href="{% url 'privacy' %}">Privacy</a>
             </li>
             <li class="list-inline-item">
-               <a class="text-muted" href="pages/terms.html">Terms of Service</a>
+               <a class="text-muted" href="{% url 'term' %}">Terms of Service</a>
             </li>
          </ul>
          <div class="copyright"> V1.0.0 Copyright © 2024. Major Assignment INT2208 5 </div>
       </footer>
-      <style>
-         html, body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-         }
-
-         .app-footer {
-            margin-top: auto;
-            height: 20%;
-         }
-      </style>
    </body>
 </html>
