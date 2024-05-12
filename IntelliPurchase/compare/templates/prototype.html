@@ -482,7 +482,11 @@
                                         <hr>
                                         <div class="circle-container" id="heart-container" data-product1-id="{{ product1.product_id }}" data-product2-id="{{ product2.product_id }}">
                                             <div class="circle" id="heart-button">
-                                                <img src="{% static 'img/heart-off.png' %}" alt="Heart" id="heart-img">
+                                                {% if request.user.is_authenticated %}
+                                                    <img src="{% static 'img/heart-off.png' %}" alt="Heart" id="heart-img">
+                                                {% else %}
+                                                    VS
+                                                {% endif %}
                                             </div>
                                         </div>
                                         <script>

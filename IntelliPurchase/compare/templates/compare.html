@@ -1,3 +1,6 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block main-content %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,7 +21,7 @@
 
 <body>
 
-    <header class="fs-header">
+    <!-- <header class="fs-header">
         <div class="f-hdtop">
             <div class="f-wrap">
                 <a href="/">
@@ -37,7 +40,7 @@
                 </ul>
             </div>
         </div>
-    </header>
+    </header> -->
     
     <div class="over-suggest"></div>
     <style>
@@ -479,7 +482,11 @@
                                         <hr>
                                         <div class="circle-container" id="heart-container" data-product1-id="{{ product1.product_id }}" data-product2-id="{{ product2.product_id }}">
                                             <div class="circle" id="heart-button">
-                                                <img src="{% static 'img/heart-off.png' %}" alt="Heart" id="heart-img">
+                                                {% if request.user.is_authenticated %}
+                                                    <img src="{% static 'img/heart-off.png' %}" alt="Heart" id="heart-img">
+                                                {% else %}
+                                                    VS
+                                                {% endif %}
                                             </div>
                                         </div>
                                         <script>
@@ -1211,74 +1218,76 @@
                                     <h2 class="title">Giá bán</h2>
                                 </div>
                                 <div class="l-pc-row compare-product__group">
-                                    <div class="c-compare__product">
-                                        <div class="product-img" style="margin-top: 20px;">
-                                            <img src="{{product1.image}}" alt="{{product1.name}}">
-                                        </div>
-                                        <div class="product-info">
-                                            <div class="product-name"> {{product1.product_name}} </div>
-                                            <div class="product-price">
-                                                <img src="{% static 'img/tgdd.png' %}" alt="tgdd" class="tgdd-logo">
-                                                <div class="text">Chỉ từ</div>
-                                                <div class="price">
-                                                    {% if product1_tgdd_price is not None %}
-                                                        {{ product1_tgdd_price }}
-                                                    {% else %}
-                                                        Sản phẩm ngừng kinh doanh
-                                                    {% endif %}
-                                                </div>
+                                    {% if product1_brand %}
+                                        <div class="c-compare__product">
+                                            <div class="product-img" style="margin-top: 20px;">
+                                                <img src="{{product1.image}}" alt="{{product1.name}}">
                                             </div>
-                                            <a class="product-link"
-                                                href=" {{product1.TGDD_product_link}} ">Đến nơi bán <span class="carret"></span> </a>
-                                            <div class="product-price">
-                                                    <img src="{% static 'img/fpt.png' %}" alt="fpt" class="fpt-logo">
+                                            <div class="product-info">
+                                                <div class="product-name"> {{product1.product_name}} </div>
+                                                <div class="product-price">
+                                                    <img src="{% static 'img/tgdd.png' %}" alt="tgdd" class="tgdd-logo">
                                                     <div class="text">Chỉ từ</div>
                                                     <div class="price">
-                                                        {% if product1_fpt_price is not None %}
-                                                            {{ product1_fpt_price }}
+                                                        {% if product1_tgdd_price is not None %}
+                                                            {{ product1_tgdd_price }}
                                                         {% else %}
                                                             Sản phẩm ngừng kinh doanh
                                                         {% endif %}
                                                     </div>
-                                            </div>
-                                            <a class="product-link"
-                                                href=" {{product1.FPT_product_link}} ">Đến nơi bán <span class="carret"></span> </a>
-                                        </div>
-                                    </div>
-                                    <div class="c-compare__product">
-                                        <div class="product-img" style="margin-top: 20px;">
-                                            <img src="{{product2.image}}" alt="{{product2.name}}">
-                                        </div>
-                                        <div class="product-info">
-                                            <div class="product-name"> {{product2.product_name}} </div>
-                                            <div class="product-price">
-                                                <img src="{% static 'img/tgdd.png' %}" alt="tgdd" class="tgdd-logo">
-                                                <div class="text">Chỉ từ</div>
-                                                <div class="price">
-                                                    {% if product2_tgdd_price is not None %}
-                                                        {{ product2_tgdd_price }}
-                                                    {% else %}
-                                                        Sản phẩm ngừng kinh doanh
-                                                    {% endif %}
                                                 </div>
+                                                <a class="product-link"
+                                                    href=" {{product1.TGDD_product_link}} ">Đến nơi bán <span class="carret"></span> </a>
+                                                <div class="product-price">
+                                                        <img src="{% static 'img/fpt.png' %}" alt="fpt" class="fpt-logo">
+                                                        <div class="text">Chỉ từ</div>
+                                                        <div class="price">
+                                                            {% if product1_fpt_price is not None %}
+                                                                {{ product1_fpt_price }}
+                                                            {% else %}
+                                                                Sản phẩm ngừng kinh doanh
+                                                            {% endif %}
+                                                        </div>
+                                                </div>
+                                                <a class="product-link"
+                                                    href=" {{product1.FPT_product_link}} ">Đến nơi bán <span class="carret"></span> </a>
                                             </div>
-                                            <a class="product-link"
-                                                href=" {{product2.TGDD_product_link}} ">Đến nơi bán <span class="carret"></span> </a>
-                                            <div class="product-price">
-                                                    <img src="{% static 'img/fpt.png' %}" alt="fpt" class="fpt-logo">
+                                        </div>
+                                        <div class="c-compare__product">
+                                            <div class="product-img" style="margin-top: 20px;">
+                                                <img src="{{product2.image}}" alt="{{product2.name}}">
+                                            </div>
+                                            <div class="product-info">
+                                                <div class="product-name"> {{product2.product_name}} </div>
+                                                <div class="product-price">
+                                                    <img src="{% static 'img/tgdd.png' %}" alt="tgdd" class="tgdd-logo">
                                                     <div class="text">Chỉ từ</div>
                                                     <div class="price">
-                                                        {% if product2_fpt_price is not None %}
-                                                            {{ product2_fpt_price }}
+                                                        {% if product2_tgdd_price is not None %}
+                                                            {{ product2_tgdd_price }}
                                                         {% else %}
                                                             Sản phẩm ngừng kinh doanh
                                                         {% endif %}
                                                     </div>
+                                                </div>
+                                                <a class="product-link"
+                                                    href=" {{product2.TGDD_product_link}} ">Đến nơi bán <span class="carret"></span> </a>
+                                                <div class="product-price">
+                                                        <img src="{% static 'img/fpt.png' %}" alt="fpt" class="fpt-logo">
+                                                        <div class="text">Chỉ từ</div>
+                                                        <div class="price">
+                                                            {% if product2_fpt_price is not None %}
+                                                                {{ product2_fpt_price }}
+                                                            {% else %}
+                                                                Sản phẩm ngừng kinh doanh
+                                                            {% endif %}
+                                                        </div>
+                                                </div>
+                                                <a class="product-link"
+                                                    href=" {{product2.FPT_product_link}} ">Đến nơi bán <span class="carret"></span> </a>
                                             </div>
-                                            <a class="product-link"
-                                                href=" {{product2.FPT_product_link}} ">Đến nơi bán <span class="carret"></span> </a>
                                         </div>
-                                    </div>
+                                    {% endif %}
                                 </div>
                             </div>
                             <div class="c-compare__row js--collapse-detail" id="data-Giaban">
@@ -1538,3 +1547,5 @@
 
 
 </html>
+
+{% endblock main-content %}

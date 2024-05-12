@@ -38,7 +38,7 @@ def loginUser(request):
 
 def logoutUser(request):
     logout(request)
-    return redirect('/')
+    return redirect(request.META.get('HTTP_REFERER', '/'))
 
 
 @csrf_exempt
