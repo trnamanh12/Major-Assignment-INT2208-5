@@ -1,44 +1,62 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-
-    <title>So sánh {{ phone_1 }} vs {{ phone_2 }}</title>
-
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'css/bundle.mainaa47.css' %}" type="text/css">
-    <link rel="stylesheet" href="{% static 'css/header.footer.css' %}" type="text/css">
-</head>
-
-<body>
-
-    <header class="fs-header">
-        <div class="f-hdtop">
-            <div class="f-wrap">
-                <a href="home.html">
-                    <span class="logo_name">INTELLIPURCHASE</span>
-                </a>
-                <ul class="fs-hdmn">
-                    <li>
-                        <a href="account.html" title="Tài khoản của tôi">
-                            <span class="lg-name-view">Tài khoản của tôi</span>
-                        </a>
-                    </li>
-
-                    <div class="form-inline my-2 my-lg-0">
-                        <span>Hello {{request.user}} </span>
-                        <span><a href="{% url 'logout' %}" class="fw-bold text-body"><u>Đăng xuất</u></a></span>
-                    </div>
-
-                </ul>
-            </div>
-            <input id="queryID" queryid hidden style="display:none">
-            <input id="userIP" ip-user hidden style="display:none">
-        </div>
-
-    </header>
-    <div class="over-suggest"></div>
+{% extends 'base.html' %}
+{% load static %}
+{% block main-content %}
+<html lang="vi">
+<body data-token="ec4c8xg89pssoc40o0s8gokcwg88sg0">
     <style>
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f1f1f198;
+            min-width: 160px;
+            padding: 12px 10px;
+            z-index: 1;
+        }
+
+        .user-dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .user-dropdown {
+            display: flex;
+            align-items: baseline; /* Cân chỉnh các phần tử con dựa trên dòng cơ bản của văn bản */
+        }
+
+        .lg-name-view {
+            color: rgb(255, 255, 255);
+            margin: 12px 0 0 0; /* Thêm đơn vị đo(px) cho margin-top */
+            width: 415px;
+            font-size: 0.4em;
+            font-weight: 10; /* font-weight thường được chỉ định bằng các giá trị số từ 100 đến 900 */
+            text-align: right;
+            display: flex;
+            align-items: center; /* Hiển thị về giữa theo chiều dọc */
+            justify-content: flex-end; /* Hiển thị bên phải theo chiều ngang */
+            max-width: 100%;
+        }
+
+        .user-dropdown .lg-name-view {
+            color: rgb(255, 255, 255);
+            margin: 12px 0 0 0; /* Thêm đơn vị đo(px) cho margin-top */
+            width: 415px;
+            font-size: 0.4em;
+            font-weight: 10; /* font-weight thường được chỉ định bằng các giá trị số từ 100 đến 900 */
+            text-align: right;
+            display: flex;
+            align-items: center; /* Hiển thị về giữa theo chiều dọc */
+            justify-content: flex-end; /* Hiển thị bên phải theo chiều ngang */
+            max-width: 100%;
+        }
+
+        .logout {
+            color: rgb(0, 0, 0);
+            margin: 0 auto; /* Căn giữa nút logout */
+            font-size: 0.4em; /* Đổi kích thước font */
+            font-weight: normal; /* Khôi phục font-weight về giá trị mặc định */
+            display: block; /* Đặt nút logout thành block để căn giữa */
+            text-align: center; /* Căn giữa nội dung của nút logout */
+        }
+
         .f-hdtop {
             background-color: red;
         }
@@ -58,367 +76,13 @@
             z-index: 2;
         }
 
-
         .f-wrap {
             text-align: left;
             font-size: 40px;
             color: #000;
-            font-family: Roboto;
         }
-
-        @font-face {
-            font-family: "header-icon";
-            src: url(Content/v5d/fonts/Icon/header-iconc6a0.html?p330i7&amp;v=17);
-            src: url(Content/v5d/fonts/Icon/header-iconc6a0.html?p330i7&amp;v=17#iefix) format("embedded-opentype"), url(Content/v5d/fonts/Icon/header-iconc6a0.ttf?p330i7&amp;v=17) format("truetype"), url(Content/v5d/fonts/Icon/header-iconc6a0.woff?p330i7&amp;v=17) format("woff"), url(Content/v5d/fonts/Icon/header-iconc6a0.svg?p330i7&amp;v=17#header-icon) format("svg");
-            font-weight: normal;
-            font-style: normal;
-            font-display: block
-        }
-
-        .fs-hdmn>li>a .user-img {
-            width: 24px;
-            height: 24px;
-            margin: auto;
-            position: relative
-        }
-
-        .fs-hdmn>li>a .user-img.noti::before {
-            position: absolute;
-            content: '';
-            top: 0;
-            right: -1px;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background-color: #efb140;
-            z-index: 1
-        }
-
-        .fs-hdmn>li>a .user-img.active i {
-            display: none
-        }
-
-        .fs-hdmn>li>a .user-img.active .ava-user {
-            display: flex;
-            justify-content: center
-        }
-
-        .fs-hdmn>li>a .ava-user {
-            text-align: center;
-            display: none
-        }
-
-        .fs-hdmn>li>a .ava-user img {
-            max-width: 100%;
-            border-radius: 50%;
-            width: 24px;
-            height: 24px
-        }
-
-        .fs-hdmn>li>a .user-img.noti::before {
-            position: absolute;
-            content: '';
-            top: 0;
-            right: -1px;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background-color: #efb140;
-            z-index: 1
-        }
-
-        .fs--sub-user i.ic-noti {
-            position: relative
-        }
-
-        .fs--sub-user i.ic-noti.active:after {
-            position: absolute;
-            content: '';
-            top: -2px;
-            right: 0;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background-color: #cb1c22;
-            z-index: 1
-        }
-
-        .mf-vhiditem {
-            border: 0;
-            clip: rect(0 0 0 0);
-            height: 1px;
-            margin: -1px;
-            overflow: hidden;
-            padding: 0;
-            position: absolute;
-            width: 1px
-        }
-
-        .sg-p {
-            padding: 4px 16px 4px
-        }
-
-        .m-r-8 {
-            margin-right: 8px
-        }
-
-        .m-b-4 {
-            margin-bottom: 4px
-        }
-
-        .icon-search {
-            font-size: 28px
-        }
-
-        .icon-cance {
-            position: absolute;
-            z-index: 1;
-            color: #a2a2a2;
-            top: 50%;
-            transform: translateY(-50%);
-            right: 0;
-            padding-right: 68px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer
-        }
-
-        .line {
-            height: 1px;
-            margin: 4px 16px;
-            background-color: #e7e6e6
-        }
-
-        .fs-search form {
-            width: 496px
-        }
-
-        .fs-suggest-cate li a {
-            color: #919191;
-            font-size: 14px;
-            line-height: 20px
-        }
-
-        .fs-suggest-cate li .hightText {
-            color: #0168fa
-        }
-
-        .fs-suggest-product li {
-            padding: 8px 16px
-        }
-
-        .fs-suggest-product li:not(:last-child) {
-            box-shadow: 0 1px 0 0 #e7e6e6
-        }
-
-        .fs-suggest-product li:focus,
-        .fs-suggest-product li:hover {
-            background-color: #f8f9fa
-        }
-
-        .suggest .sub-cate {
-            color: #495057
-        }
-
-        .suggest-box {
-            display: none;
-            position: absolute;
-            width: 540px;
-            overflow: hidden;
-            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .25);
-            background-color: #fff;
-            z-index: 100;
-            border-radius: 0 0 4px 4px
-        }
-
-        .suggest-box li:focus,
-        .suggest-box li:hover {
-            background-color: #f8f9fa
-        }
-
-        .suggest-box a {
-            color: #495057;
-            display: block
-        }
-
-        .suggest-box .ic-clear {
-            font-size: 14px;
-            font-weight: 400;
-            line-height: 20px;
-            color: #0168fa;
-            float: right;
-            cursor: pointer
-        }
-
-        .suggest-title {
-            font-size: 14px;
-            font-weight: 400;
-            line-height: 20px;
-            color: #6c757d;
-            background-color: #f8f9fa;
-            padding: 2px 16px;
-            margin-bottom: 4px
-        }
-
-        .pr-item {
-            display: flex;
-            justify-content: space-between
-        }
-
-        .pr-item__info {
-            flex: 1
-        }
-
-        .pr-item__info a[class*="btn-"] {
-            display: inline-block;
-            padding: 2px 8px;
-            border-radius: 4px;
-            background-color: #f8f9fa;
-            font-size: 14px;
-            font-weight: 400;
-            line-height: 1.43;
-            color: #6c757d
-        }
-
-        .pr-item__img {
-            width: 60px;
-            height: 60px
-        }
-
-        .fs-result-box:not(:last-child) {
-            margin-bottom: 16px
-        }
-
-        .pr-item__name,
-        .pr-item__name a {
-            font-size: 16px;
-            font-weight: 400;
-            line-height: normal;
-            color: #0168fa;
-            display: -webkit-box !important;
-            overflow: hidden;
-            -o-text-overflow: ellipsis;
-            text-overflow: ellipsis;
-            -webkit-box-orient: vertical;
-            -webkit-line-clamp: 2;
-            word-break: break-word
-        }
-
-        .pr-item__name em,
-        .pr-item__name .highlight {
-            font-style: normal;
-            font-weight: 700
-        }
-
-        .pr-item__price {
-            font-size: 16px;
-            font-weight: 700;
-            line-height: 24px;
-            color: #cb1c22;
-            text-align: left
-        }
-
-        .pr-item__price .deal {
-            display: inline-block;
-            font-size: 14px;
-            font-weight: 400;
-            line-height: 20px;
-            color: #919191
-        }
-
+        
         .fs-header {
-            z-index: 100
-        }
-
-        .fs-search-result {
-            line-height: 28px;
-            font-weight: 400;
-            color: #495057
-        }
-
-        .suggest {
-            display: flex;
-            width: 750px;
-            border-top-right-radius: 4px
-        }
-
-        .suggest-right {
-            width: 400px;
-            border-left: 1px solid #e7e6e6
-        }
-
-        ol {
-            list-style: none
-        }
-
-        .over-suggest {
-            opacity: 0;
-            visibility: hidden;
-            position: fixed;
-            right: 0;
-            left: 0;
-            bottom: 0;
-            opacity: .7;
-            background-color: rgba(0, 0, 0, .7);
-            width: 100%;
-            height: 100%;
-            transition: all .3s;
-            z-index: 98
-        }
-
-        .ais-Highlight-highlighted {
-            font-weight: 700;
-            color: inherit
-        }
-
-        .fs-search>form>button {
-            z-index: 2
-        }
-
-        .fs-suggest-tags {
-            margin-top: 4px
-        }
-
-        .suggest-left {
-            width: 350px;
-            padding: 8px 0
-        }
-
-        .suggest-right {
-            padding-bottom: 8px
-        }
-
-        .suggest-right .suggest-title {
-            margin-bottom: 0
-        }
-
-        .fs-suggest-tags ul {
-            max-height: 50px;
-            overflow: hidden;
-            display: flex;
-            flex-wrap: wrap;
-            columns: unset !important;
-            -webkit-columns: unset !important;
-            -moz-columns: unset !important;
-            padding: 0 4px
-        }
-
-        .fs-suggest-tags ul li {
-            width: 50%;
-            padding: 4px 4px 4px 12px
-        }
-
-        .fs-suggest-tags ul .sg-p a {
-            font-size: 14px;
-            line-height: 20px
-        }
-
-        .suggest-box.sugg-his,
-        .suggest-box.suggest-box-propensity {
-            padding: 16px 0 12px
-        }
-
-        .f-hdtop {
             z-index: 100
         }
 
@@ -426,1453 +90,296 @@
             overflow: unset !important
         }
 
-        .fs-menu .f-wrap {
-            background: #252525
-        }
-
-        .fs-search>form>input {
-            padding: 0 0 0 16px
-        }
-
-        .fs-search>form>input:focus {
-            border-bottom-left-radius: 0
-        }
-
-        .fs-stxt:focus {
-            outline: none
-        }
-
-        .fpt-sale .sale-cd-timer {
-            font-family: inherit;
-            text-shadow: unset
-        }
-
-        .fpt-sale .sale-cd-timer ul li .cd-tm {
-            font-weight: 700
-        }
-
-        .fs-mnsub {
-            z-index: 60
-        }
-
-        .fpt-sale,
-        .banner-cs,
-        .fs-bnord,
-        .section-box,
-        .fs-bxh,
-        .category-container,
-        .main.main-wrapper:before,
-        .main.main-wrapper:after {
-            z-index: 2 !important
-        }
-
-        main.main-wrapper:after,
-        main.main-wrapper:before {
-            z-index: 1 !important
-        }
-
-        .fs-suggest-page {
-            padding: 0 16px
-        }
-
-        .fs-suggest-page a {
-            display: flex !important;
-            justify-content: space-between;
-            border: 1px solid #cbd1d6;
-            padding: 5px 7px;
-            border-radius: 6px;
-            line-height: 14px;
-            position: relative
-        }
-
-        .fs-suggest-page a span {
-            font-size: 14px;
-            line-height: 14px
-        }
-
-        .fs-suggest-page a strong {
-            font-weight: 500
-        }
-
-        .fs-suggest-page a i {
-            color: #444b52;
-            position: absolute;
-            right: 8px;
-            top: 50%;
-            transform: translateY(-50%)
-        }
-
-        .modal-header>div {
-            font-size: 24px;
-            line-height: 32px
-        }
-
-        @media (max-width:768px) {
-            .modal-header>div {
-                font-size: 18px;
-                line-height: 18px
-            }
-        }
-
-        .fs-mnstit a {
-            color: #3d3d3d
-        }
-
-        .base-ic .ic-th-list:before {
-            content: "\e91f"
-        }
-
-        .base-ic .ic-noti:before {
-            content: "\e91d"
-        }
-
-        .base-ic .ic-eye:before {
-            content: "\e91e"
-        }
-
-        .base-ic .ic-chat:before {
-            content: "\e920"
-        }
-    </style>
-
-    <main class="l-main">
-        <div class="l-pc">
-            <div class="l-pc-header">
-                <div class="g-container">
-                    <div class="row">
-                        <ol class="breadcrumb breadcrumb-margin">
-                            <li class="breadcrumb-item"><a href="home.html">Trang chủ</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">So sánh</li>
-                        </ol>
-                    </div>
-                </div>
-                <div class="g-container">
-                    <div class="l-pc-top">
-                        <h1 class="l-pc-heading typo-headline text-center text-color-heading text-size--lg">
-                            So sánh
-                            <strong class="text-size--lg l-pc-name"> Samsung Galaxy S23 Ultra 5G 256GB</strong>
-                            <span class="text-size--lg typo-headline text-color-sub">vs</span>
-                            <strong class="l-pc-name text-size--lg">
-                                iPhone 15 Pro Max 256GB
-                            </strong>
-                        </h1>
-                        <div class="l-pc-row l-pc-select">
-                            <div class="l-pc-product">
-                                <div class="cs-search--lg js--search-product">
-                                    <div class="cs-search-group">
-                                        <input type="text" value=""
-                                            placeholder="Nhập tên sản phẩm cần so sánh" id="searchpr1"
-                                            class="cs-search-input js--input-w-product typo-text--large text-color-normal">
-                                        <span class="icon-search cs-search-icon"></span>
-                                        <span class="icon-icon-cancel cs-search-icon"></span>
-                                    </div>
-                                    <ul class="cs-search-suggest js--suggestion-w-product proff">
-                                    </ul>
-                                </div>
-                                <div class="c-pc-product text-center">
-                                    <div class="c-pc-product__img">
-                                        <img src="../images.fpt.shop/unsafe/fit-in/240x240/filters_quality(90)_fill(white)/fptshop.com.vn/Uploads/Originals/2024/3/27/638471599704942918_samsung-galaxy-s23-ultra-xanh-dd-AI.jpg"
-                                            alt="Phone 1">
-                                    </div>
-                                    <div class="c-pc-product__price typo-into-elevated text-color-normal">
-                                        Chỉ từ
-                                        <strong class="typo-headline price ">23.990.000đ</strong>
-                                    </div>
-                                    <div class="st-slider">
-                                        <div class="swiper-container js--pd-slider swiper-custom">
-                                            <div class="swiper-wrapper js--slide--full slide-40073">
-                                                <div class="swiper-slide"
-                                                    data-src="https://images.fpt.shop/unsafe/fit-in/960x640/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2023/2/16/638121659738426587_DSC09671.JPG">
-                                                    <img src="../images.fpt.shop/unsafe/fit-in/960x640/filters_quality(90)_fill(white)/fptshop.com.vn/Uploads/Originals/2023/2/16/638121659738426587_DSC09671.JPG"
-                                                        alt="Samsung Galaxy S23 Ultra 5G 256GB" />
-                                                </div>
-                                            </div>
-
-                                            <div class="swiper-pagination"></div>
-
-                                            <div class="swiper-button-next">
-                                                <span>
-                                                    <i class="icon-right-open-big"></i>
-                                                </span>
-                                            </div>
-                                            <div class="swiper-button-prev">
-                                                <span>
-                                                    <i class="icon-left-open-big"></i>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="swiper-container js--pd-slider swiper-custom"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="l-pc-line">
-                                <div class="line-ct">
-                                    <hr>
-                                    <span class="circle">VS</span>
-                                </div>
-                            </div>
-                            <div class="l-pc-product">
-                                <div class="cs-search--lg js--search-product">
-                                    <div class="cs-search-group">
-                                        <input type="text" value=""
-                                            placeholder="Nhập tên sản phẩm cần so sánh" id="searchpr2"
-                                            class="cs-search-input js--input-w-product typo-text--large text-color-normal">
-                                            <img src="{% static 'img/search_icon.png' %}" class="icon-search cs-search-icon">
-                                        <!-- <span class="icon-search cs-search-icon"></span> -->
-                                        <!-- <span class="icon-icon-cancel cs-search-icon"></span> -->
-                                    </div>
-                                    <ul class="cs-search-suggest js--suggestion-w-product prola">
-                                    </ul>
-                                </div>
-                                <div class="c-pc-product text-center">
-                                    <div class="c-pc-product__img">
-                                        <img src="../images.fpt.shop/unsafe/fit-in/240x240/filters_quality(90)_fill(white)/fptshop.com.vn/Uploads/Originals/2023/10/30/638342502751589917_ip-15-pro-max-dd-bh-2-nam.jpg"
-                                            alt="Phone 2">
-                                    </div>
-                                    <div class="c-pc-product__price typo-into-elevated text-color-normal">
-                                        Chỉ từ
-                                        <strong class="typo-headline price ">29.690.000đ</strong>
-                                    </div>
-                                    <div class="st-slider">
-                                        <div class="swiper-container js--pd-slider swiper-custom">
-                                            <div class="swiper-wrapper js--slide--full slide-46449">
-                                                <div class="swiper-slide"
-                                                    data-src="https://images.fpt.shop/unsafe/fit-in/960x640/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2024/4/16/638488768374793121_1.jpg">
-                                                    <img src="../images.fpt.shop/unsafe/fit-in/960x640/filters_quality(90)_fill(white)/fptshop.com.vn/Uploads/Originals/2024/4/16/638488768374793121_1.jpg"
-                                                        alt="iPhone 15 Pro Max 256GB" />
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="swiper-pagination"></div>
-
-                                        <div class="swiper-button-next">
-                                            <span>
-                                                <i class="icon-right-open-big"></i>
-                                            </span>
-                                        </div>
-                                        <div class="swiper-button-prev">
-                                            <span>
-                                                <i class="icon-left-open-big"></i>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="swiper-container js--pd-slider swiper-custom"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="l-pc-body">
-            <div class="l-pc-container">
-                <div class="l-pc-main">
-                    <div class="l-pc-container">
-                        <div class="compare-detail">
-                            <div class="c-compare__row js--collapse-detail" id="data-Thngtinhngha">
-                                <div class="c-compare__title">
-                                    <h2 class="title">Th&#xF4;ng tin h&#xE0;ng h&#xF3;a</h2>
-                                </div>
-                                <div class="c-compare__wrap">
-                                    <ul class="c-compare__table">
-                                        <li>
-                                            <div class="prop">Th&#x1B0;&#x1A1;ng hi&#x1EC7;u</div>
-                                            <div class="detail">
-                                                Samsung
-                                            </div>
-                                            <div class="detail">
-                                                Apple
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="prop">Xu&#x1EA5;t x&#x1EE9;</div>
-                                            <div class="detail">
-                                                Vi&#x1EC7;t Nam / Trung Qu&#x1ED1;c
-                                            </div>
-                                            <div class="detail">
-                                                Trung Qu&#x1ED1;c
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="prop">Th&#x1EDD;i &#x111;i&#x1EC3;m ra m&#x1EAF;t</div>
-                                            <div class="detail">
-                                                02/2023
-                                            </div>
-                                            <div class="detail">
-                                                09/2023
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="prop">Th&#x1EDD;i gian b&#x1EA3;o h&#xE0;nh (th&#xE1;ng)</div>
-                                            <div class="detail">
-                                                12
-                                            </div>
-                                            <div class="detail">
-                                                12
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="prop">H&#x1B0;&#x1EDB;ng d&#x1EAB;n b&#x1EA3;o qu&#x1EA3;n</div>
-                                            <div class="detail">
-                                                &#x110;&#x1EC3; n&#x1A1;i kh&#xF4; r&#xE1;o, nh&#x1EB9; tay, d&#x1EC5;
-                                                v&#x1EE1;.
-                                            </div>
-                                            <div class="detail">
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="prop">H&#x1B0;&#x1EDB;ng d&#x1EAB;n s&#x1EED; d&#x1EE5;ng</div>
-                                            <div class="detail">
-                                                Xem trong s&#xE1;ch h&#x1B0;&#x1EDB;ng d&#x1EAB;n s&#x1EED; d&#x1EE5;ng
-                                            </div>
-                                            <div class="detail">
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="c-compare__row js--collapse-detail" id="data-ThitkTrnglng">
-                                <div class="c-compare__title">
-                                    <h2 class="title">Thi&#x1EBF;t k&#x1EBF; &amp; Tr&#x1ECD;ng l&#x1B0;&#x1EE3;ng</h2>
-                                </div>
-                                <div class="c-compare__wrap">
-                                    <ul class="c-compare__table">
-                                        <li>
-                                            <div class="prop">K&#xED;ch th&#x1B0;&#x1EDB;c</div>
-                                            <div class="detail">
-                                                163.4 x 78.1 x 8.9 mm
-                                            </div>
-                                            <div class="detail">
-                                                159.9 x 76.7 x 8.25 mm
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="prop">Tr&#x1ECD;ng l&#x1B0;&#x1EE3;ng s&#x1EA3;n ph&#x1EA9;m
-                                            </div>
-                                            <div class="detail">
-                                                234 g
-                                            </div>
-                                            <div class="detail">
-                                                221 g
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="prop">Chu&#x1EA9;n kh&#xE1;ng n&#x1B0;&#x1EDB;c / B&#x1EE5;i
-                                                b&#x1EA9;n</div>
-                                            <div class="detail">
-                                                IP68
-                                            </div>
-                                            <div class="detail">
-                                                IP68
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="c-compare__row js--collapse-detail" id="data-Bxl">
-                                <div class="c-compare__title">
-                                    <h2 class="title">B&#x1ED9; x&#x1EED; l&#xFD;</h2>
-                                </div>
-                                <div class="c-compare__wrap">
-                                    <ul class="c-compare__table">
-                                        <li>
-                                            <div class="prop">Phi&#xEA;n b&#x1EA3;n CPU</div>
-                                            <div class="detail">
-                                                Snapdragon 8 Gen 2
-                                            </div>
-                                            <div class="detail">
-                                                Apple A17 Pro
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="prop">Lo&#x1EA1;i CPU</div>
-                                            <div class="detail">
-                                                Octa-Core
-                                            </div>
-                                            <div class="detail">
-                                                6 - Core
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="prop">S&#x1ED1; nh&#xE2;n</div>
-                                            <div class="detail">
-                                                8
-                                            </div>
-                                            <div class="detail">
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="prop">T&#x1ED1;c &#x111;&#x1ED9; t&#x1ED1;i &#x111;a</div>
-                                            <div class="detail">
-                                                2.2 GHz
-                                            </div>
-                                            <div class="detail">
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="prop">64 Bits</div>
-                                            <div class="detail">
-                                                C&#xF3;
-                                            </div>
-                                            <div class="detail">
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="c-compare__row js--collapse-detail" id="data-RAM">
-                                <div class="c-compare__title">
-                                    <h2 class="title">RAM</h2>
-                                </div>
-                                <div class="c-compare__wrap">
-                                    <ul class="c-compare__table">
-                                        <li>
-                                            <div class="prop">RAM</div>
-                                            <div class="detail">
-                                                8 GB
-                                            </div>
-                                            <div class="detail">
-                                                8 GB
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="c-compare__row js--collapse-detail" id="data-Mnhnh">
-                                <div class="c-compare__title">
-                                    <h2 class="title">M&#xE0;n h&#xEC;nh</h2>
-                                </div>
-                                <div class="c-compare__wrap">
-                                    <ul class="c-compare__table">
-                                        <li>
-                                            <div class="prop">K&#xED;ch th&#x1B0;&#x1EDB;c m&#xE0;n h&#xEC;nh</div>
-                                            <div class="detail">
-                                                6.8 inch
-                                            </div>
-                                            <div class="detail">
-                                                6.7 inch
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="prop">C&#xF4;ng ngh&#x1EC7; m&#xE0;n h&#xEC;nh</div>
-                                            <div class="detail">
-                                                Dynamic AMOLED 2X
-                                            </div>
-                                            <div class="detail">
-                                                OLED
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="prop">Chu&#x1EA9;n m&#xE0;n h&#xEC;nh</div>
-                                            <div class="detail">
-                                                QHD&#x2B;
-                                            </div>
-                                            <div class="detail">
-                                                Super Retina XDR
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="prop">&#x110;&#x1ED9; ph&#xE2;n gi&#x1EA3;i</div>
-                                            <div class="detail">
-                                                1440 x 3088 Pixels
-                                            </div>
-                                            <div class="detail">
-                                                2796 x 1290 Pixels
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="prop">M&#xE0;u m&#xE0;n h&#xEC;nh</div>
-                                            <div class="detail">
-                                                16 Tri&#x1EC7;u
-                                            </div>
-                                            <div class="detail">
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="prop">T&#x1EA7;n s&#x1ED1; qu&#xE9;t</div>
-                                            <div class="detail">
-                                                120 Hz
-                                            </div>
-                                            <div class="detail">
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="prop">Ch&#x1EA5;t li&#x1EC7;u m&#x1EB7;t k&#xED;nh</div>
-                                            <div class="detail">
-                                                Gorilla Glass Victus
-                                            </div>
-                                            <div class="detail">
-                                                Ph&#x1EE7; Ceramic
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="prop">Lo&#x1EA1;i c&#x1EA3;m &#x1EE9;ng</div>
-                                            <div class="detail">
-                                                &#x110;i&#x1EC7;n dung &#x111;a &#x111;i&#x1EC3;m
-                                            </div>
-                                            <div class="detail">
-                                                &#x110;i&#x1EC7;n dung &#x111;a &#x111;i&#x1EC3;m
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="c-compare__row js--collapse-detail" id="data-Lutr">
-                                <div class="c-compare__title">
-                                    <h2 class="title">L&#x1B0;u tr&#x1EEF;</h2>
-                                </div>
-                                <div class="c-compare__wrap">
-                                    <ul class="c-compare__table">
-                                        <li>
-                                            <div class="prop">B&#x1ED9; nh&#x1EDB; trong</div>
-                                            <div class="detail">
-                                                256 GB
-                                            </div>
-                                            <div class="detail">
-                                                256 GB
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="prop">Danh b&#x1EA1; l&#x1B0;u tr&#x1EEF;</div>
-                                            <div class="detail">
-                                                Kh&#xF4;ng gi&#x1EDB;i h&#x1EA1;n
-                                            </div>
-                                            <div class="detail">
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="prop">Th&#x1EBB; nh&#x1EDB; ngo&#xE0;i</div>
-                                            <div class="detail">
-                                                Kh&#xF4;ng
-                                            </div>
-                                            <div class="detail">
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="c-compare__row js--collapse-detail" id="data-Camerasau">
-                                <div class="c-compare__title">
-                                    <h2 class="title">Camera sau</h2>
-                                </div>
-                                <div class="c-compare__wrap">
-                                    <ul class="c-compare__table">
-                                        <li class="list-in">
-                                            <ul>
-                                                <li>
-                                                    <div class="detail">
-                                                        <span class="order">1</span>
-                                                        <span class="feature">Standard</span>
-                                                    </div>
-                                                    <div class="detail">
-                                                        <span class="order">1</span>
-                                                        <span class="feature">Standard</span>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="prop">
-                                                        Resolution
-                                                    </div>
-                                                    <div class="detail">200.0 MP</div>
-                                                    <div class="detail">48.0 MP</div>
-                                                </li>
-                                                <li>
-                                                    <div class="prop">
-                                                        Aperture
-                                                    </div>
-                                                    <div class="detail">&#x192;/1.8</div>
-                                                    <div class="detail"></div>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li class="list-in">
-                                            <ul>
-                                                <li>
-                                                    <div class="detail">
-                                                        <span class="order">2</span>
-                                                        <span class="feature">Ultra Wide</span>
-                                                    </div>
-                                                    <div class="detail">
-                                                        <span class="order">2</span>
-                                                        <span class="feature">Ultra Wide</span>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="prop">
-                                                        Resolution
-                                                    </div>
-                                                    <div class="detail">12.0 MP</div>
-                                                    <div class="detail">12.0 MP</div>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li class="list-in">
-                                            <ul>
-                                                <li>
-                                                    <div class="detail">
-                                                        <span class="order">3</span>
-                                                        <span class="feature">Telephoto</span>
-                                                    </div>
-                                                    <div class="detail">
-                                                        <span class="order">3</span>
-                                                        <span class="feature">Telephoto</span>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="prop">
-                                                        Resolution
-                                                    </div>
-                                                    <div class="detail">10.0 MP</div>
-                                                    <div class="detail">12.0 MP</div>
-                                                </li>
-                                                <li>
-                                                    <div class="prop">
-                                                        Aperture
-                                                    </div>
-                                                    <div class="detail">&#x192;/2.4</div>
-                                                    <div class="detail"></div>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li class="list-in">
-                                            <ul>
-                                                <li>
-                                                    <div class="detail">
-                                                        <span class="order">4</span>
-                                                        <span class="feature">Telephoto</span>
-                                                    </div>
-                                                    <div class="detail">
-                                                        <span class="order">4</span>
-                                                        <span class="feature">Telephoto</span>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="prop">
-                                                        Resolution
-                                                    </div>
-                                                    <div class="detail">10.0 MP</div>
-                                                    <div class="detail"></div>
-                                                </li>
-                                                <li>
-                                                    <div class="prop">
-                                                        Aperture
-                                                    </div>
-                                                    <div class="detail">&#x192;/4.9</div>
-                                                    <div class="detail"></div>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li class="list-col">
-                                            <div class="prop">
-                                                Quay phim
-                                            </div>
-                                            <div class="detail">
-                                                <ul>
-                                                    <li>4K 2160p@30fps</li>
-                                                    <li>FullHD 1080p@240fps</li>
-                                                </ul>
-                                            </div>
-                                            <div class="detail">
-                                                <ul>
-                                                    <li>HD 720p@30fps</li>
-                                                    <li>FullHD 1080p@30fps</li>
-                                                    <li>4K 2160p@25fps</li>
-                                                    <li>4K 2160p@24fps</li>
-                                                    <li>4K 2160p@30fps</li>
-                                                    <li>4K 2160p@60fps</li>
-                                                    <li>FullHD 1080p@60fps</li>
-                                                    <li>FullHD 1080p@25fps</li>
-                                                </ul>
-                                            </div>
-                                        </li>
-                                        <li class="list-col">
-                                            <div class="prop">
-                                                T&#xED;nh n&#x103;ng
-                                            </div>
-                                            <div class="detail">
-                                                <ul>
-                                                    <li>Ban &#x111;&#xEA;m (Night Mode)</li>
-                                                    <li>Ch&#x1EE5;p g&#xF3;c r&#x1ED9;ng (Wide)</li>
-                                                    <li>A.I Camera</li>
-                                                    <li>Ch&#x1ED1;ng rung quang ho&#x323;c (OIS)</li>
-                                                    <li>Ch&#x1EE5;p g&#xF3;c si&#xEA;u r&#x1ED9;ng (Ultrawide)</li>
-                                                </ul>
-                                            </div>
-                                            <div class="detail">
-                                                <ul>
-                                                    <li>Ban &#x111;&#xEA;m (Night Mode)</li>
-                                                    <li>Ch&#x1EE5;p g&#xF3;c r&#x1ED9;ng (Wide)</li>
-                                                    <li>Ch&#x1ED1;ng rung quang ho&#x323;c (OIS)</li>
-                                                    <li>Ch&#x1EA1;m l&#x1EA5;y n&#xE9;t</li>
-                                                    <li>Tr&#xF4;i nhanh th&#x1EDD;i gian (Time Lapse)</li>
-                                                    <li>Flash LED</li>
-                                                    <li>Ch&#x1EE5;p g&#xF3;c si&#xEA;u r&#x1ED9;ng (Ultrawide)</li>
-                                                    <li>HDR</li>
-                                                    <li>Quay ch&#x1EAD;m (Slow Motion)</li>
-                                                    <li>T&#x1EF1; &#x111;&#x1ED9;ng l&#x1EA5;y n&#xE9;t (AF)</li>
-                                                    <li>Ch&#x1EE5;p ch&#xE2;n dung</li>
-                                                    <li>Chuy&#xEA;n nghi&#x1EC7;p (Pro)</li>
-                                                    <li>To&#xE0;n c&#x1EA3;nh (Panorama)</li>
-                                                    <li>&#x1ED4;n &#x111;&#x1ECB;nh h&#xEC;nh &#x1EA3;nh quang
-                                                        h&#x1ECD;c</li>
-                                                    <li>Ch&#x1EE5;p chuy&#x1EC3;n &#x111;&#x1ED9;ng</li>
-                                                </ul>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="c-compare__row js--collapse-detail" id="data-Selfie">
-                                <div class="c-compare__title">
-                                    <h2 class="title">Selfie</h2>
-                                </div>
-                                <div class="c-compare__wrap">
-                                    <ul class="c-compare__table">
-                                        <li class="list-in">
-                                            <ul>
-                                                <li>
-                                                    <div class="detail">
-                                                        <span class="order">1</span>
-                                                        <span class="feature">Selfie</span>
-                                                    </div>
-                                                    <div class="detail">
-                                                        <span class="order">1</span>
-                                                        <span class="feature">Selfie</span>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="prop">
-                                                        Resolution
-                                                    </div>
-                                                    <div class="detail">12.0 MP</div>
-                                                    <div class="detail">12.0 MP</div>
-                                                </li>
-                                                <li>
-                                                    <div class="prop">
-                                                        Aperture
-                                                    </div>
-                                                    <div class="detail">&#x192;/2.2</div>
-                                                    <div class="detail"></div>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li class="list-col">
-                                            <div class="prop">
-                                                Quay phim
-                                            </div>
-                                            <div class="detail">
-                                                <ul>
-                                                    <li>Quay phim 4K</li>
-                                                    <li>Quay phim FullHD</li>
-                                                </ul>
-                                            </div>
-                                            <div class="detail">
-                                                <ul>
-                                                    <li>Quay phim 4K</li>
-                                                    <li>Quay phim FullHD</li>
-                                                </ul>
-                                            </div>
-                                        </li>
-                                        <li class="list-col">
-                                            <div class="prop">
-                                                T&#xED;nh n&#x103;ng
-                                            </div>
-                                            <div class="detail">
-                                                <ul>
-                                                    <li>L&#xE0;m &#x111;&#x1EB9;p (Beautify)</li>
-                                                    <li>A.I Camera</li>
-                                                    <li>HDR</li>
-                                                </ul>
-                                            </div>
-                                            <div class="detail">
-                                                <ul>
-                                                    <li>Ch&#x1EE5;p g&#xF3;c r&#x1ED9;ng (Wide)</li>
-                                                    <li>Ban &#x111;&#xEA;m (Night Mode)</li>
-                                                    <li>HDR</li>
-                                                    <li>T&#x1EF1; &#x111;&#x1ED9;ng l&#x1EA5;y n&#xE9;t (AF)</li>
-                                                    <li>Ch&#x1EBF; &#x111;&#x1ED9; ch&#xE2;n dung</li>
-                                                    <li>Flash m&#xE0;n h&#xEC;nh</li>
-                                                    <li>&#x1ED4;n &#x111;&#x1ECB;nh h&#xEC;nh &#x1EA3;nh quang
-                                                        h&#x1ECD;c</li>
-                                                </ul>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="c-compare__row js--collapse-detail" id="data-Cmbin">
-                                <div class="c-compare__title">
-                                    <h2 class="title">C&#x1EA3;m bi&#x1EBF;n</h2>
-                                </div>
-                                <div class="c-compare__wrap">
-                                    <ul class="c-compare__table">
-                                        <li class="list-col">
-                                            <div class="prop">
-                                                C&#x1EA3;m bi&#x1EBF;n
-                                            </div>
-                                            <div class="detail">
-                                                <ul>
-                                                    <li>C&#x1EA3;m bi&#x1EBF;n v&#xE2;n tay</li>
-                                                    <li>C&#x1EA3;m bi&#x1EBF;n &#xE1;nh s&#xE1;ng</li>
-                                                    <li>C&#x1EA3;m bi&#x1EBF;n tr&#x1ECD;ng l&#x1EF1;c</li>
-                                                </ul>
-                                            </div>
-                                            <div class="detail">
-                                                <ul>
-                                                    <li>C&#x1EA3;m bi&#x1EBF;n ti&#x1EC7;m c&#x1EAD;n</li>
-                                                    <li>C&#x1EA3;m bi&#x1EBF;n la b&#xE0;n</li>
-                                                    <li>C&#x1EA3;m bi&#x1EBF;n &#xE1;nh s&#xE1;ng</li>
-                                                    <li>Con quay h&#x1ED3;i chuy&#x1EC3;n</li>
-                                                    <li>C&#x1EA3;m bi&#x1EBF;n gia t&#x1ED1;c</li>
-                                                    <li>C&#x1EA3;m bi&#x1EBF;n kh&#xED; &#xE1;p k&#x1EBF;</li>
-                                                </ul>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="c-compare__row js--collapse-detail" id="data-Bomt">
-                                <div class="c-compare__title">
-                                    <h2 class="title">B&#x1EA3;o m&#x1EAD;t</h2>
-                                </div>
-                                <div class="c-compare__wrap">
-                                    <ul class="c-compare__table">
-                                        <li class="list-col">
-                                            <div class="prop">
-                                                B&#x1EA3;o m&#x1EAD;t
-                                            </div>
-                                            <div class="detail">
-                                                <ul>
-                                                    <li>M&#x1EDF; kh&#xF3;a khu&#xF4;n m&#x1EB7;t</li>
-                                                    <li>M&#x1EDF; kh&#xF3;a b&#x1EB1;ng m&#x1EAD;t m&#xE3;</li>
-                                                </ul>
-                                            </div>
-                                            <div class="detail">
-                                                <ul>
-                                                    <li>M&#x1EDF; kh&#xF3;a khu&#xF4;n m&#x1EB7;t</li>
-                                                    <li>M&#x1EDF; kh&#xF3;a b&#x1EB1;ng m&#x1EAD;t m&#xE3;</li>
-                                                </ul>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="c-compare__row js--collapse-detail" id="data-Others">
-                                <div class="c-compare__title">
-                                    <h2 class="title">Others</h2>
-                                </div>
-                                <div class="c-compare__wrap">
-                                    <ul class="c-compare__table">
-                                        <li>
-                                            <div class="prop">L&#xE0;m m&#xE1;t</div>
-                                            <div class="detail">
-                                                Kh&#xF4;ng
-                                            </div>
-                                            <div class="detail">
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="prop">Th&#xF4;ng b&#xE1;o LED</div>
-                                            <div class="detail">
-                                                Kh&#xF4;ng
-                                            </div>
-                                            <div class="detail">
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="c-compare__row js--collapse-detail" id="data-Giaotipktni">
-                                <div class="c-compare__title">
-                                    <h2 class="title">Giao ti&#x1EBF;p &amp; k&#x1EBF;t n&#x1ED1;i</h2>
-                                </div>
-                                <div class="c-compare__wrap">
-                                    <ul class="c-compare__table">
-                                        <li>
-                                            <div class="prop">S&#x1ED1; khe SIM</div>
-                                            <div class="detail">
-                                                1
-                                            </div>
-                                            <div class="detail">
-                                                1
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="prop">Lo&#x1EA1;i SIM</div>
-                                            <div class="detail">
-                                                2 Nano SIM ho&#x1EB7;c 1 eSIM, 1 Nano SIM
-                                            </div>
-                                            <div class="detail">
-                                                1 eSIM, 1 Nano SIM
-                                            </div>
-                                        </li>
-                                        <li class="list-col">
-                                            <div class="prop">
-                                                H&#x1ED7; tr&#x1EE3; m&#x1EA1;ng
-                                            </div>
-                                            <div class="detail">
-                                                <ul>
-                                                    <li>5G</li>
-                                                    <li>4G</li>
-                                                </ul>
-                                            </div>
-                                            <div class="detail">
-                                                <ul>
-                                                    <li>5G</li>
-                                                </ul>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="prop">C&#x1ED5;ng giao ti&#x1EBF;p</div>
-                                            <div class="detail">
-                                                C&#x1ED5;ng s&#x1EA1;c: Type C
-                                            </div>
-                                            <div class="detail">
-                                                Audio Jack: Type C
-                                            </div>
-                                        </li>
-                                        <li class="list-col">
-                                            <div class="prop">
-                                                Wifi
-                                            </div>
-                                            <div class="detail">
-                                                <ul>
-                                                    <li>Dual-band (2.4 GHz/ 5 GHz)</li>
-                                                    <li>802.11 a/b/g/n/ac/ax</li>
-                                                </ul>
-                                            </div>
-                                            <div class="detail">
-                                                <ul>
-                                                    <li>Wifi 6</li>
-                                                </ul>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="prop">GPS</div>
-                                            <div class="detail">
-                                                GLONASS
-                                            </div>
-                                            <div class="detail">
-                                                BEIDOU
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="prop">Bluetooth</div>
-                                            <div class="detail">
-                                                v5.3
-                                            </div>
-                                            <div class="detail">
-                                                v5.3
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="c-compare__row js--collapse-detail" id="data-ThngtinpinSc">
-                                <div class="c-compare__title">
-                                    <h2 class="title">Th&#xF4;ng tin pin &amp; S&#x1EA1;c</h2>
-                                </div>
-                                <div class="c-compare__wrap">
-                                    <ul class="c-compare__table">
-                                        <li>
-                                            <div class="prop">Dung l&#x1B0;&#x1EE3;ng pin</div>
-                                            <div class="detail">
-                                                5000 mAh
-                                            </div>
-                                            <div class="detail">
-                                                29
-                                            </div>
-                                        </li>
-                                        <li class="list-col">
-                                            <div class="prop">
-                                                C&#xF4;ng ngh&#x1EC7; pin
-                                            </div>
-                                            <div class="detail">
-                                                <ul>
-                                                    <li>H&#x1ED7; tr&#x1EE3; s&#x1EA1;c kh&#xF4;ng d&#xE2;y</li>
-                                                    <li>S&#x1EA1;c pin nhanh</li>
-                                                    <li>S&#x1EA1;c ng&#x1B0;&#x1EE3;c cho thi&#x1EBF;t b&#x1ECB;
-                                                        kh&#xE1;c</li>
-                                                </ul>
-                                            </div>
-                                            <div class="detail">
-                                                <ul>
-                                                    <li>H&#x1ED7; tr&#x1EE3; s&#x1EA1;c kh&#xF4;ng d&#xE2;y</li>
-                                                    <li>S&#x1EA1;c pin nhanh</li>
-                                                    <li>S&#x1EA1;c ng&#x1B0;&#x1EE3;c cho thi&#x1EBF;t b&#x1ECB;
-                                                        kh&#xE1;c</li>
-                                                </ul>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="c-compare__row js--collapse-detail" id="data-Hiuhnh">
-                                <div class="c-compare__title">
-                                    <h2 class="title">H&#x1EC7; &#x111;i&#x1EC1;u h&#xE0;nh</h2>
-                                </div>
-                                <div class="c-compare__wrap">
-                                    <ul class="c-compare__table">
-                                        <li>
-                                            <div class="prop">OS</div>
-                                            <div class="detail">
-                                                Android
-                                            </div>
-                                            <div class="detail">
-                                                iOS
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="prop">Version</div>
-                                            <div class="detail">
-                                                Android 13.0
-                                            </div>
-                                            <div class="detail">
-                                                iOS 17
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="c-compare__row js--collapse-detail" id="data-Phkintronghp">
-                                <div class="c-compare__title">
-                                    <h2 class="title">Ph&#x1EE5; ki&#x1EC7;n trong h&#x1ED9;p</h2>
-                                </div>
-                                <div class="c-compare__wrap">
-                                    <ul class="c-compare__table">
-                                        <li class="list-accessories">
-                                            <div class="detail">
-                                                <ul>
-                                                    <li>
-                                                        <div class="access-icon">
-                                                            <i class="ic-sim-eject"></i>
-                                                        </div>
-                                                        Que l&#x1EA5;y SIM
-                                                    </li>
-                                                    <li>
-                                                        <div class="access-icon">
-                                                            <i class="ic-doc"></i>
-                                                        </div>
-                                                        S&#xE1;ch HDSD
-                                                    </li>
-                                                    <li>
-                                                        <div class="access-icon">
-                                                            <i class="ic-apple-cable"></i>
-                                                        </div>
-                                                        C&#xE1;p
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="detail">
-                                                <ul>
-                                                    <li>
-                                                        <div class="access-icon">
-                                                            <i class="ic-sim-eject"></i>
-                                                        </div>
-                                                        Que l&#x1EA5;y SIM
-                                                    </li>
-                                                    <li>
-                                                        <div class="access-icon">
-                                                            <i class="ic-doc"></i>
-                                                        </div>
-                                                        S&#xE1;ch HDSD
-                                                    </li>
-                                                    <li>
-                                                        <div class="access-icon">
-                                                            <i class="ic-apple-cable"></i>
-                                                        </div>
-                                                        C&#xE1;p USB-C to USB-C
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="compare-product">
-                                <div class="l-pc-row compare-product__group">
-                                    <div class="c-compare__product">
-                                        <div class="product-img">
-                                            <img src="../images.fpt.shop/unsafe/fit-in/240x320/filters_quality(90)_fill(white)/fptshop.com.vn/Uploads/Originals/2024/3/27/638471599704942918_samsung-galaxy-s23-ultra-xanh-dd-AI.jpg"
-                                                alt="Samsung Galaxy S23 Ultra 5G 256GB">
-                                        </div>
-                                        <div class="product-info">
-                                            <div class="product-name">Samsung Galaxy S23 Ultra 5G 256GB</div>
-                                            <div class="product-price">
-                                                <div class="text">Chỉ từ</div>
-                                                <div class="price">23.990.000₫</div>
-                                            </div>
-                                            <a class="product-link"
-                                                href="dien-thoai/samsung-galaxy-s23-ultra.html?dung-luong=256-gb">Xem
-                                                chi tiết <span class="carret"></span> </a>
-                                        </div>
-                                    </div>
-                                    <div class="c-compare__product">
-                                        <div class="product-img">
-                                            <img src="../images.fpt.shop/unsafe/fit-in/240x320/filters_quality(90)_fill(white)/fptshop.com.vn/Uploads/Originals/2023/10/30/638342502751589917_ip-15-pro-max-dd-bh-2-nam.jpg"
-                                                alt="iPhone 15 Pro Max 256GB">
-                                        </div>
-                                        <div class="product-info">
-                                            <div class="product-name">iPhone 15 Pro Max 256GB</div>
-                                            <div class="product-price">
-                                                <div class="text">Chỉ từ</div>
-                                                <div class="price">29.690.000₫</div>
-                                            </div>
-                                            <a class="product-link"
-                                                href="dien-thoai/iphone-15-pro-max.html?dung-luong=256gb">Xem chi tiết
-                                                <span class="carret"></span> </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        </div>
-    </main>
-
-    <div class="lt-modal lt-modal-md js-modal-login lt-modal-otp modal-father" data-animation="on">
-        <div class="lt-modal-wrapper" tabindex="-1">
-
-            <div id="box-login-phone" class="lt-modal-box">
-                <div class="lt-modal-header">
-                    <div class="f-w-500">Đăng Nhập Hoặc Tạo Tài Khoản</div>
-                    <span class="lt-modal-close js-lt-modal-close base-ic js-modal-lg-close">
-                        <i class="ic-close icon-md f-s-ui-15 f-w-500"></i>
-                    </span>
-                </div>
-                <div class="lt-modal-body">
-                    <div class="image-login text-center">
-                        <picture>
-                            <source media="(max-width:992px )" srcset="Content/v5d/account/images/img-login-mb.png" />
-                            <img src="Content/v5d/account/images/img-login.png" alt="Nhập số điện thoại" width="156"
-                                height="156" loading="lazy" />
-                        </picture>
-                    </div>
-                    <div class="content-login">
-                        <p class="f-s-p-16 text-gray-700 text-center">
-                            Nhập số điện thoại mua hàng để hưởng <br />
-                            đặc quyền riêng tại FPT Shop
-                        </p>
-                        <div class="form-group">
-                            <input type="text" id="phoneNumber" name="phoneNumber"
-                                class="lt-form-input lt-form-input-lg" placeholder="Nhập số điện thoại"
-                                maxlength="10" />
-                            <div class="lt-alert lt-alert-md text-left lt-alert-danger lt-alert-des base-ic m-t-8 phone-error"
-                                style="display: none">
-                                <i class="ic-exclamation m-r-4 lt-alert-ic-sm ic-circle bg-danger"></i>
-                                <span class="phone-error-mess"></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="lt-modal-footer">
-                    <button
-                        class="lt-btn lt-btn-primary lt-btn-lg width-100-mb js-check-form js-check-phone btnSendPhone">
-                        TIẾP TỤC
-                    </button>
-                </div>
-            </div>
-
-            <div id="box-login-password" class="lt-modal-box lt-modal-login" style="display: none">
-                <div class="lt-modal-header">
-                    <div class="text-gray-800 f-w-500">Đăng Nhập Tài Khoản</div>
-                    <span class="lt-modal-close js-lt-modal-close base-ic js-modal-lg-close">
-                        <i class="ic-close icon-md f-s-ui-15 f-w-500"></i>
-                    </span>
-                </div>
-                <div class="lt-modal-body">
-                    <div class="image-login text-center">
-                        <picture>
-                            <source media="(max-width:992px )" srcset="Content/v5m/account/images/img-password.png" />
-                            <img src="Content/v5d/account/images/login-password.png" alt="login" />
-                        </picture>
-                    </div>
-                    <div class="content-login">
-                        <p class="f-s-p-16 text-gray-700 text-center m-t-16">
-                            Quý khách vui lòng nhập mật khẩu để đăng nhập tài khoản
-                        </p>
-                        <div class="form-group">
-                            <input type="password" id="login-password" class="lt-form-input lt-form-input-lg"
-                                name="phoneOtp" placeholder="Nhập mật khẩu" />
-                            <span class="base-ic toggle-password">
-                                <i class="ic-eye-off"></i>
-                            </span>
-                            <div class="lt-alert lt-alert-des m-t-8 base-ic" style="display: none"
-                                id="error-login-pass">
-                                <i class="ic-exclamation m-r-4 lt-alert-ic-sm ic-circle bg-danger"></i>
-                                <span class="text text-danger-700">Vui lòng nhập mật khẩu để đăng nhập</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="lt-modal-footer">
-                    <button class="lt-btn lt-btn-primary lt-btn-lg width-100-mb js-check-form js-check-phone btnLogin">
-                        ĐĂNG NHẬP
-                    </button>
-                    <div class="lt-password">
-                        <a class="f-s-p-16 link btn-forget-password"> Quên mật khẩu? </a>
-                    </div>
-                </div>
-            </div>
-
-            <div id="box-create-password" class="lt-modal-box lt-modal-login" style="display: none">
-                <div class="lt-modal-header">
-                    <div class="text-gray-800 f-w-500">Khởi Tạo Mật Khẩu</div>
-                    <span class="lt-modal-close js-lt-modal-close base-ic js-modal-lg-close">
-                        <i class="ic-close icon-md f-s-ui-15 f-w-500"></i>
-                    </span>
-                </div>
-                <div class="lt-modal-body">
-                    <div class="image-login text-center">
-                        <picture>
-                            <source media="(max-width:992px )" srcset="Content/v5m/account/images/img-password.png" />
-                            <img src="Content/v5d/account/images/login-password.png" alt />
-                        </picture>
-                    </div>
-                    <div class="content-login">
-                        <p class="f-s-p-16 text-gray-700 text-center m-t-16">
-                            Mật khẩu có ít nhất 6 ký tự
-                        </p>
-                        <div class="form-group">
-                            <div class="form-item">
-                                <input type="password" onpaste="return false;" oncopy="return false"
-                                    oncut="return false" ondrag="return false" ondrop="return false" maxlength="16"
-                                    autocomplete="off" placeholder="Nhập mật khẩu "
-                                    class="lt-form-input form form-input new-pass" id="new-password" />
-                                <span class="form-float-label data-title fs-p-16 text-gray-600">Mật khẩu</span>
-                                <span class="form-icon base-ic js-icon-eye toggle-password-2">
-                                    <i class="ic-eye-off"></i>
-                                </span>
-                            </div>
-                            <div class="lt-alert lt-alert-des m-t-8 base-ic" style="display: none"
-                                id="error-new-password">
-                                <i class="ic-exclamation m-r-4 lt-alert-ic-sm ic-circle bg-danger"></i>
-                                <span class="text text-danger-700">Mật khẩu không trùng khớp</span>
-                            </div>
-                            <div class="form-item">
-                                <input type="password" onpaste="return false;" oncopy="return false"
-                                    oncut="return false" ondrag="return false" ondrop="return false" maxlength="16"
-                                    autocomplete="off" placeholder="Nhập lại mật khẩu "
-                                    class="lt-form-input form form-input new-pass" id="re-new-password" />
-                                <span class="form-float-label data-title fs-p-16 text-gray-600">Nhập lại mật khẩu</span>
-                                <span class="form-icon base-ic js-icon-eye toggle-password-2">
-                                    <i class="ic-eye-off"></i>
-                                </span>
-                            </div>
-                            <div class="lt-alert lt-alert-des m-t-8 base-ic" style="display: none"
-                                id="error-re-new-password">
-                                <i class="ic-exclamation m-r-4 lt-alert-ic-sm ic-circle bg-danger"></i>
-                                <span class="text text-danger-700">Mật khẩu không trùng khớp</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="lt-modal-footer">
-                    <button
-                        class="lt-btn lt-btn-primary lt-btn-lg width-100-mb js-check-form js-check-phone btnCheckPassword">
-                        XÁC NHẬN
-                    </button>
-                </div>
-            </div>
-
-            <div id="box-login-profile" class="lt-modal-box lt-modal-login" style="display: none">
-                <div class="lt-modal-header">
-                    <h2 class="text-gray-800"></h2>
-                    <span class="lt-modal-close js-lt-modal-close base-ic js-modal-lg-close">
-                        <i class="ic-close icon-md f-s-ui-15 f-w-500"></i>
-                    </span>
-                </div>
-                <div class="lt-modal-body">
-                    <div class="image-login text-center">
-                        <picture>
-                            <source media="(max-width:992px )" srcset="Content/v5d/account/images/img-update-mb.html" />
-                            <img src="Content/v5d/account/images/img-update-info.png" alt="info" />
-                        </picture>
-                    </div>
-                    <div class="content-login">
-                        <p class="f-s-p-16 text-gray-700 text-center">
-                            Cập nhật thông tin tài khoản của quý khách
-                        </p>
-                        <div class="radio-group m-t-16">
-                            <div class="radio radio-md m-r-16">
-                                <input type="radio" value="male" name="gender" id="male" />
-                                <label for="male" class="label label-md">
-                                    <span class="label-text f-w-400">Anh</span>
-                                </label>
-                            </div>
-                            <div class="radio radio-md m-r-16">
-                                <input type="radio" value="female" name="gender" id="female" />
-                                <label for="female" class="label label-md">
-                                    <span class="label-text f-w-400">Chị</span>
-                                </label>
-                            </div>
-                        </div>
-                        <div class="lt-alert lt-alert-des m-t-8 base-ic" style="display: none" id="error-gender">
-                            <i class="ic-exclamation m-r-4 lt-alert-ic-sm ic-circle bg-danger"></i>
-                            <span class="text text-danger-700">Thông tin bắt buộc</span>
-                        </div>
-                        <div class="form-group">
-                            <div class="form-item">
-                                <input type="text" autocomplete="off" placeholder="Nhập họ và tên"
-                                    class="lt-form-input form form-input new-name" id="new-name" />
-                                <span class="form-float-label data-title fs-p-16 text-gray-600">Nhập họ và tên</span>
-                            </div>
-                            <div class="lt-alert lt-alert-des m-t-8 base-ic" style="display: none" id="error-name">
-                                <i class="ic-exclamation m-r-4 lt-alert-ic-sm ic-circle bg-danger"></i>
-                                <span class="text text-danger-700">Thông tin bắt buộc</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="lt-modal-footer">
-                    <button class="lt-btn lt-btn-primary lt-btn-lg width-100-mb js-check-form btnSendProfile">
-                        HOÀN TẤT
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <style>
-        .lt-modal-otp .lt-modal-box .content-login p {
-            max-width: none
-        }
-    </style>
-
-    <style>
-        .cs-search-input {
-            background-color: #c7c7c7;
-        }
-
-        a.tooltips {
-            outline: none
-        }
-
-        a.tooltips span {
-            z-index: 10;
-            display: none;
-            padding: 10px 15px;
-            margin-top: 30px;
-            margin-left: -160px;
-            width: 280px;
-            -moz-box-shadow: 0 0 5px 1px #ccc;
-            -webkit-box-shadow: 0 0 5px 1px #ccc;
-            box-shadow: 0 0 5px 1px #ccc
-        }
-
-        a.tooltips:hover span {
-            display: inline;
-            position: absolute;
-            border: 1px solid #ccc;
-            background: #fff
-        }
-
-        .fs-ftrtit {
-            font-size: 15px
-        }
-
-        .box-container .box-left .gallery-thumbs .swiper-wrapper {
-            justify-content: flex-start
-        }
-
-        .category-container {
-            overflow: unset
-        }
-
-        .f-search {
-            background-repeat: no-repeat;
-            background-image: url(Content/v4/images/iconhd6040.png?v=123);
-            background-size: auto
-        }
-
-        .f-search {
-            background-position: -7px -87px
-        }
-
-        .fs-ftcol1 {
-            padding: 0 12px
-        }
-
-        .fs-ftlink {
-            display: flex;
-            margin-bottom: 24px
-        }
-
-        .fs-ftlink a {
-            margin-left: 12px
-        }
-
-        .fs-ftlink img {
-            width: 24px
-        }
-
-        .fs-ftlink p {
-            padding: 2.5px 0;
-            font-weight: 500;
-            color: #444b52
-        }
-
-        .fs-ftlink a:first-child {
-            margin-left: 8px
-        }
-
-        .zalo-chat-widg {
-            bottom: 24px !important;
-            right: 40px !important
-        }
-
-        .icon-neo {
-            position: fixed;
-            right: 40px;
-            bottom: 95px;
-            z-index: 999
-        }
-
-        .icon-neo img {
-            width: 100px;
-            animation: zoom-in-zoom-out 1s ease infinite
-        }
-
-        @keyframes zoom-in-zoom-out {
-            0% {
-                transform: scale(1, 1);
-            }
-
-            50% {
-                transform: scale(1.1, 1.1);
-            }
-
-            100% {
-                transform: scale(1, 1);
-            }
-        }
-
         .fs-header {
             position: relative
-        }
-
-        .suggest-box {
-            top: calc(100% + 4px)
         }
 
         .fs-header__top__search {
             position: relative
         }
-    </style>
-    <style>
-        .zalo-chat-widget {
-            right: 40px !important;
-            bottom: 24px !important
+
+        .f-hdtop {
+            z-index: 100
         }
 
-        .cdt-filter__checklist .checkbox .wrap-checkItem label {
-            text-transform: none !important
+        .fs-menu .f-wrap {
+            background: #252525
         }
+        
+        .dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%; /* Tạo hình tròn */
+            background-color: #7e00f3; /* Màu sắc tùy chỉnh */
+            margin: 0 10px; /* Khoảng cách giữa các dấu chấm */
+        }
+
     </style>
 
+        <main class="app-main pt-md-3 pt-3">
+            <div class="wrapper ">
+                <div class="page ">
+<section class="py-3 py-md-5 _bg-light larger-background" style="background: #FEEBC8;">
+    <div class="container container-fluid-xl">
+        <div class="row align-items-center">
+            <div class="col-12 col-lg-5 order-md-2 d-none d-lg-block">
+                <img class="img-fluid img-float-md-4 mb-3 mb-md-0" src="{% static 'assets/images/illustration/financial_data.svg' %}" alt="Lịch sử giá" width="1138" height="741" />
+            </div>
+            <div class="col-12 col-lg-7 order-lg-1">
+                <div class="col-fix pr-xl-3 ml-auto">
+                    <p class="lead mb-2"><strong>Bạn đang cần mua điện thoại?</strong> Muốn <strong>so sánh và lựa chọn</strong> một cách thông minh?</p>
+                    <h1 class="display-4 enable-responsive-font-size mb-3">Công cụ <strong style="color: #6b46c1;">so sánh sản phẩm </strong> cho TGDD và FPTShop</h1>
+                    <p class="mb-3">
+                        <span class="dot"></span>
+                        <span class="pr-2">So sánh thông số kỹ thuật</span>
+                        <span class="dot"></span>
+                        <span class="pr-2">So sánh giá cả</span>
+                        <span class="dot"></span>
+                        <span class="pr-2">Phân tích cảm xúc đánh giá</span>
+                    </p>
+                    <form action="/compare/" method="POST" class="d-md-flex w-100 form_product_url">
+                        <button type="submit" id="buttoncheck" class="btn btn-block btn-lg btn-success mb-2">So sánh ngay</button>
+                    </form>
+                    <div class="d-flex mt-3 home-store-logo">
+                        <div class="col-4 col-md-3 col-lg-2 mb-5">
+                            <img src="{% static 'img/tgdd.png' %}" alt="tgdd-logo" class="img-fluid  rounded" style="max-width: 70%;">
+                        </div>
+                        <div class="col-4 col-md-3 col-lg-2 mb-5">
+                            <img src="{% static 'img/fpt.png' %}" alt="fpt-logo" class="img-fluid  rounded" style="max-width: 110%;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div id="process_lsg"></div>
+
+<div class="container">
+    <div class="row text-center text-md-left">
+        <div class="col-6 col-md-3 py-4 text-center">
+            <img class="mb-4 " src="{% static 'assets/images/illustration/lab.svg' %}" alt="" height="72">
+            <h2 class="lead"> Đơn giản & đầy đủ </h2>
+        </div>
+        <div class="col-6 col-md-3 py-4 text-center">
+            <img class="mb-4 " src="{% static 'assets/images/illustration/easy-config.svg' %}" alt="" height="72">
+            <h2 class="lead"> Dễ sử dụng </h2>
+        </div>
+        <div class="col-6 col-md-3 py-4 text-center">
+            <img class="mb-4 " src="{% static 'assets/images/illustration/scale.svg' %}" alt="" height="72">
+            <h2 class="lead"> Dữ liệu mới nhất </h2>
+        </div>
+        <div class="col-6 col-md-3 py-4 text-center">
+            <img class="mb-4 " src="{% static 'assets/images/illustration/support.svg' %}" alt="" height="72">
+            <h2 class="lead"> Chính xác cao </h2>
+        </div>
+    </div>
+</div>
+
+<section class="position-relative py-3 bg-white">
+    <div class="container position-relative mb-3">
+        <h2 class="text-center"> Có sẵn cho </h2>
+        <p class="text-center text-muted font-size-lg mb-5"> Với dữ liệu từ các trang bán lẻ lớn Thế giới di động, FPTShop giúp bạn có cái nhìn khách quan nhất.</p>
+        <div class="row mb-3">
+            <div class="col-12 col-md-8 offset-md-2 py-3">
+                <div class="row justify-content-center text-center">
+                    <div class="col-4 col-md-3 _col-lg-2 mb-5">
+                        <img src="{% static 'img/tgdd.png' %}" alt="tgdd-logo" style="max-height: 64px">
+                    </div>
+                    <div class="col-4 col-md-3 col-lg-2 mb-5">
+                        <img src="{% static 'img/fpt.png' %}" alt="fpt-logo" class="img-fluid " style="max-height: 64px">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="position-relative py-4 bg-light">
+    <div class="sticker">
+        <div class="sticker-item sticker-top-right sticker-soften">
+            <img class="" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/assets/images/decoration/cubes.svg" alt="">
+        </div>
+        <div class="sticker-item sticker-bottom-left sticker-soften scale-150">
+            <img class="" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/assets/images/decoration/cubes.svg" alt="">
+        </div>
+    </div>
+    <div class="container position-relative">
+        <h2 class="text-center text-sm-left"> Tính năng nổi bật </h2>
+        <p class="lead text-muted text-center text-sm-left mb-5"></p>
+        <div class="card-deck-lg">
+            <div class="card shadow">
+                <div class="card-body p-4">
+                    <div class="d-sm-flex align-items-start text-center text-sm-left">
+                        <img src="{% static 'assets/images/illustration/visual_data.svg' %}" class="mr-sm-4 mb-3 mb-sm-0 " alt="" width="72">
+                        <div class="flex-fill">
+                            <h5 class="mt-0"> So sánh sản phẩm </h5>
+                            <p class="text-muted font-size-lg"> Khi phân vân giữa 2 sản phẩm? Hãy sử dụng tính năng so sánh trước. Đưa ra lựa chọn tối ưu khi mua sắm.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card shadow">
+                <div class="card-body p-4">
+                    <div class="d-sm-flex align-items-start text-center text-sm-left">
+                        <img src="{% static 'assets/images/illustration/data_2.svg' %}" class="mr-sm-4 mb-3 mb-sm-0 " alt="" width="72">
+                        <div class="flex-fill">
+                            <h5 class="mt-0"> So sánh giá </h5>
+                            <p class="text-muted font-size-lg"> So sánh giá của sản phẩm trên Thế giới di dộng và FPTShop. </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-deck-lg">
+            <div class="card shadow">
+                <div class="card-body p-4">
+                    <div class="d-sm-flex align-items-start text-center text-sm-left">
+                        <img src="{% static 'assets/images/illustration/online_shopping.svg' %}" class="mr-sm-4 mb-3 mb-sm-0 " alt="" width="72">
+                        <div class="flex-fill">
+                            <h5 class="mt-0"> Tổng quan đánh giá </h5>
+                            <p class="text-muted font-size-lg"> Phân tích điểm trung bình của đánh giá theo chiều huớng tính cực/tiêu cực/trung lập, giúp bạn dễ dàng hiểu đuợc ưu điểm và nhược điểm của sản phẩm</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card shadow">
+                <div class="card-body p-4">
+                    <div class="d-sm-flex align-items-start text-center text-sm-left">
+                        <img src="{% static 'assets/images/illustration/trends.svg' %}" class="mr-sm-4 mb-3 mb-sm-0 " alt="" width="72">
+                        <div class="flex-fill">
+                            <h5 class="mt-0"> So sánh yêu thích </h5>
+                            <p class="text-muted font-size-lg"> Bạn có thể lên danh sách các cặp sản phẩm so sánh yêu thích của mình để không phải tìm kiếm lại trong tương lai.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-deck-lg">
+            <div class="card shadow">
+                <div class="card-body p-4">
+                    <div class="d-sm-flex align-items-start text-center text-sm-left">
+                        <img src="{% static 'assets/images/illustration/search_engines.svg' %}" class="mr-sm-4 mb-3 mb-sm-0 " alt="" width="72">
+                        <div class="flex-fill">
+                            <h5 class="mt-0"> Miễn phí </h5>
+                            <p class="text-muted font-size-lg"> Chúng tôi sẽ không tính phí bạn khi sử dụng bất kỳ tính năng nào của chúng tôi. Chúng tôi kiếm tiền qua tiếp thị sản phẩm và quảng cáo. </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card shadow">
+                <div class="card-body p-4">
+                    <div class="d-sm-flex align-items-start text-center text-sm-left">
+                        <img src="{% static 'assets/images/illustration/server_status.svg' %}" class="mr-sm-4 mb-3 mb-sm-0 " alt="" width="72">
+                        <div class="flex-fill">
+                            <h5 class="mt-0"> Hỗ trợ tích cực </h5>
+                            <p class="text-muted font-size-lg"> Có bất kỳ vấn đề hoặc phản hồi? Liên hệ với chúng tôi qua email của chúng tôi, chúng tôi sẽ cung cấp cho bạn sự trợ giúp tốt nhất. </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="position-relative py-3 bg-white">
+    <div class="sticker">
+        <div class="sticker-item sticker-bottom-left sticker-soften">
+            <img class="" src="{% static 'assets/images/decoration/bubble2.svg' %}" alt="">
+        </div>
+    </div>
+    <div class="container position-relative">
+        <h2 class="text-center text-sm-left"> Được xây dựng bởi </h2>
+        <p class="lead text-muted text-center text-sm-left mb-5"></p>
+<div class="row">
+    <div class="col-lg-6 mb-4">
+        <a class="card shadow aos-init aos-animate text-decoration-none">
+            <div class="card-body p-4">
+                <div class="d-sm-flex align-items-start text-center text-sm-left">
+                    <img src="{% static 'assets/images/illustration/easy-config.svg' %}" class="mr-sm-4 mb-3 mb-sm-0 " alt="" width="72">
+                    <div class="flex-fill">
+                        <h5 class="mt-0"> Bùi Đức Mạnh </h5>
+                        <p class="text-muted font-size-lg">22022602</p>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-lg-6 mb-4">
+        <a class="card shadow aos-init aos-animate text-decoration-none">
+            <div class="card-body p-4">
+                <div class="d-sm-flex align-items-start text-center text-sm-left">
+                    <img src="{% static 'assets/images/illustration/easy-config.svg' %}" class="mr-sm-4 mb-3 mb-sm-0 " alt="" width="72">
+                    <div class="flex-fill">
+                        <h5 class="mt-0"> Đàm Thái Ninh </h5>
+                        <p class="text-muted font-size-lg">22022522</p>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-6 mb-4">
+        <a class="card shadow aos-init aos-animate text-decoration-none">
+            <div class="card-body p-4">
+                <div class="d-sm-flex align-items-start text-center text-sm-left">
+                    <img src="{% static 'assets/images/illustration/easy-config.svg' %}" class="mr-sm-4 mb-3 mb-sm-0 " alt="" width="72">
+                    <div class="flex-fill">
+                        <h5 class="mt-0"> Lê Việt Hùng </h5>
+                        <p class="text-muted font-size-lg">22022666</p>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-lg-6 mb-4">
+        <a class="card shadow aos-init aos-animate text-decoration-none">
+            <div class="card-body p-4">
+                <div class="d-sm-flex align-items-start text-center text-sm-left">
+                    <img src="{% static 'assets/images/illustration/easy-config.svg' %}" class="mr-sm-4 mb-3 mb-sm-0 " alt="" width="72">
+                    <div class="flex-fill">
+                        <h5 class="mt-0"> Trần Nam Anh </h5>
+                        <p class="text-muted font-size-lg">22022569</p>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+    </div>
+</section><section class="position-relative py-3 bg-white">
+    <div class="sticker">
+        <div class="sticker-item sticker-bottom-left sticker-soften">
+            <img class="" src="{% static '/assets/images/decoration/bubble2.svg' %}" alt="">
+        </div>
+    </div>
+    <div class="py-3 my-6"></div>
+    <div class="container position-relative mt-4 mb-5">
+        <div class="row">
+            <div class="col-12 col-md-6 col-lg-4 offset-lg-1 mr-md-0">
+                <div class="card shadow-none rounded-lg mb-0 mr-md-n5 mt-md-n5 scale-125">
+                    <img class="img-fluid rounded-lg " src="{% static '/assets/images/decoration/quote.svg' %}" alt="">
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-5 ml-md-0">
+                <div class="card shadow-lg rounded-lg p-4 ml-md-n5 mt-md-5">
+                    <blockquote class="blockquote text-center border-0 p-3 p-md-4">
+                        <figure>
+                            <img class="mr-2" src="{% static '/assets/images/decoration/quote.svg' %}" alt="" height="32">
+                        </figure>
+                        <p class="mb-0">Ứng dụng đơn giản miễn phí và có thể giúp bạn lựa chọn sản phẩm tốt nhất. Nó thật tuyệt - và tôi thực sự khuyên bạn nên thử nó!</p>
+                        <footer class="blockquote-footer"> Admin, <cite title="Lịch Sử Giá">IntelliPurchase</cite>
+                        </footer>
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</div>
 </body>
 
+<!-- Mirrored from lichsugia.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 10 May 2024 03:34:04 GMT -->
 </html>
+{% endblock main-content %}

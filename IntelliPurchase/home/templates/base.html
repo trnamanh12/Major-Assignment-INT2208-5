@@ -11,7 +11,6 @@
       <title>IntelliPurchase</title>
       <link rel="canonical" href="index.html" />
       <link rel="manifest" href="{% static 'manifest.json' %}" />
-      <link rel="apple-touch-icon" sizes="144x144" href="{% static 'assets/logo_1x1.png' %}">
       <link rel="shortcut icon" href="{% static 'assets/favicon.png' %}">
          <!-- BEGIN PLUGINS STYLES -->
       <link rel="stylesheet" href="{% static 'cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css' %}" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -21,8 +20,6 @@
       
       <link rel="stylesheet" href="{% static 'assets/vendor/aos/aos.css' %}">
       <link rel="stylesheet" href="{% static 'assets/vendor/sweetalert2/sweetalert2.min.css' %}" /><!-- END PLUGINS STYLES -->
-      <link rel="stylesheet" href="{% static 'css/bundle.mainaa47.css' %}" type="text/css">
-      <link rel="stylesheet" href="{% static 'css/header.footer.css' %}" type="text/css">
       <!-- BEGIN THEME STYLES -->
       <link rel="stylesheet" href="{% static 'assets/stylesheets/theme.min2.css' %}"/>
       <link rel="stylesheet" href="{% static 'assets/stylesheets/custome1e2.css?v=1715312035' %}" />
@@ -52,7 +49,7 @@
                <a class="nav-link" href="#">Giới thiệu</a>
             </li>
             <li class="nav-item">
-               <a class="nav-link" href="#">Liên hệ</a>
+               <a class="nav-link" href="{% url 'support' %}">Liên hệ</a>
             </li>
             </ul>
             <form class="d-flex" role="search">
@@ -110,30 +107,16 @@
          </div>
          <ul class="list-inline mt-3">
             <li class="list-inline-item">
-               <a class="text-muted" href="pages/support.html">Support</a>
+               <a class="text-muted" href="{% url 'support' %}">Support</a>
             </li>
             <li class="list-inline-item">
-               <a class="text-muted" href="pages/privacy.html">Privacy</a>
+               <a class="text-muted" href="{% url 'privacy' %}">Privacy</a>
             </li>
             <li class="list-inline-item">
-               <a class="text-muted" href="pages/terms.html">Terms of Service</a>
+               <a class="text-muted" href="{% url 'term' %}">Terms of Service</a>
             </li>
          </ul>
          <div class="copyright"> V1.0.0 Copyright © 2024. Major Assignment INT2208 5 </div>
       </footer>
-      <style>
-         html, body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-         }
-
-         .app-footer {
-            margin-top: auto;
-            height: 20%;
-         }
-      </style>
    </body>
 </html>
