@@ -36,6 +36,8 @@ urlpatterns = [
     path('support/', views.support, name='support'),
     path('privacy/', views.privacy, name='privacy'),
     path('terms/', views.terms, name='term'),
+    path('profile/', user_views.profile, name='profile'),
+    path('password/', user_views.change_password, name='password'),
 ]
 
 

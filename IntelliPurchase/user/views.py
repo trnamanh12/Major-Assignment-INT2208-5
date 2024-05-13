@@ -97,3 +97,13 @@ def get_saved_history(request):
     # Chuyển đổi các lịch sử thành một danh sách các từ điển
 
     return render(request, 'saved_history.html', {'products': products})
+
+
+def profile(request):
+    if request.user.is_authenticated:
+        return render(request, 'users/profile.html')
+    else:
+        return redirect('login')
+
+def change_password(request):
+    return render(request, 'users/password_reset.html') 
