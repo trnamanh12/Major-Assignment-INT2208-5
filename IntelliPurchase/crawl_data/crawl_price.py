@@ -2,6 +2,28 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 from concurrent.futures import ThreadPoolExecutor
+import pandas as pd
+import csv
+
+
+def convert_text(text) -> list:
+    """
+    Chuyển đổi một chuỗi văn bản chứa các phần tử được phân tách bằng dấu "', '"
+    thành một danh sách các phần tử.
+
+    Parameters:
+    text (str): Chuỗi văn bản chứa các phần tử được phân tách bằng dấu "', '".
+
+    Returns:
+    list: Danh sách các phần tử được trích xuất từ chuỗi.
+
+    Ví dụ:
+    >>> convert_text("['item1', 'item2', 'item3']")
+    ['item1', 'item2', 'item3']
+    """
+    text = text.strip("[']")
+    texts = text.split("', '")
+    return texts
 
 
 def crawl_tgdd(link):
@@ -104,9 +126,7 @@ def crawl_link(link):
         return "Unsupported website"
 
 
-def get_price(
-    product1_FPT_link, product1_TGDD_link, product2_FPT_link, product2_TGDD_link
-):
+def get_price(links):
     """
     Hàm này nhận vào các liên kết sản phẩm từ FPT và Thế Giới Di Động và trả về giá của các sản phẩm.
 
@@ -119,30 +139,28 @@ def get_price(
     Returns:
         tuple: Một tuple chứa giá của các sản phẩm lần lượt từ FPT và Thế Giới Di Động.
     """
-    links = [
-        product1_FPT_link,
-        product1_TGDD_link,
-        product2_FPT_link,
-        product2_TGDD_link,
-    ]
 
-    with ThreadPoolExecutor(max_workers=4) as executor:
+    with ThreadPoolExecutor(max_workers=len(links)) as executor:
         results = list(executor.map(crawl_link, links))
 
-    return results[0], results[1], results[2], results[3]
+    return results
 
 
 def main():
-    price1, price2, price3, price4 = get_price(
-        "https://www.thegioididong.com/dtdd/iphone-15-pro-max",
-        "https://fptshop.com.vn/dien-thoai/iphone-15-pro-max",
-        "https://www.thegioididong.com/dtdd/samsung-galaxy-s24-ultra-5g",
-        "https://fptshop.com.vn/dien-thoai/samsung-galaxy-s24-ultra",
-    )
-    print(price1)
-    print(price2)
-    print(price3)
-    print(price4)
+    data = pd.read_csv("data.csv")
+    nums = range(0, 54)
+    with open("data_tmp.csv", "a", newline="", encoding="utf-8-sig") as csvfile:
+        writer = csv.writer(csvfile)
+        for i in nums:
+            name = data["Tên"][i]
+            links_tgdd = convert_text(data["Link_tgdd"][i])
+            links_fpt = convert_text(data["Link_fpt"][i])
+            prices_tgdd = get_price(links_tgdd)
+            prices_fpt = get_price(links_fpt)
+            for link, price in zip(links_tgdd, prices_tgdd):
+                writer.writerow([name, link, price])
+            for link, price in zip(links_fpt, prices_fpt):
+                writer.writerow([name, link, price])
 
 
 if __name__ == "__main__":
