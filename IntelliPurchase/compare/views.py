@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from .sentiment_analysis import plot_sentiment
 from products.models import Product, ProductSpec
+from user.views import check_history
 # Create your views here.
 
 def search(request):
@@ -75,6 +76,8 @@ def compare(request):
 
             product2_tgdd_sa = plot_sentiment(product2.product_id, company_id=1).to_html(full_html=False, include_plotlyjs='cdn')
             product2_fpt_sa = plot_sentiment(product2.product_id, company_id=2).to_html(full_html=False, include_plotlyjs='cdn')
+
+            existing_history = check_history(product1.product_id, product2.product_id, request.user)
 
             context = {
                 'product1': product1,
@@ -175,6 +178,7 @@ def compare(request):
                 'product1_fpt_sa': product1_fpt_sa,
                 'product2_tgdd_sa': product2_tgdd_sa,
                 'product2_fpt_sa': product2_fpt_sa,
+                'existing_history': existing_history
             }
 
             return render(request, 'compare.html', context)

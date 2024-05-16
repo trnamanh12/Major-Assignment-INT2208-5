@@ -468,12 +468,6 @@ a.tooltips:hover span {
 }
 
 .f-search {
-    background-repeat: no-repeat;
-    background-image: url(Content/v4/images/iconhd6040.png?v=123);
-    background-size: auto
-}
-
-.f-search {
     background-position: -7px -87px
 }
 
@@ -773,12 +767,6 @@ ul {
     width: 22px;
     height: 23px;
     background-position: -5px -122px
-}
-
-.ficon {
-    display: inline-block;
-    background-repeat: no-repeat;
-    background-image: url(../images/iconhd3671.png?v=456)
 }
 
 .f-hdtop {
@@ -1591,18 +1579,6 @@ ul {
 
 .fs-ftr1 span {
     padding-right: 5px
-}
-
-.fs-ftr1 a {
-    font-size: 13px;
-    color: #464646;
-    width: 48px;
-    height: 32px;
-    background-image: url(../images/iconft3671.png?v=456);
-    background-repeat: no-repeat;
-    -webkit-border-radius: 2px;
-    -moz-border-radius: 2px;
-    border-radius: 2px
 }
 
 .fs-ftr-vs {

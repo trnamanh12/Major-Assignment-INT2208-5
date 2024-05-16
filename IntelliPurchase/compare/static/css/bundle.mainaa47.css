@@ -6125,33 +6125,8 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item.lg-complete .lg-object 
     overflow: auto
 }
 
-.lg-outer .lg-has-vimeo .lg-video-play {
-    background: url(../img/vimeo-play.html) no-repeat scroll 0 0 transparent
-}
-
-.lg-outer .lg-has-vimeo:hover .lg-video-play {
-    background: url(../img/vimeo-play.html) no-repeat scroll 0 -58px transparent
-}
-
-.lg-outer .lg-has-html5 .lg-video-play {
-    background: transparent url(../img/video-play.html) no-repeat scroll 0 0;
-    height: 64px;
-    margin-left: -32px;
-    margin-top: -32px;
-    width: 64px;
-    opacity: .8
-}
-
 .lg-outer .lg-has-html5:hover .lg-video-play {
     opacity: 1
-}
-
-.lg-outer .lg-has-youtube .lg-video-play {
-    background: url(../img/youtube-play.html) no-repeat scroll 0 0 transparent
-}
-
-.lg-outer .lg-has-youtube:hover .lg-video-play {
-    background: url(../img/youtube-play.html) no-repeat scroll 0 -60px transparent
 }
 
 .lg-outer .lg-video-object {
@@ -6650,11 +6625,6 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item.lg-complete .lg-object 
     white-space: nowrap
 }
 
-.lg-outer .lg-item {
-    background: url(../images/loading.gif) no-repeat scroll center center transparent;
-    display: none !important
-}
-
 .lg-outer.lg-css3 .lg-prev-slide,
 .lg-outer.lg-css3 .lg-current,
 .lg-outer.lg-css3 .lg-next-slide {
@@ -7004,21 +6974,6 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item.lg-complete .lg-object 
 .lSSlideOuter .lSPager.lSGallery:before {
     content: " ";
     display: table
-}
-
-.lSAction>a {
-    width: 32px;
-    display: block;
-    top: 50%;
-    height: 32px;
-    background-image: url(../images/controls.html);
-    cursor: pointer;
-    position: absolute;
-    z-index: 99;
-    margin-top: -16px;
-    opacity: .5;
-    -webkit-transition: opacity .35s linear 0s;
-    transition: opacity .35s linear 0s
 }
 
 .lSAction>a:hover {
@@ -10936,19 +10891,6 @@ h6 {
     display: inline-block;
     padding-left: 20px;
     margin-left: 4px
-}
-
-.c-comment-name .tick:before {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 3px;
-    transform: translateY(-50%);
-    width: 13px;
-    height: 13px;
-    background: url(../images/tick.html);
-    background-size: cover;
-    display: inline-block
 }
 
 .c-comment-name .badge {
