@@ -47,13 +47,13 @@ def save_history(request):
         product1_id = request.POST.get('product1_id')
         product2_id = request.POST.get('product2_id')
 
-        existing_history = SavedHistory.objects.filter_by_products(product1_id=product1_id, product2_id=product2_id).first()
+        existing_history = SavedHistory.objects.filter_by_products(product1_id=product1_id, product2_id=product2_id, account_id=request.user).first()
 
         if existing_history:
             existing_history.delete()  # Xoá lịch sử nếu đã tồn tại
             return JsonResponse({'message': 'History deleted and new history created successfully'})
         else:
-            new_history = SavedHistory(product1_id=product1_id, product2_id=product2_id)
+            new_history = SavedHistory(product1_id=product1_id, product2_id=product2_id, account_id=request.user)
             new_history.save()
             # Trả về một phản hồi JSON để thông báo rằng lịch sử đã được tạo mới
             return JsonResponse({'message': 'New history created successfully'})
@@ -66,8 +66,9 @@ def recent_history(request):
         product2_name = request.POST.get('product2_name')
         product1_id = Product.objects.filter(product_name=product1_name).first().product_id
         product2_id = Product.objects.filter(product_name=product2_name).first().product_id
+
         # Kiểm tra xem cặp product1_id và product2_id đã tồn tại trong lịch sử hay chưa
-        existing_history = History.objects.filter_by_products(product1_id=product1_id, product2_id=product2_id).first()
+        existing_history = History.objects.filter_by_products(product1_id=product1_id, product2_id=product2_id, account_id=request.user).first()
 
         if existing_history:
             # Nếu đã tồn tại lịch sử, cập nhật thời gian
@@ -76,7 +77,7 @@ def recent_history(request):
             return JsonResponse({'message': 'History updated successfully'})
         else:
             # Nếu không tồn tại lịch sử, tạo mới
-            new_history = History(product1_id=product1_id, product2_id=product2_id)
+            new_history = History(product1_id=product1_id, product2_id=product2_id, account_id=request.user)
             new_history.save()
             # Trả về một phản hồi JSON để thông báo rằng lịch sử đã được tạo mới
             return JsonResponse({'message': 'New history created successfully'})
@@ -86,14 +87,14 @@ def recent_history(request):
 
 def get_recent_history(request):
     # Lấy ra 5 lịch sử gần đây nhất
-    products = History.objects.all().order_by('-time')
+    products = History.objects.filter(account_id=request.user).order_by('-time')
+    
     # Chuyển đổi các lịch sử thành một danh sách các từ điển
-
     return render(request, 'recent_history.html', {'products': products})
 
 def get_saved_history(request):
     # Lấy ra 5 lịch sử gần đây nhất
-    products = SavedHistory.objects.all()
+    products = SavedHistory.objects.filter(account_id=request.user).order_by('-time')
     # Chuyển đổi các lịch sử thành một danh sách các từ điển
 
     return render(request, 'saved_history.html', {'products': products})
