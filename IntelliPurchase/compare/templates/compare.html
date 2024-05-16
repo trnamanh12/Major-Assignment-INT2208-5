@@ -11,9 +11,6 @@
 
     <title>So sánh sản phẩm</title>
 
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'css/bundle.mainaa47.css' %}" type="text/css">
-    <link rel="stylesheet" href="{% static 'css/header.footer.css' %}" type="text/css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{% static 'js/search.js' %}"></script>
     <script src="{% static 'js/heart.js' %}"></script>
@@ -490,7 +487,11 @@
                                         <div class="circle-container" id="heart-container" data-product1-id="{{ product1.product_id }}" data-product2-id="{{ product2.product_id }}">
                                             <div class="circle" id="heart-button">
                                                 {% if request.user.is_authenticated %}
-                                                    <img src="{% static 'img/heart-off.png' %}" alt="Heart" id="heart-img">
+                                                    {% if existing_history %}
+                                                        <img src="{% static 'img/heart-on.png' %}" alt="Heart" id="heart-img">
+                                                    {% else %}
+                                                        <img src="{% static 'img/heart-off.png' %}" alt="Heart" id="heart-img">
+                                                    {% endif %}
                                                 {% else %}
                                                     VS
                                                 {% endif %}

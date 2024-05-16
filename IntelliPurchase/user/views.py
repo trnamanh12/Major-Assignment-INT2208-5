@@ -99,6 +99,13 @@ def get_saved_history(request):
 
     return render(request, 'saved_history.html', {'products': products})
 
+def check_history(product1_id, product2_id, user):
+    existing_history = SavedHistory.objects.filter_by_products(product1_id=product1_id, product2_id=product2_id, account_id=user).first()
+
+    if existing_history:
+        return True
+    
+    return False
 
 def profile(request):
     if request.user.is_authenticated:
