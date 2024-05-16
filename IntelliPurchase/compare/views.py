@@ -1,9 +1,6 @@
 import json
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
-from django.core.serializers import serialize
-from .crawl_price import get_price
-from concurrent.futures import ThreadPoolExecutor
 from .sentiment_analysis import plot_sentiment
 from products.models import Product, ProductSpec
 # Create your views here.
@@ -66,10 +63,9 @@ def compare(request):
             product1_battery = json.loads(json.dumps(eval(product1_specs[0].pin_sac))) if product1_specs[0].pin_sac is not None else {}
             product2_battery = json.loads(json.dumps(eval(product2_specs[0].pin_sac))) if product2_specs[0].pin_sac is not None else {}
 
-            product1_fpt_price, product1_tgdd_price, product2_fpt_price, product2_tgdd_price = get_price(product1.FPT_product_link, 
-                                                                                                        product1.TGDD_product_link,
-                                                                                                        product2.FPT_product_link,
-                                                                                                        product2.TGDD_product_link)
+            product1_fpt_price, product1_tgdd_price = product1.FPT_product_price, product1.TGDD_product_price
+            product2_fpt_price, product2_tgdd_price = product2.FPT_product_price, product2.TGDD_product_price
+                                                                                                        
 
             product1_min_price = min(product1_fpt_price, product1_tgdd_price)
             product2_min_price = min(product2_fpt_price, product2_tgdd_price)
@@ -179,8 +175,6 @@ def compare(request):
                 'product1_fpt_sa': product1_fpt_sa,
                 'product2_tgdd_sa': product2_tgdd_sa,
                 'product2_fpt_sa': product2_fpt_sa,
-                'product1_id': product1.product_id,
-                'product2_id': product2.product_id,
             }
 
             return render(request, 'compare.html', context)
@@ -190,4 +184,3 @@ def compare(request):
             pass
     # Trả về template và truyền test_string vào context
     return render(request, 'compare.html', context)
-
