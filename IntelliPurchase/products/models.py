@@ -9,12 +9,15 @@ class Product(models.Model):
     TGDD_product_link = models.URLField()
     FPT_product_link = models.URLField()
     image = models.URLField()
+    TGDD_product_price = models.IntegerField()
+    FPT_product_price = models.IntegerField()
 
     def __str__(self):
         return self.product_name
     
     class Meta:
         db_table = 'product'
+        managed = False
 
 class ProductSpec(models.Model):
     id = models.AutoField(primary_key=True)
@@ -35,6 +38,7 @@ class ProductSpec(models.Model):
 
     class Meta:
         db_table = 'technical_details'
+        managed = False
 
 class Company(models.Model):
     company_id = models.AutoField(primary_key=True)
@@ -45,6 +49,7 @@ class Company(models.Model):
 
     class Meta:
         db_table = 'company'
+        managed = False
 
 class SentimentManager(models.Manager):
     def filler(self, product_id, company_id):
@@ -66,4 +71,5 @@ class Sentiment(models.Model):
     
     class Meta:
         db_table = 'average_sa'
+        managed = False
 
