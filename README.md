@@ -19,8 +19,15 @@
 2. Lê Việt Hùng - 22022666
 3. Đàm Thái Ninh - 22022522
 4. Trần Nam Anh - 22022569
-## Hướng Dẫn Cài Đặt
 
+## Hướng Dẫn Cài Đặt
+```
+git clone <url>
+pip install -r requirements.txt
+cd IntelliPurchase
+python manage.py migrate
+python manage.py runserver
+```
 
 ## Gitflow
 ### Được giao task mới
