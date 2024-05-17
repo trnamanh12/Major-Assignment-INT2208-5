@@ -1,5 +1,13 @@
 # IntelliPurchase
-Dự án này được kế thừa từ dự án https://github.com/NinhDT22022522/Mobile-e-commerce-review-sentiment-classification. Mọi tiến độ hay phân công công việc của dự án trước được lưu tại [đây]([url](https://rainy-infinity-73a.notion.site/Ph-n-c-ng-96e1de5cf7bb4b3a9bc4b643d763daf9?pvs=4)).
+Link dự án trước: [github](https://github.com/baitaploncnpm66/Mobile-e-commerce-review-sentiment-classification)
+- Tài liệu về hệ thống:
+    - Problem Statement: [link](https://www.notion.so/M-t-v-n-b2e73a30053c4f6cb587a579313c0ff7?pvs=21)
+    - System Glossary: [link](https://www.notion.so/Ch-gi-i-h-th-ng-IntelliPurchase-d4f063a56cbd47ff87314c133c6407b0?pvs=21)
+    - System Specification: [link](https://www.notion.so/c-t-h-th-ng-IntelliPurchase-66e49c81288241d19ba850a029ae237d?pvs=21)
+    - System Supplementary Specification: [link](https://www.notion.so/c-t-b-sung-h-th-ng-IntelliPurchase-1c95bb4efb8a43a5a601621baf20ebf2?pvs=21)
+    - Scenarios, User Stories: [link](https://www.notion.so/Scenarios-v-User-stories-41987e52c308475fac5aafa920805ae6?pvs=21)
+    - User Manual: [link](https://www.notion.so/H-ng-d-n-s-d-ng-User-Manual-763c1e9529e04bccb7b9a24e78034a86?pvs=21)
+    - Báo cáo dự án: [link](https://www.notion.so/B-o-c-o-d-n-6466d99781d04cd9954d3b9336898c2f)
 
 Bài tập lớn môn Công nghệ phần mềm INT2208 5
 Trang web phân tích bán hàng IntelliPurchase
